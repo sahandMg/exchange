@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repo\IpFinder;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->bind('getIp',function($app){
+
+            return new IpFinder($app->make('getIp'));
+
+        });
     }
 }
