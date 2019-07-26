@@ -182,14 +182,14 @@ class AuthController extends Controller
     /*
      * Google Login Apis
      */
-
+// TODO create an authentication service at dev.google
     public function redirectToProvider()
     {
 //
         return Socialite::driver('google')->redirect();
     }
 
-    public function handleProviderCallback(){
+    public function handleProviderCallback(IpFinder $ipFinder){
 
         $client =  Socialite::driver('google')->stateless()->user();
 
@@ -207,10 +207,10 @@ class AuthController extends Controller
         $user = User::where('email',$client->email)->first();
         if(!is_null($user)){
             $user->avatar = $client->avatar;
-            $user->ip = Helpers::userIP();
+            $user->ip = $ipFinder->getIp();
             try{
 
-                $user->country = strtolower(Location::get(Helpers::userIP())->countryCode);
+                $user->country = strtolower(Location::get($ipFinder->getIp())->countryCode);
             }catch (\Exception $exception){
                 $user->country = 'fr';
             }
@@ -224,14 +224,15 @@ class AuthController extends Controller
         $user = new User();
         $user->name = $client->name;
         $user->email = $client->email;
-        $user->code = uniqid('hashBazaar_');
+        $user->code = uniqid();
         $user->avatar = $client->avatar;
-        $user->ip = Helpers::userIP();
+        $user->ip = $ipFinder->getIp();
+        $user->verified = 1;
         $user->total_mining = 0;
         $user->pending = 0;
         try{
 
-            $user->country = strtolower(Location::get(Helpers::userIP())->countryCode);
+            $user->country = strtolower(Location::get($ipFinder->getIp())->countryCode);
         }catch (\Exception $exception){
             $user->country = 'fr';
         }
@@ -242,7 +243,6 @@ class AuthController extends Controller
             'code'=> $user->code,
             'email'=>$user->email
         ];
-        event(new \App\Events\ReferralQuery($user));
         Auth::guard('user')->login($user);
 
         $user->update(['verified'=>1]);
