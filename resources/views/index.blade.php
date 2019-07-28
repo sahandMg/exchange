@@ -11,82 +11,19 @@
         <div class="row">
           <div class="col-md-4">
             <div class="row">
-              <!-- <input  type="text" class="form-control pb_height-50 reverse" style="width: 60%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;" value="1" /> -->
+              <input id="inputCoinValue" type="text" class="form-control pb_height-50 reverse" style="width: 50%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;" value="1" />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
                 <div>
                   <div class="selected-exchange">
                     <span>&#8597;</span>
-                    <div>Click and select </div>
+                    <div id="inputCoinKind">Click and select </div>
                   </div>
                   <div class="select-dropdown-exchange">
                     <div class="item-search-exchange">
                       <input autocomplete="off" placeholder="search...">
                     </div>
                     <div class="items-exchange">
-                      <div>
-                        <div class="img-exchange">
-                         <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
-                        </div>
-                        <div class="content-exchange">
-                          <div><b>FSLJ01</b></div>
-                          <div>600MLP DEMO CONTENT </div>
-                          <span class="badge-exchange">TAKEAWAY BOX</span>
-                        </div>
-                      </div>
-                      <div>
-                      <div class="img-exchange">
-                         <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
-                      </div>
-                      <div class="content-exchange">
-                         <div><b>FSLJ02</b></div>
-                         <div>600MLP DEMO CONTENT </div>
-                         <span class="badge-exchange">TAKEAWAY BOX</span>
-                      </div>
-                      </div>
-                      <div>
-                      <div class="img-exchange">
-                        <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
-                      </div>
-                      <div class="content-exchange">
-                        <div><b>FSLJ03</b></div>
-                        <div>600MLP DEMO CONTENT </div>
-                        <span class="badge-exchange">TAKEAWAY BOX</span>
-                      </div>
-                      </div>
-                      <div>
-                      <div class="img-exchange">
-                         <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
-                      </div>
-                      <div class="content-exchange">
-                         <div><b>FSLJ04</b></div>
-                         <div>600MLP DEMO CONTENT </div>
-                         <span class="badge-exchange">TAKEAWAY BOX</span>
-                      </div>
-                      </div>
-                      <div>
-                      <div class="img-exchange">
-                         <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
-                      </div>
-                      <div class="content-exchange">
-                         <div><b>FSLJ05</b></div>
-                         <div>600MLP DEMO CONTENT </div>
-                         <span class="badge-exchange">TAKEAWAY BOX</span>
-                      </div>
-                      </div>
-                      <div>
-                      <div class="img-exchange">
-                        <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
-                      </div>
-                      <div class="content-exchange">
-                         <div><b>FSLJ06</b></div>
-                         <div>600MLP DEMO CONTENT </div>
-                         <span class="badge-exchange">TAKEAWAY BOX</span>
-                      </div>
-                      </div>
-                    </div>
-                    <div class="item-count-exchange">
-                       30 products
                     </div>
                   </div>
                 </div>
@@ -98,59 +35,33 @@
           </div>
           <div class="col-md-4">
             <div class="row">
-              <input  type="text" class="form-control pb_height-50 reverse" style="width: 60%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background-color: #f2f2f2;" placeholder="Full name" />
-              <select class="form-control pb_height-50 reverse"  style="width: 40%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
-                <option value="" selected>Bitcoin</option>
-                <option value="">Ethereum</option>
-                <option value="">Stellar</option>
-                <option value="">Tron</option>
-              </select>
+              <input  id="outputCoinValue" type="text" class="form-control pb_height-50 reverse" style="width: 50%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background-color: #f2f2f2;" placeholder="..." />
+              <div class="select-exchange">
+                <select name="item"><option value=""></option></select>
+                <div>
+                  <div class="selected-exchange">
+                    <span>&#8597;</span>
+                    <div id="outputCoinKind">Click and select </div>
+                  </div>
+                  <div class="select-dropdown-exchange">
+                    <div class="item-search-exchange">
+                      <input autocomplete="off" placeholder="search...">
+                    </div>
+                    <div class="items-exchange">
+                    </div>
+                    <!-- <div class="item-count-exchange">
+                       30 products
+                    </div> -->
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-md-1">
             <button class="btn btn-primary exchange-button" type="submit">تبدیل</button>
           </div>
         </div>
-        <div class="row align-items-center justify-content-center">
-          <div class="col-md-6">
-            <h2 class="heading mb-3">Fly makes you faster</h2>
-            <div class="sub-heading">
-              <p class="mb-4">New free template by <a href="http://uicookies.com" target="_blank">uicookies.com</a>. For more templates visit the <a href="http://uicookies.com" target="_blank">site</a>. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <p class="mb-5"><a class="btn btn-success btn-lg pb_btn-pill smoothscroll" href="#section-pricing"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">See Pricing</span></a></p>
-            </div>
-          </div> 
-          <div class="col-md-1">
-          </div>
-          <div class="col-md-5 relative align-self-center">
-            
-            <form action="#" class="bg-white rounded pb_form_v1">
-              <h2 class="mb-4 mt-0 text-center">Sign Up for Free</h2>
-              <div class="form-group">
-                <input type="text" class="form-control pb_height-50 reverse" placeholder="Full name">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control pb_height-50 reverse" placeholder="Email">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control pb_height-50 reverse" placeholder="Email">
-              </div>
-              <div class="form-group">
-                <div class="pb_select-wrap">
-                  <select class="form-control pb_height-50 reverse">
-                    <option value="" selected>Type</option>
-                    <option value="">Basic</option>
-                    <option value="">Business</option>
-                    <option value="">Free</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-lg btn-block pb_btn-pill  btn-shadow-blue" value="Register">
-              </div>
-            </form>
-
-          </div> 
-        </div>
+        
       </div>
     </section>
     <!-- END section -->
@@ -335,50 +246,6 @@
     </section>
     <!-- END section -->
 
-
-
-    <!--<section class="pb_xl_py_cover overflow-hidden pb_slant-light pb_gradient_v1 cover-bg-opacity-8"  style="background-image: url(assets/images/1900x1200_img_5.jpg)">-->
-      <!--<div class="container">-->
-        <!--<div class="row align-items-center justify-content-center">-->
-          <!--<div class="col-md-5 justify-content-center">-->
-            <!--<h2 class="heading mb-5 pb_font-40">Join over 1M+ people who uses Instant App</h2>-->
-            <!--<div class="sub-heading">-->
-              <!--<p class="mb-4">New free template by <a href="http://uicookies.com" target="_blank">uicookies.com</a>. For more templates visit the <a href="http://uicookies.com" target="_blank">site</a>. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
-            <!--</div>-->
-          <!--</div> -->
-          <!--<div class="col-md-1"></div>-->
-          <!--<div class="col-md-5">-->
-             <!--<form action="#" class="bg-white rounded pb_form_v1">-->
-              <!--<h2 class="mb-4 mt-0 text-center">Sign Up for Free</h2>-->
-              <!--<div class="form-group">-->
-                <!--<input type="text" class="form-control py-3 reverse" placeholder="Full name">-->
-              <!--</div>-->
-              <!--<div class="form-group">-->
-                <!--<input type="text" class="form-control py-3 reverse" placeholder="Email">-->
-              <!--</div>-->
-              <!--<div class="form-group">-->
-                <!--<input type="text" class="form-control py-3 reverse" placeholder="Email">-->
-              <!--</div>-->
-              <!--<div class="form-group">-->
-                <!--<div class="pb_select-wrap">-->
-                  <!--<select class="form-control pb_height-50 reverse">-->
-                    <!--<option value="" selected>Type</option>-->
-                    <!--<option value="">Basic</option>-->
-                    <!--<option value="">Business</option>-->
-                    <!--<option value="">Free</option>-->
-                  <!--</select>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="form-group">-->
-                <!--<input type="submit" class="btn btn-primary btn-lg btn-block pb_btn-pill  btn-shadow-blue" value="Register">-->
-              <!--</div>-->
-            <!--</form>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</section>-->
-    <!--&lt;!&ndash; END section &ndash;&gt;-->
-
     <footer class="pb_footer bg-light" role="contentinfo">
       <div class="container">
         <div class="row text-center">
@@ -410,7 +277,7 @@
     <!-- loader -->
     <div id="pb_loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#1d82ff"/></svg></div>
 
-@include('master.scripts')
+
 
   <style type="text/css">
     /*body {*/
@@ -433,12 +300,12 @@
     }
 
     .select-dropdown-exchange.opened-exchange {
-        height: 500px;
+        height: 380px;
         transition: height ease 0.2s;
     }
 
     .selected-exchange {
-        height: 35px;
+        height: 48.5px;
         padding: 10px 10px;
         background: #f0f0f0;
         cursor: pointer;
@@ -451,22 +318,24 @@
     .select-exchange {
         text-align: left;
         display: inline-block;
-        width: 400px;
+        width: 50%;
         border: 1px solid #ccc;
         border-radius: 5px;
         overflow: hidden;
-        box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.1);
+        /*box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.1);*/
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px
     }
 
     .item-search-exchange {
-        padding: 15px 10px;
+        padding: 10px 5px;
         background: #fafafa;
         border-bottom: 1px solid #ddd;
     }
 
     .item-search-exchange input {
         width: 100%;
-        padding: 10px;
+        padding: 5px;
         box-sizing: border-box;
         border: 2px solid #eee;
         border-radius: 5px;
@@ -484,6 +353,7 @@
         height: 380px;
         overflow: auto;
         overflow-x: hidden;
+        background-color: white;
     }
 
     .item-count-exchange {
@@ -495,6 +365,18 @@
     .items-exchange > div {
         border-top:  1px solid #eee;
         font-size: 0px;
+    }
+
+    .item-exchange {
+      background-color: #f0f0f0; padding: 2%;margin-left: 0px;
+    }
+    .item-exchange img {
+        margin-left: 5%;
+    }
+    .item-exchange span {
+        margin-left: 5px;
+        color: black;
+        font-size: 15px;
     }
 
     .items-exchange > div:hover {
@@ -539,26 +421,86 @@
         border-radius: 5px;
     }
   </style>
-  
+
+  @include('master.scripts')
+
   <script type="text/javascript">
     console.log("Start");
+
+    var coinList = [];
+
     $('.selected-exchange').on('click', function() {
         console.log("selected clicked");
         $(this).next().toggleClass('opened-exchange');
     });
 
-    $('.items-exchange > div').on('click', function() {
-        console.log("items-select");
-        var txt = $(this).find('.content-exchange > div:first-child b').text();
-        $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
-        $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
-    });
+    // $('.item-exchange').on('click', function() {
+    //     console.log("item-select");
+    //     var txt = $(this).find('span').text();
+    //     console.log($(this));
+    //     console.log(txt);
+    //     $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
+    //     $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
+    // });
+
+    // $('.items-exchange > div').on('click', function() {
+    //     console.log("item-select");
+    //     var txt = $(this).find('.content-exchange > div:first-child b').text();
+    //     $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
+    //     $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
+    // });
 
     $('.item-search-exchange input').on('keyup', function() {
         console.log("item-select-search");
-        var txt = $(this).val().toUpperCase();
+        var txt = $(this).val().toLowerCase();
+        console.log(txt);
         $(this).parent().parent().parent().find('.items-exchange > div').hide();
-        $(this).parent().parent().parent().find('.items-exchange > div:contains("' + txt + '")').show();
+        for(var i=0; i<coinList.length; i++) {
+          if(coinList[i].full_name.toLowerCase().includes(txt) || coinList[i].name.toLowerCase().includes(txt)) {
+            $('#coin'+i).show();
+          } else {console.log(coinList[i].full_name+" , "+txt);}
+        }
+        
     })
+    // console.log('{{route('getCurrencies')}}');
+    axios.post('{{route('getCurrencies')}}').then(function (response) {
+        console.log("getCurrencies");console.log(response);
+         coinList = response.data;
+        for(var i=0; i<coinList.length; i++) {
+          $('.items-exchange').append(`
+               <div class="row item-exchange" id="coin`+i+`">
+                   <img  width="20" height="20" src="assets/img/icons/`+coinList[i].name+`.png">
+                   <span class="coinSmallName" style="color:`+coinList[i].color+`;">`+coinList[i].name+`</span>
+                   <span>`+coinList[i].full_name+`</span>
+               </div>
+            `);
+        }
+        $('#inputCoinKind').html("Bitcoin");$('#outputCoinKind').html("Ethereum");
+          // console.log($('#inputCoinValue').val());
+          // console.log($('#inputCoinKind').text());
+          // console.log($('#inputCoinValue').val());
+          exchangeRate();
+        $('.item-exchange').on('click', function() {
+          console.log("item-select");
+          var txt = $(this).find('span.coinSmallName').text();
+          console.log($(this));
+          console.log(txt);
+          $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
+          $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
+
+          
+        });
+    });
+
+    function exchangeRate() {
+      axios.post('{{route('getExchangeAmount')}}',{'from':$('#inputCoinKind').text(), 'to':$('#outputCoinKind').text(),'amount':$('#inputCoinValue').val()}).then(function (response) {
+               console.log(response);
+              if(response.data == 500){
+                 
+              } else {
+                 // vm.receiveNumber = response.data.toFixed(8);
+              }
+          });
+    }
   </script>
 @endsection

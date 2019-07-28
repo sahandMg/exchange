@@ -1,4 +1,5 @@
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="{{URL::asset('assets/js/jquery.min.js')}}"></script>
 
 <script src="{{URL::asset('assets/js/popper.min.js')}}"></script>
