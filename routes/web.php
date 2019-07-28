@@ -50,7 +50,19 @@ Route::post('password-reset','AuthController@post_passwordReset')->name('passwor
 
 // ==================== API EndPoints ===========================
 
-Route::get('get-currencies','TradeController@getCurrencies')->name('getCurrencies');
+Route::post('get-currencies','TradeController@getCurrencies')->name('getCurrencies');
+
+Route::post('get-min-amount','TradeController@getMinAmount')->name('getMinAmount');
+
+Route::post('get-exchange-amount','TradeController@getExchangeAmount')->name('getExchangeAmount');
+
+Route::post('create-transaction','TradeController@createTransaction')->name('createTransaction');
+
+Route::post('get-transaction','TradeController@getTransactions')->name('getTransactions');
+
+Route::post('get-status','TradeController@getStatus')->name('getStatus');
+
+Route::post('get-rate','TradeController@getFixRate')->name('getFixRate');
 
 Route::get('get-crypto-color','HandyController@getCryptoColor');
 

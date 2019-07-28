@@ -245,8 +245,6 @@ class AuthController extends Controller
         ];
         Auth::guard('user')->login($user);
 
-        $user->update(['verified'=>1]);
-
         Mail::send('email.admin.newUser',['user'=>$user],function($message) use($data){
             $message->from (env('Admin_Mail'));
             $message->to (env('Info_Mail'));
