@@ -20,9 +20,15 @@ class TradeController extends Controller
 
     public function getCurrencies(){
 
-       $response = $this->changellyHelper->getChangellyData('getCurrencies',[]);
-        $cryptoList = $this->checkForImage($response['result']);
-        $cryptoDetail = $this->getCryptoDetails($cryptoList);
+       if(!Cache::has('cryptoList')){
+           $response = $this->changellyHelper->getChangellyData('getCurrencies',[]);
+           $cryptoList = $this->checkForImage($response['result']);
+           $cryptoDetail = $this->getCryptoDetails($cryptoList);
+           Cache::put('cryptoList',$cryptoDetail,1000000);
+       }else{
+
+           $cryptoDetail = Cache::get('cryptoList');
+       }
         return $cryptoDetail;
     }
 
