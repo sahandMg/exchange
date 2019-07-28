@@ -14,7 +14,7 @@ class CreateFixRateTransactionsTable extends Migration
     public function up()
     {
         Schema::create('fix_rate_transactions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('trans_id');
             $table->float('apiExtraFee')->nullable();
             $table->float('changellyFee');
@@ -30,6 +30,8 @@ class CreateFixRateTransactionsTable extends Migration
             $table->double('amountTo',15,8)->nullable();
             $table->string('payinAddress');
             $table->string('payoutAddress');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

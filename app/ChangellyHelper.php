@@ -25,10 +25,13 @@ class ChangellyHelper
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $requestHeaders);
-
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $response = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($response,true);
+        if(is_null($response)){
+            $response = 500;
+        }
         return $response;
     }
 }

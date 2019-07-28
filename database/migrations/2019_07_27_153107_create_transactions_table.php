@@ -24,6 +24,8 @@ class CreateTransactionsTable extends Migration
             $table->string('payoutExtraId')->nullable();
             $table->double('amountExpectedFrom',15,8);
             $table->string('status')->nullable();
+            $table->string('refundAddress')->nullable();
+            $table->string('refundExtraId')->nullable();
             $table->string('currencyFrom')->nullable();
             $table->string('currencyTo')->nullable();
             $table->string('amountTo')->nullable();
