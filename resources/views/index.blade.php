@@ -6,12 +6,14 @@
 <section class="pb_cover_v3 overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_gradient_v1 pb_slant-light" id="section-home">
       <div class="container">
         <br/><br/><br/><br/><br/><br/>
-        <h1 class="text-center" style="color: white;">راه آسان و امن برای تبدیل بیش از 140 ارز دیجیتال</h1>
-        <br/><br/>
-        <div class="row">
-          <div class="col-md-4">
+       <div class="row">
+        <div class="col-md-5 col-sm-12">
+         <h1 class="text-center" style="color: white;">راه آسان و امن برای تبدیل بیش از 140 ارز دیجیتال</h1>
+        </div>
+        <div class="col-md-7 col-sm-12 row">
+          <div class="col-md-12">
             <div class="row">
-              <input id="inputCoinValue" type="text" class="form-control pb_height-50 reverse" style="width: 50%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;" value="1" />
+              <input id="inputCoinValue" type="text" class="form-control pb_height-50 reverse inputCoin"  value="1" />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
                 <div>
@@ -33,9 +35,9 @@
           <div class="col-md-1 text-center">
             <button type="button" style="background-color: inherit;border: 0px;margin-top: 10px;font-size: 20px;"><i class="fa fa-exchange fa-3" aria-hidden="true"></i></button>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-12">
             <div class="row">
-              <input  id="outputCoinValue" type="text" class="form-control pb_height-50 reverse" style="width: 50%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background-color: #f2f2f2;" placeholder="..." />
+              <input  id="outputCoinValue" type="text" class="form-control pb_height-50 reverse" placeholder="..." />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
                 <div>
@@ -61,7 +63,7 @@
             <button class="btn btn-primary exchange-button" type="submit">تبدیل</button>
           </div>
         </div>
-        
+       </div>
       </div>
     </section>
     <!-- END section -->
@@ -288,6 +290,10 @@
         /*line-height: 1.5;*/
     /*}*/
 
+    .inputCoin {
+      width: 40%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;
+    }
+
     .selected-exchange span {
         float: right;
         margin-top: -5px;
@@ -318,7 +324,7 @@
     .select-exchange {
         text-align: left;
         display: inline-block;
-        width: 50%;
+        width: 60%;
         border: 1px solid #ccc;
         border-radius: 5px;
         overflow: hidden;
@@ -494,6 +500,14 @@
 
     function exchangeRate() {
       axios.post('{{route('getExchangeAmount')}}',{'from':$('#inputCoinKind').text(), 'to':$('#outputCoinKind').text(),'amount':$('#inputCoinValue').val()}).then(function (response) {
+               console.log(response);
+              if(response.data == 500){
+                 
+              } else {
+                 // vm.receiveNumber = response.data.toFixed(8);
+              }
+          });
+      axios.post('{{route('getExchangeAmount')}}',{'from':1, 'to':"btc",'amount':"eth"}).then(function (response) {
                console.log(response);
               if(response.data == 500){
                  
