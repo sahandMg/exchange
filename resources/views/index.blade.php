@@ -11,13 +11,86 @@
         <div class="row">
           <div class="col-md-4">
             <div class="row">
-              <input  type="text" class="form-control pb_height-50 reverse" style="width: 60%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;" value="1" />
-              <select class="form-control pb_height-50 reverse"  style="width: 40%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;background-color: #f2f2f2;">
-                <option value="" selected>Bitcoin</option>
-                <option value="">Ethereum</option>
-                <option value="">Stellar</option>
-                <option value="">Tron</option>
-              </select>
+              <!-- <input  type="text" class="form-control pb_height-50 reverse" style="width: 60%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;" value="1" /> -->
+              <div class="select-exchange">
+                <select name="item"><option value=""></option></select>
+                <div>
+                  <div class="selected-exchange">
+                    <span>&#8597;</span>
+                    <div>Click and select </div>
+                  </div>
+                  <div class="select-dropdown-exchange">
+                    <div class="item-search-exchange">
+                      <input autocomplete="off" placeholder="search...">
+                    </div>
+                    <div class="items-exchange">
+                      <div>
+                        <div class="img-exchange">
+                         <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
+                        </div>
+                        <div class="content-exchange">
+                          <div><b>FSLJ01</b></div>
+                          <div>600MLP DEMO CONTENT </div>
+                          <span class="badge-exchange">TAKEAWAY BOX</span>
+                        </div>
+                      </div>
+                      <div>
+                      <div class="img-exchange">
+                         <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
+                      </div>
+                      <div class="content-exchange">
+                         <div><b>FSLJ02</b></div>
+                         <div>600MLP DEMO CONTENT </div>
+                         <span class="badge-exchange">TAKEAWAY BOX</span>
+                      </div>
+                      </div>
+                      <div>
+                      <div class="img-exchange">
+                        <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
+                      </div>
+                      <div class="content-exchange">
+                        <div><b>FSLJ03</b></div>
+                        <div>600MLP DEMO CONTENT </div>
+                        <span class="badge-exchange">TAKEAWAY BOX</span>
+                      </div>
+                      </div>
+                      <div>
+                      <div class="img-exchange">
+                         <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
+                      </div>
+                      <div class="content-exchange">
+                         <div><b>FSLJ04</b></div>
+                         <div>600MLP DEMO CONTENT </div>
+                         <span class="badge-exchange">TAKEAWAY BOX</span>
+                      </div>
+                      </div>
+                      <div>
+                      <div class="img-exchange">
+                         <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
+                      </div>
+                      <div class="content-exchange">
+                         <div><b>FSLJ05</b></div>
+                         <div>600MLP DEMO CONTENT </div>
+                         <span class="badge-exchange">TAKEAWAY BOX</span>
+                      </div>
+                      </div>
+                      <div>
+                      <div class="img-exchange">
+                        <img src="https://images.unsplash.com/photo-1490506080785-f64dae288188?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=80&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=01626e75ffab96042ba0f0324b5be3be">
+                      </div>
+                      <div class="content-exchange">
+                         <div><b>FSLJ06</b></div>
+                         <div>600MLP DEMO CONTENT </div>
+                         <span class="badge-exchange">TAKEAWAY BOX</span>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="item-count-exchange">
+                       30 products
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-md-1 text-center">
@@ -337,5 +410,153 @@
     <!-- loader -->
     <div id="pb_loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#1d82ff"/></svg></div>
 
+  <style type="text/css">
+    /*body {*/
+        /*overflow: scroll;*/
+        /*padding: 20px;*/
+        /*text-align: center;*/
+        /*font-family: Arial;*/
+        /*line-height: 1.5;*/
+    /*}*/
 
+    .selected-exchange span {
+        float: right;
+        margin-top: -5px;
+    }
+
+    .select-dropdown-exchange {
+        overflow: hidden;
+        height: 0px;
+        transition: height ease 0.2s;
+    }
+
+    .select-dropdown-exchange.opened-exchange {
+        height: 500px;
+        transition: height ease 0.2s;
+    }
+
+    .selected-exchange {
+        height: 35px;
+        padding: 10px 10px;
+        background: #f0f0f0;
+        cursor: pointer;
+    }
+
+    select {
+        display: none;
+    }
+
+    .select-exchange {
+        text-align: left;
+        display: inline-block;
+        width: 400px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.1);
+    }
+
+    .item-search-exchange {
+        padding: 15px 10px;
+        background: #fafafa;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .item-search-exchange input {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 2px solid #eee;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .item-search-exchange input:focus {
+        outline: none;
+        border: 1px solid #4fa5ff;
+        margin: 1px;
+        box-shadow: 0px 0px 0px 5px #afd6ff;
+    }
+
+    .items-exchange {
+        height: 380px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .item-count-exchange {
+        padding: 15px 10px;
+        background: #fafafa;
+        border-top: 1px solid #ccc;
+    }
+
+    .items-exchange > div {
+        border-top:  1px solid #eee;
+        font-size: 0px;
+    }
+
+    .items-exchange > div:hover {
+        background: #fcfcfc;
+        cursor: pointer;
+    }
+
+
+    .items-exchange > div:last-child {
+        border-bottom: 1px solid #eee;
+    }
+
+    .img-exchange {
+        vertical-align: top;
+        display: inline-block;
+        width: 80px;
+        padding: 12px 0px 0px 12px;
+    }
+
+    .content-exchange {
+        display: inline-block;
+        width: calc(100% - 120px);
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    span.badge-exchange {
+        border:  1px solid #ccc;
+        padding:  3px 10px;
+        font-size:  13px;
+        background:  #fafafa;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.1);
+        border-radius: 5px;
+    }
+  </style>
+  
+  <script type="text/javascript">
+    console.log("Start");
+    $('.selected-exchange').on('click', function() {
+        console.log("selected clicked");
+        $(this).next().toggleClass('opened-exchange');
+    });
+
+    $('.items-exchange > div').on('click', function() {
+        console.log("items-select");
+        var txt = $(this).find('.content-exchange > div:first-child b').text();
+        $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
+        $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
+    });
+
+    $('.item-search-exchange input').on('keyup', function() {
+        console.log("item-select-search");
+        var txt = $(this).val().toUpperCase();
+        $(this).parent().parent().parent().find('.items-exchange > div').hide();
+        $(this).parent().parent().parent().find('.items-exchange > div:contains("' + txt + '")').show();
+    })
+  </script>
 @endsection
