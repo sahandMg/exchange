@@ -41,6 +41,7 @@ class TradeController extends Controller
             $to = $request->to;
             $amount = $request->amount;
         $response = $this->changellyHelper->getChangellyData('getExchangeAmount',['from'=> $from,'to'=> $to , 'amount'=>$amount]);
+        dd($response);
         if(!is_numeric($response['result'])){
             return 500;
         }
@@ -85,6 +86,11 @@ class TradeController extends Controller
         return $transactionData['id'];
     }
 
+    public function createFixRateTransaction(Request $request){
+
+
+    }
+
     public function getTransactions(Request $request){
 
         $currency = $request->currency;
@@ -121,6 +127,13 @@ class TradeController extends Controller
             'from'=> $from,
             'to'=> $to,
         ]);
+
+        return $response;
+    }
+// gets all coin pairs fix rate
+    public function getFixRateBulk(){
+
+        $response = $this->changellyHelper->getChangellyData('getFixRateBulk',[]);
 
         return $response;
     }

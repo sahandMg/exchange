@@ -54,7 +54,7 @@ Route::post('get-currencies','TradeController@getCurrencies')->name('getCurrenci
 
 Route::post('get-min-amount','TradeController@getMinAmount')->name('getMinAmount');
 
-Route::post('get-exchange-amount','TradeController@getExchangeAmount')->name('getExchangeAmount');
+Route::get('get-exchange-amount','TradeController@getExchangeAmount')->name('getExchangeAmount');
 
 Route::post('create-transaction','TradeController@createTransaction')->name('createTransaction');
 
@@ -63,6 +63,8 @@ Route::post('get-transaction','TradeController@getTransactions')->name('getTrans
 Route::post('get-status','TradeController@getStatus')->name('getStatus');
 
 Route::post('get-rate','TradeController@getFixRate')->name('getFixRate');
+
+Route::get('get-rate-bulk','TradeController@getFixRateBulk')->name('getFixRateBulk');
 
 Route::get('get-crypto-color','HandyController@getCryptoColor');
 

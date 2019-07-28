@@ -22,7 +22,7 @@ class CreateTransactionsTable extends Migration
             $table->string('changellyFee')->nullable();
             $table->string('payinExtraId')->nullable();
             $table->string('payoutExtraId')->nullable();
-            $table->double('amountExpectedFrom',10,8);
+            $table->double('amountExpectedFrom',15,8);
             $table->string('status')->nullable();
             $table->string('currencyFrom')->nullable();
             $table->string('currencyTo')->nullable();

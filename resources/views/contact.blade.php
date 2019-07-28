@@ -75,5 +75,5 @@
 <script src="assets/js/jquery.easing.1.3.js"></script>
 
 <script src="assets/js/main.js"></script>
-
+@include('master.scripts')
 @endsection
