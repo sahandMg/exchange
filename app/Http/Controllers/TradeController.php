@@ -241,4 +241,9 @@ class TradeController extends Controller
         return $output;
     }
 
+    public function exchagePage(){
+
+        return view('panel.exchange');
+    }
+
 }

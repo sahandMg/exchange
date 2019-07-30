@@ -1,72 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Landing &mdash; Free One Page Bootstrap 4 Template by uicookies.com</title>
-    <meta name="description" content="Free Bootstrap 4 Template by uicookies.com">
-    <meta name="keywords" content="Free website templates, Free bootstrap themes, Free template, Free bootstrap, Free website template">
-
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400" rel="stylesheet">
-
-    <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/fonts/law-icons/font/flaticon.css">
-
-    <link rel="stylesheet" href="assets/fonts/fontawesome/css/font-awesome.min.css">
-
-
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/slick-theme.css">
-
-    <link rel="stylesheet" href="assets/css/helpers.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/landing-2.css">
-    <style>
-        @font-face {
-            font-family: BYekanFont;
-            src: url(assets/fonts/Yekan.ttf);
-        }
-        * {
-            font-family: BYekanFont;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: BYekanFont;
-        }
-        th, a, p, input, button, legend, label, blockquote {font-family: BYekanFont;}
-        .btn {font-family: BYekanFont;}
-    </style>
-</head>
-<body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
-
-<nav class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light scrolled awake" id="pb-navbar">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">Best Exchange</a>
-        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#probootstrap-navbar" aria-controls="probootstrap-navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span><i class="ion-navicon"></i></span>
-        </button>
-        <div class="collapse navbar-collapse" id="probootstrap-navbar">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">خانه</a></li>
-                <li class="nav-item"><a class="nav-link" href="aboutUs.html">درباره ما</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">تماس با ما</a></li>
-                <!--<li class="nav-item"><a class="nav-link" href="#section-pricing">Pricing</a></li>-->
-                <li class="nav-item"><a class="nav-link" href="FAQ.html">سوالات متداول</a></li>
-                <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="https://uicookies.com/" target="_blank"><span class="pb_rounded-4 px-4">ثبت نام</span></a></li>
-                <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="https://uicookies.com/" target="_blank"><span class="pb_rounded-4 px-4">ورود</span></a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<!-- END nav -->
-
-<!--<section class="pb_cover_v3 overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_gradient_v1 pb_slant-light" id="section-home">-->
-<!--<div class="container">-->
-
-<!--</div>-->
-<!--</section>-->
-<!-- END section -->
+@extends('master.layout')
+@section('title')
+    <title> اکسچنج - اسم سایت </title>
+@endsection
+@section('content')
 
 <section class="pb_section pb_slant-white" id="section-faq">
     <div class="container">
@@ -299,7 +235,5 @@
 <script src="assets/js/jquery.easing.1.3.js"></script>
 
 <script src="assets/js/main.js"></script>
-
-</body>
-
-</html>
+@include('master.scripts')
+@endsection
