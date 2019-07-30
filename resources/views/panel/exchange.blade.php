@@ -8,11 +8,11 @@
     <div class="container">
        <div>
          <ul class="d-flex justify-content-around" style="padding-left: 0;">
-            <li class="white-circle circle-active">1</li>
-            <li class="white-circle">2</li>
-            <li class="white-circle">3</li>
-            <li class="white-circle">4</li>
-            <li class="white-circle">5</li>
+            <li class="white-circle receive_coin">5</li>
+            <li class="white-circle waitForExchange">4</li>
+            <li class="white-circle send_funds">3</li>
+            <li class="white-circle enter_address">2</li>
+            <li class="white-circle enter_amount circle-active">1</li>
          </ul>
        </div>
        <br/>
@@ -39,37 +39,60 @@
                  </div>
                  <br/><br/>
              </div>
-             <div class="col-md-7">
+             <div class="col-md-7 col-sm-12">
                  <h3 class="text-right">مقدار ارز خود را وارد کنید</h3>
                  <div class="row">
-                     <div class="col-md-11" style="margin: auto;">
-                         <div class="row">
-                             <input  type="text" class="form-control pb_height-50 reverse" style="width: 60%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;" value="1" />
-                             <select class="form-control pb_height-50 reverse"  style="width: 40%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;background-color: #f2f2f2;">
-                                 <option value="" selected>Bitcoin</option>
-                                 <option value="">Ethereum</option>
-                                 <option value="">Stellar</option>
-                                 <option value="">Tron</option>
-                             </select>
-                         </div>
-                     </div>
-                     <div class="col-md-11 text-center"  style="margin: auto;">
-                         <button type="button" style="background-color: inherit;border: 0px;margin-top: 10px;font-size: 20px;"><i class="fa fa-exchange fa-3" aria-hidden="true"></i></button>
-                     </div>
-                     <div class="col-md-11"  style="margin: auto;">
-                         <div class="row">
-                             <input  type="text" class="form-control pb_height-50 reverse" style="width: 60%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background-color: #f2f2f2;" value="10" />
-                             <select class="form-control pb_height-50 reverse"  style="width: 40%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
-                                 <option value="" selected>Bitcoin</option>
-                                 <option value="">Ethereum</option>
-                                 <option value="">Stellar</option>
-                                 <option value="">Tron</option>
-                             </select>
-                         </div>
-                     </div>
-                     <div class="col-md-11" style="margin: auto;margin-top: 2%;">
-                         <button class="btn btn-success exchange-button" type="submit" style="display: block;margin: auto;">تبدیل</button>
-                     </div>
+                     <div class="col-md-12">
+            <div class="row mx-auto">
+              <input id="inputCoinValue"  oninput="exchangeRate()" type="text" class="form-control pb_height-50 inputCoin"  value="1" />
+              <div class="select-exchange">
+                <select name="item"><option value=""></option></select>
+                <div>
+                  <div class="selected-exchange">
+                    <span>&#8597;</span>
+                    <div id="inputCoinKind">Click and select </div>
+                  </div>
+                  <div class="select-dropdown-exchange">
+                    <div class="item-search-exchange">
+                      <input autocomplete="off" placeholder="search...">
+                    </div>
+                    <div class="items-exchange">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 text-center">
+            <button type="button" style="background-color: inherit;border: 0px;margin-top: 10px;font-size: 20px;"><i class="fa fa-exchange fa-3" aria-hidden="true"></i></button>
+          </div>
+          <div class="col-md-12">
+            <div class="row mx-auto">
+              <input  id="outputCoinValue" type="text" class="form-control pb_height-50 inputCoin" placeholder="..." />
+              <div class="select-exchange">
+                <select name="item"><option value=""></option></select>
+                <div>
+                  <div class="selected-exchange">
+                    <span>&#8597;</span>
+                    <div id="outputCoinKind">Click and select </div>
+                  </div>
+                  <div class="select-dropdown-exchange">
+                    <div class="item-search-exchange">
+                      <input autocomplete="off" placeholder="search...">
+                    </div>
+                    <div class="items-exchange">
+                    </div>
+                    <!-- <div class="item-count-exchange">
+                       30 products
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 exchange-button-container">
+            <button class="btn btn-success exchange-button" type="submit" id="converBtn">تبدیل</button>
+          </div>
                  </div>
              </div>
          </div>
@@ -79,19 +102,19 @@
        <div class="exchange-card" id="enter_address"  style="direction: rtl;">
            <div class="d-flex justify-content-between">
                <h3>آدرس کیف پول</h3>
-               <button class="btn">بازگشت</button>
+               <button class="btn" id="return_enter_amount">بازگشت</button>
            </div>
            <div class="form-group">
                <label>آدرس کیف پول</label>
                <input type="text" class="form-control">
            </div>
-           <button class="btn btn-success" style="margin: auto;display: block;">مرحله بعدی</button>
+           <button id="enter_address_btn" class="btn btn-success" style="margin: auto;display: block;">مرحله بعدی</button>
        </div>
 
        <div class="exchange-card" id="send_funds" style="direction: rtl;">
            <div class="d-flex justify-content-between">
                <h3>چک کردن</h3>
-               <button class="btn">بازگشت</button>
+               <button class="btn" id="return_enter_address">بازگشت</button>
            </div>
            <div style=" padding-right: 2%;">
                <div class="exchange-details">
@@ -193,6 +216,158 @@
 <div id="pb_loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#1d82ff"/></svg></div>
 
 <style>
+     .exchange-button-container {
+       text-align: center; margin-top: 3%;
+     }
+     @media only screen and (max-width: 1024px) {
+     }
+
+     @media only screen and (max-width: 768px) {
+         .exchange-button-container {margin-top: 3%;}
+      }
+
+      @media only screen and (max-width: 414px) {
+         .exchange-button-container {margin-top: 3%;}
+      }
+
+      @media only screen and (max-width: 350px) { 
+      }
+     .inputCoin {
+      width: 40%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background-color: white;
+    }
+
+    .selected-exchange span {
+        float: right;
+        margin-top: -5px;
+    }
+
+    .select-dropdown-exchange {
+        overflow: hidden;
+        height: 0px;
+        transition: height ease 0.2s;
+    }
+
+    .select-dropdown-exchange.opened-exchange {
+        height: 380px;
+        transition: height ease 0.2s;
+    }
+
+    .selected-exchange {
+        height: 48.5px;
+        padding: 10px 10px;
+        background: #f0f0f0;
+        cursor: pointer;
+    }
+
+    select {
+        display: none;
+    }
+
+    .select-exchange {
+        text-align: left;
+        display: inline-block;
+        width: 60%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+        /*box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.1);*/
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px
+    }
+
+    .item-search-exchange {
+        padding: 10px 5px;
+        background: #fafafa;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .item-search-exchange input {
+        width: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+        border: 2px solid #eee;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .item-search-exchange input:focus {
+        outline: none;
+        border: 1px solid #4fa5ff;
+        margin: 1px;
+        box-shadow: 0px 0px 0px 5px #afd6ff;
+    }
+
+    .items-exchange {
+        height: 380px;
+        overflow: auto;
+        overflow-x: hidden;
+        background-color: white;
+    }
+
+    .item-count-exchange {
+        padding: 15px 10px;
+        background: #fafafa;
+        border-top: 1px solid #ccc;
+    }
+
+    .items-exchange > div {
+        border-top:  1px solid #eee;
+        font-size: 0px;
+    }
+
+    .item-exchange {
+      background-color: #f0f0f0; padding: 2%;margin-left: 0px;
+    }
+    .item-exchange img {
+        margin-left: 5%;
+    }
+    .item-exchange span {
+        margin-left: 5px;
+        color: black;
+        font-size: 15px;
+    }
+
+    .items-exchange > div:hover {
+        background: #fcfcfc;
+        cursor: pointer;
+    }
+
+
+    .items-exchange > div:last-child {
+        border-bottom: 1px solid #eee;
+    }
+
+    .img-exchange {
+        vertical-align: top;
+        display: inline-block;
+        width: 80px;
+        padding: 12px 0px 0px 12px;
+    }
+
+    .content-exchange {
+        display: inline-block;
+        width: calc(100% - 120px);
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    span.badge-exchange {
+        border:  1px solid #ccc;
+        padding:  3px 10px;
+        font-size:  13px;
+        background:  #fafafa;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.1);
+        border-radius: 5px;
+    }
     .white-circle {
         border-radius: 50%;
         background-color: #FAFAFA;
@@ -227,6 +402,125 @@
 @include('master.scripts')
 
 <script type="text/javascript">
+    var coinList = [];
+
+    $('.selected-exchange').on('click', function() {
+        console.log("selected clicked");
+        $(this).next().toggleClass('opened-exchange');
+        exchangeRate();
+    });
+
+
+    $('.item-search-exchange input').on('keyup', function() {
+        console.log("item-select-search");
+        var txt = $(this).val().toLowerCase();
+        console.log(txt);
+        $(this).parent().parent().parent().find('.items-exchange > div').hide();
+        for(var i=0; i<coinList.length; i++) {
+          if(coinList[i].full_name.toLowerCase().includes(txt) || coinList[i].name.toLowerCase().includes(txt)) {
+            $('#coin'+i).show();
+          } else {console.log(coinList[i].full_name+" , "+txt);}
+        }
+        
+    })
+    // console.log('{{route('getCurrencies')}}');
+    axios.post('{{route('getCurrencies')}}').then(function (response) {
+        console.log("getCurrencies");console.log(response);
+         coinList = response.data;
+        for(var i=0; i<coinList.length; i++) {
+          $('.items-exchange').append(`
+               <div class="row item-exchange" id="coin`+i+`">
+                   <img  width="20" height="20" src="assets/img/icons/`+coinList[i].name+`.png">
+                   <span class="coinSmallName" style="color:`+coinList[i].color+`;">`+coinList[i].name+`</span>
+                   <span>`+coinList[i].full_name+`</span>
+               </div>
+            `);
+        }
+        $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
+          // console.log($('#inputCoinValue').val());
+          // console.log($('#inputCoinKind').text());
+          // console.log($('#inputCoinValue').val());
+          exchangeRate();
+        $('.item-exchange').on('click', function() {
+          console.log("item-select");
+          var txt = $(this).find('span.coinSmallName').text();
+          console.log($(this));
+          console.log(txt);
+          $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
+          $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
+           exchangeRate();
+          
+        });
+    });
+
+    // document.getElementById("inputCoinValue").addEventListener('change', exchangeRate);
+
+
+    function exchangeRate() {
+      var link = 'http://localhost:70/exchange/public/get-exchange-amount?from='+$('#inputCoinKind').text()+'&to='+$('#outputCoinKind').text()+'&amount='+$('#inputCoinValue').val();
+      console.log(link);
+      if( isNumeric($('#inputCoinValue').val()) && ($('#inputCoinValue').val() !== "") ) {
+        console.log("exchangeRate");
+        axios.get(link).then(function (response) {
+               console.log("axios test");
+               console.log(response);
+              if(response.data == 500){
+                 
+              } else {
+                 // vm.receiveNumber = response.data.toFixed(8);
+                 $('#outputCoinValue').val(response.data);
+              }
+          })
+      }
+    }
+
+    function isNumeric(num){
+       return !isNaN(num)
+    }
+
     $('#pb-navbar').addClass("scrolled awake"); 
+
+    function hideAllExchangeParts() {
+      $('#enter_amount').hide();
+      $('#enter_address').hide();
+      $('#send_funds').hide();
+      $('#waitForExchange').hide();
+      $('#receive_coin').hide();
+      $('.white-circle').removeClass("circle-active");
+    }
+
+    function showExchangePart1() {
+      $('#enter_amount').show(); $('.enter_amount').addClass("circle-active");
+    }
+    function showExchangePart2() {
+      $('#enter_address').show(); $('.enter_address').addClass("circle-active");
+    }
+    function showExchangePart3() {
+      $('#send_funds').show(); $('.send_funds').addClass("circle-active");
+    }
+    function showExchangePart4() {
+      $('#waitForExchange').show(); $('.waitForExchange').addClass("circle-active");
+    }
+    function showExchangePart5() {
+      $('#receive_coin').show(); $('.receive_coin').addClass("circle-active");
+    }
+ 
+    hideAllExchangeParts();
+    showExchangePart1();
+    
+     $('#converBtn').on('click', function() {
+        hideAllExchangeParts();showExchangePart2();
+    });
+
+     $('#return_enter_amount').on('click', function() {
+        hideAllExchangeParts();showExchangePart1();
+    });
+    $('#enter_address_btn').on('click', function() {
+        hideAllExchangeParts();showExchangePart3();
+    }); 
+    $('#return_enter_address').on('click', function() {
+        hideAllExchangeParts();showExchangePart2();
+    });
+
 </script>
 @endsection

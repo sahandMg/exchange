@@ -287,9 +287,7 @@
      .exchange-button-container {
       text-align: center;
      }
-     /*.exchange-button-container button {
-      display: block;margin: 0 auto;
-     }*/
+    
      @media only screen and (max-width: 1024px) {
         .exchange-header-section {
             height: 70vh;
