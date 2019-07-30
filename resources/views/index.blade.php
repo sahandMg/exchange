@@ -5,15 +5,14 @@
 @section('content')
 <section class="pb_cover_v3 overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_gradient_v1 pb_slant-light" id="section-home">
       <div class="container">
-        <br/><br/><br/><br/><br/><br/>
-       <div class="row">
+       <div class="row exchange-header" style="height: 50vh;">
         <div class="col-md-5 col-sm-12">
          <h1 class="text-center" style="color: white;">راه آسان و امن برای تبدیل بیش از 140 ارز دیجیتال</h1>
         </div>
         <div class="col-md-7 col-sm-12 row">
           <div class="col-md-12">
             <div class="row">
-              <input id="inputCoinValue" type="text" class="form-control pb_height-50 reverse inputCoin"  value="1" />
+              <input id="inputCoinValue"  oninput="exchangeRate()" type="text" class="form-control pb_height-50 inputCoin"  value="1" />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
                 <div>
@@ -32,12 +31,12 @@
               </div>
             </div>
           </div>
-          <div class="col-md-1 text-center">
+          <div class="col-md-1 text-center" style="margin: auto;">
             <button type="button" style="background-color: inherit;border: 0px;margin-top: 10px;font-size: 20px;"><i class="fa fa-exchange fa-3" aria-hidden="true"></i></button>
           </div>
           <div class="col-md-12">
             <div class="row">
-              <input  id="outputCoinValue" type="text" class="form-control pb_height-50 reverse" placeholder="..." />
+              <input  id="outputCoinValue" type="text" class="form-control pb_height-50 inputCoin" placeholder="..." />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
                 <div>
@@ -59,7 +58,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-1" style="margin: auto;">
             <button class="btn btn-primary exchange-button" type="submit">تبدیل</button>
           </div>
         </div>
@@ -282,16 +281,12 @@
 
 
   <style type="text/css">
-    /*body {*/
-        /*overflow: scroll;*/
-        /*padding: 20px;*/
-        /*text-align: center;*/
-        /*font-family: Arial;*/
-        /*line-height: 1.5;*/
-    /*}*/
+     .exchange-header {
+      height: 50vh;margin-top: 15%;
+     }
 
     .inputCoin {
-      width: 40%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;
+      width: 40%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background-color: white;
     }
 
     .selected-exchange span {
@@ -438,6 +433,7 @@
     $('.selected-exchange').on('click', function() {
         console.log("selected clicked");
         $(this).next().toggleClass('opened-exchange');
+        exchangeRate();
     });
 
     // $('.item-exchange').on('click', function() {
@@ -481,7 +477,7 @@
                </div>
             `);
         }
-        $('#inputCoinKind').html("Bitcoin");$('#outputCoinKind').html("Ethereum");
+        $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
           // console.log($('#inputCoinValue').val());
           // console.log($('#inputCoinKind').text());
           // console.log($('#inputCoinValue').val());
@@ -493,28 +489,34 @@
           console.log(txt);
           $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
           $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
-
+           exchangeRate();
           
         });
     });
 
+    // document.getElementById("inputCoinValue").addEventListener('change', exchangeRate);
+
+
     function exchangeRate() {
-      axios.post('{{route('getExchangeAmount')}}',{'from':$('#inputCoinKind').text(), 'to':$('#outputCoinKind').text(),'amount':$('#inputCoinValue').val()}).then(function (response) {
+      var link = 'http://localhost:70/exchange/public/get-exchange-amount?from='+$('#inputCoinKind').text()+'&to='+$('#outputCoinKind').text()+'&amount='+$('#inputCoinValue').val();
+      console.log(link);
+      if( isNumeric($('#inputCoinValue').val()) && ($('#inputCoinValue').val() !== "") ) {
+        console.log("exchangeRate");
+        axios.get(link).then(function (response) {
+               console.log("axios test");
                console.log(response);
               if(response.data == 500){
                  
               } else {
                  // vm.receiveNumber = response.data.toFixed(8);
+                 $('#outputCoinValue').val(response.data);
               }
-          });
-      axios.post('{{route('getExchangeAmount')}}',{'from':1, 'to':"btc",'amount':"eth"}).then(function (response) {
-               console.log(response);
-              if(response.data == 500){
-                 
-              } else {
-                 // vm.receiveNumber = response.data.toFixed(8);
-              }
-          });
+          })
+      }
+    }
+
+    function isNumeric(num){
+       return !isNaN(num)
     }
   </script>
 @endsection
