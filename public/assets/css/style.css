@@ -430,7 +430,8 @@
     .pb_cover_v2 > .container > .row,
     .pb_cover_v3 > .container > .row,
     .pb_cover_v4 > .container > .row {
-      height: 95vh; }
+      height: 95vh; 
+    }
       @media (max-width: 767px) {
         .pb_cover > .container > .row,
         .pb_cover_v1 > .container > .row,
