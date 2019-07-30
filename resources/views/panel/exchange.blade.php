@@ -19,7 +19,7 @@
 
        <div class="exchange-card" id="enter_amount">
          <div class="row">
-             <div class="col-md-5" style="border-right: 1px solid; padding-right: 2%;">
+            <div class="col-md-5 exchange-details-container">
                  <h3 class="text-right">جزئیات</h3>
                  <div class="exchange-details">
                    <span class="detail-desc">مقدار تبدیل مورد انتظار</span>
@@ -27,12 +27,12 @@
                  </div>
                  <div class="exchange-details">
                      <span class="detail-desc">هزینه تبدیل</span>
-                     <span class="detail-value">0.0001 BTC</span>
+                     <span class="detail-value" id="enter_amount_exchange_fee">0.0001 BTC</span>
                  </div>
-                 <div class="exchange-details">
+                 <!-- <div class="exchange-details">
                      <span class="detail-desc">هزینه شبکه</span>
                      <span class="detail-value">0.00002</span>
-                 </div>
+                 </div> -->
                  <div class="exchange-details">
                      <span class="detail-desc">زمان تقریبی</span>
                      <span class="detail-value">5 تا 10 دقیقه</span>
@@ -182,43 +182,17 @@
     </div>
 </section>
 
-
-<footer class="pb_footer bg-light" role="contentinfo">
-    <div class="container">
-        <!--<div class="row text-center">-->
-            <!--<div class="col">-->
-                <!--<ul class="list-inline">-->
-                    <!--<li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-facebook"></i></a></li>-->
-                    <!--<li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-twitter"></i></a></li>-->
-                    <!--<li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-linkedin"></i></a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</div>-->
-        <div class="row">
-            <div class="col text-center">
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <span>آدرس: فلان</span>
-                    </div>
-                    <div class="col-md-6 text-cente">
-                        <span>شماره تلفن: 54654842132132</span>
-                    </div>
-                </div>
-                <br/>
-                <p class="pb_font-14">تمام حقوق این سایت متعلق به صرافی فلان می باشد</p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
-<!-- loader -->
-<div id="pb_loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#1d82ff"/></svg></div>
+@include('master.footer')
 
 <style>
+     .exchange-details-container {
+         border-right: 1px solid; padding-right: 2%;
+     }
+
      .exchange-button-container {
        text-align: center; margin-top: 3%;
      }
+
      @media only screen and (max-width: 1024px) {
      }
 
@@ -226,15 +200,24 @@
          .exchange-button-container {margin-top: 3%;}
       }
 
-      @media only screen and (max-width: 414px) {
+      @media only screen and (max-width: 415px) {
          .exchange-button-container {margin-top: 3%;}
+         .exchange-details-container { border-right: 0px; padding-right: 8%; }
+         .container {padding-left: 0px; padding-right: 0px;}
+         .pb_section {
+           padding: 8em 0;
+          }
+          .detail-desc { font-size: 0.8rem; }
+          .detail-value {font-size: 1rem;}
       }
 
       @media only screen and (max-width: 350px) { 
       }
+
      .inputCoin {
-      width: 40%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background-color: white;
-    }
+       width: 40%;border-top-right-radius: 0px;
+       border-bottom-right-radius: 0px;background-color: white;
+     }
 
     .selected-exchange span {
         float: right;
@@ -394,7 +377,7 @@
         line-height: 1.1;
         font-size: 1.3em;
         direction: ltr;
-        /*word-break: break-word;*/
+        word-break: break-word;
     }
     .pb_footer {padding-top: 15%;}
 </style>
@@ -402,6 +385,13 @@
 @include('master.scripts')
 
 <script type="text/javascript">
+   // input coin value
+   var inputCoinValue;
+   // input coin kind
+   var inputCoinKind;
+   // output coin kind
+   var outputCoinKind;
+
     var coinList = [];
 
     $('.selected-exchange').on('click', function() {
@@ -460,7 +450,7 @@
       var link = 'http://localhost:70/exchange/public/get-exchange-amount?from='+$('#inputCoinKind').text()+'&to='+$('#outputCoinKind').text()+'&amount='+$('#inputCoinValue').val();
       console.log(link);
       if( isNumeric($('#inputCoinValue').val()) && ($('#inputCoinValue').val() !== "") ) {
-        console.log("exchangeRate");
+        console.log("exchangeRate");$('#outputCoinValue').val("...");
         axios.get(link).then(function (response) {
                console.log("axios test");
                console.log(response);

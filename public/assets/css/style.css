@@ -1730,9 +1730,9 @@ a {
   padding-bottom: 11.2px;
   color: white;
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 414px) {
   .exchange-card {
-    margin-top: 70px;
+    margin-top: 20px;
   }
 }
 
