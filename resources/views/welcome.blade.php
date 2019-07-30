@@ -148,7 +148,7 @@
 
                     getReceiveNumber:function () {
                         vm = this;
-                        axios.post('{{route('getExchangeAmount')}}',{'from':vm.send,'to':vm.receive,'amount':vm.sendNumber}).then(function (response) {
+                        axios.get('{{route('getExchangeAmount')}}',{'from':vm.send,'to':vm.receive,'amount':vm.sendNumber}).then(function (response) {
                             if(response.data == 500){
 
                                 vm.receiveNumber = NAN

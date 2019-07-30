@@ -47,6 +47,9 @@ Route::get('password-reset','AuthController@passwordReset')->name('passwordReset
 
 Route::post('password-reset','AuthController@post_passwordReset')->name('passwordReset');
 
+// ===================== Panel Routes =============================
+
+Route::get('exchage','TradeController@exchagePage')->name('exchagePage');
 
 // ==================== API EndPoints ===========================
 
