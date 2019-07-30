@@ -3,15 +3,15 @@
   <title> اسم سایت - خانه</title>
 @endsection
 @section('content')
-<section class="pb_cover_v3 overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_gradient_v1 pb_slant-light" id="section-home">
+<section class="pb_cover_v3 overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_gradient_v1 pb_slant-light exchange-header-section" id="section-home">
       <div class="container">
-       <div class="row exchange-header" style="height: 50vh;">
+       <div class="row exchange-header">
         <div class="col-md-5 col-sm-12">
          <h1 class="text-center" style="color: white;">راه آسان و امن برای تبدیل بیش از 140 ارز دیجیتال</h1>
         </div>
         <div class="col-md-7 col-sm-12 row">
           <div class="col-md-12">
-            <div class="row">
+            <div class="row mx-auto">
               <input id="inputCoinValue"  oninput="exchangeRate()" type="text" class="form-control pb_height-50 inputCoin"  value="1" />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
@@ -31,11 +31,11 @@
               </div>
             </div>
           </div>
-          <div class="col-md-1 text-center" style="margin: auto;">
+          <div class="col-md-12 text-center">
             <button type="button" style="background-color: inherit;border: 0px;margin-top: 10px;font-size: 20px;"><i class="fa fa-exchange fa-3" aria-hidden="true"></i></button>
           </div>
           <div class="col-md-12">
-            <div class="row">
+            <div class="row mx-auto">
               <input  id="outputCoinValue" type="text" class="form-control pb_height-50 inputCoin" placeholder="..." />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
@@ -58,7 +58,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-1" style="margin: auto;">
+          <div class="col-md-12 exchange-button-container">
             <button class="btn btn-primary exchange-button" type="submit">تبدیل</button>
           </div>
         </div>
@@ -282,9 +282,41 @@
 
   <style type="text/css">
      .exchange-header {
-      height: 50vh;margin-top: 15%;
+      height: 50vh !important;margin-top: 15%;
+     }
+     .exchange-button-container {
+      text-align: center;
+     }
+     /*.exchange-button-container button {
+      display: block;margin: 0 auto;
+     }*/
+     @media only screen and (max-width: 1024px) {
+        .exchange-header-section {
+            height: 70vh;
+        } 
+        .exchange-header {
+           height: 20vh !important;margin-top: 15%;
+        } 
+        .exchange-header h1{ font-size: 2rem; }
      }
 
+     @media only screen and (max-width: 768px) {
+         .exchange-header h1{ font-size: 1.7rem; }
+         .exchange-button-container {margin-top: 3%;}
+      }
+
+      @media only screen and (max-width: 414px) {
+         .exchange-header h1{ font-size: 1.5rem; margin-bottom: 10%; }
+         .exchange-button-container {margin-top: 3%;}
+         .exchange-header { margin-top: 5%;padding-top: 0px !important; }
+      }
+
+      @media only screen and (max-width: 350px) {
+         .exchange-header-section {
+            height: 100vh;
+        } 
+      }
+     
     .inputCoin {
       width: 40%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background-color: white;
     }
