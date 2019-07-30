@@ -47,6 +47,8 @@ Route::get('password-reset','AuthController@passwordReset')->name('passwordReset
 
 Route::post('password-reset','AuthController@post_passwordReset')->name('passwordReset');
 
+Route::get('gift-card','GiftCardController@index')->name('giftIndex');
+
 // ===================== Panel Routes =============================
 
 Route::get('exchage','TradeController@exchagePage')->name('exchagePage');
@@ -67,10 +69,10 @@ Route::post('get-status','TradeController@getStatus')->name('getStatus');
 
 Route::post('get-rate','TradeController@getFixRate')->name('getFixRate');
 
-Route::get('get-rate-bulk','TradeController@getFixRateBulk')->name('getFixRateBulk');
+Route::post('get-rate-bulk','TradeController@getFixRateBulk')->name('getFixRateBulk');
 
-Route::get('get-crypto-color','HandyController@getCryptoColor');
+Route::post('get-crypto-color','HandyController@getCryptoColor');
 
-Route::get('set-crypto-color','HandyController@setCryptoColor');
+Route::post('set-crypto-color','HandyController@setCryptoColor');
 
-Route::get('set-crypto-fname','HandyController@setCryptoFullName');
+Route::post('set-crypto-fname','HandyController@setCryptoFullName');

@@ -29,8 +29,11 @@ class ChangellyHelper
         $response = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($response,true);
-        if(is_null($response)){
-            $response = 500;
+        if(isset($response['error'])){
+            $response = ['error'=>500,'body'=>'error in request format'];
+        }
+        if(!isset($response['result'])){
+            $response = ['error'=>502,'body'=>'chagelly not responding'];
         }
         return $response;
     }

@@ -25,8 +25,8 @@ class TradeController extends Controller
 
        if(!Cache::has('cryptoList')){
            $response = $this->changellyHelper->getChangellyData('getCurrencies',[]);
-           if($response == 500){
-               return 'Service Error';
+           if(isset($response['error'])){
+               return $response['body'];
            }
            $cryptoList = $this->checkForImage($response['result']);
            $cryptoDetail = $this->getCryptoDetails($cryptoList);
@@ -43,8 +43,8 @@ class TradeController extends Controller
         $from = $request->from;
         $to = $request->to;
         $response = $this->changellyHelper->getChangellyData('getMinAmount',['from'=> $from,'to'=> $to]);
-        if($response == 500){
-            return $this->apiError;
+        if(isset($response['error'])){
+            return $response['body'];
         }
         return $response['result'];
     }
@@ -54,9 +54,9 @@ class TradeController extends Controller
             $to = $request->to;
             $amount = $request->amount;
             $response = $this->changellyHelper->getChangellyData('getExchangeAmount',['from'=> $from,'to'=> $to , 'amount'=>$amount]);
-        if($response == 500){
-            return $this->apiError;
-        }
+            if(isset($response['error'])){
+                return $response['body'];
+            }
         return $response['result'];
     }
 // get refound address from user to take back user the found he sent when transaction failed
@@ -77,8 +77,8 @@ class TradeController extends Controller
             'amount'=>$amount,
             'refundAddress'=>$refundAddress
         ]);
-        if($response == 500){
-            return $this->apiError;
+        if(isset($response['error'])){
+            return $response['body'];
         }
         $transactionData = $response['result'];
         $trans = new Transaction();
@@ -123,8 +123,8 @@ class TradeController extends Controller
             'refundAddress'=>$refundAddress,
             'refundExtraId'=>$refundExtraId
         ]);
-        if($response == 500){
-            return $this->apiError;
+        if(isset($response['error'])){
+            return $response['body'];
         }
         $transactionData = $response['result'];
         $trans = new FixRateTransaction();
@@ -160,8 +160,8 @@ class TradeController extends Controller
             'limit'=>10,
             'offset'=> 0
         ]);
-        if($response == 500){
-            return $this->apiError;
+        if(isset($response['error'])){
+            return $response['body'];
         }
         return $response['result'];
     }
@@ -188,8 +188,8 @@ class TradeController extends Controller
             'from'=> $from,
             'to'=> $to,
         ]);
-        if($response == 500){
-            return $this->apiError;
+        if(isset($response['error'])){
+            return $response['body'];
         }
         return $response;
     }
@@ -197,8 +197,8 @@ class TradeController extends Controller
     public function getFixRateBulk(){
 
         $response = $this->changellyHelper->getChangellyData('getFixRateBulk',[]);
-        if($response == 500){
-            return $this->apiError;
+        if(isset($response['error'])){
+            return $response['body'];
         }
         return $response;
     }
