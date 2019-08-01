@@ -351,21 +351,7 @@
         background: rgba(0,0,0,0.1);
         border-radius: 5px;
     }
-    .white-circle {
-        border-radius: 50%;
-        background-color: #FAFAFA;
-        color: #b3b4b4;
-        width: 40px;
-        height: 40px;
-        list-style: none;
-        text-align: center;
-        font-size: 1.2rem;
-    }
-    .circle-active {
-        background-color: white;
-        color: black;
-        box-shadow: 0 10px 15px 0 rgba(0,0,0,.08);
-    }
+    
     .exchange-details {margin-top: 2%;direction: rtl;text-align: right;}
     .detail-desc {
         line-height: 1;
