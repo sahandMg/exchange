@@ -29,12 +29,16 @@ class ChangellyHelper
         $response = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($response,true);
+
         if(isset($response['error'])){
-            $response = ['error'=>500,'body'=>'error in request format'];
+            $response = ['error'=>500,'body'=>$response['error']['message']];
+            return $response;
         }
         if(!isset($response['result'])){
-            $response = ['error'=>502,'body'=>'chagelly not responding'];
+            $response = ['error'=>502,'body'=>'changelly not responding'];
+            return $response;
         }
         return $response;
+
     }
 }

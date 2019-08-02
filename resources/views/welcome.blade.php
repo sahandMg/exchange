@@ -126,7 +126,7 @@
                 created:function () {
 
                     vm = this;
-                    axios.get('{{route('getCurrencies')}}').then(function (response) {
+                    axios.post('{{route('getCurrencies')}}').then(function (response) {
                         vm.list = response.data;
                     })
                 },
@@ -148,22 +148,24 @@
 
                     getReceiveNumber:function () {
                         vm = this;
-                        axios.get('{{route('getExchangeAmount')}}',{'from':vm.send,'to':vm.receive,'amount':vm.sendNumber}).then(function (response) {
+                        axios.post('{{route('getExchangeAmount')}}',{'from':vm.send,'to':vm.receive,'amount':vm.sendNumber}).then(function (response) {
                             if(response.data['error'] == 500){
 
                                 vm.receiveNumber = NAN
                             }else{
-                                vm.receiveNumber = response.data.toFixed(8);
+                                console.log(response.data.result);
+                                var result = response.data.result;
+                                vm.receiveNumber = result;
 
                             }
                         })
                     },
                     exchange:function(){
                         vm = this;
-                        axios.get('{{route('createTransaction')}}',{
+                        axios.post('{{route('createTransaction')}}',{
                             'from':vm.send,'to':vm.receive,'amount':vm.sendNumber,'address':'0xf8B1392351dcf6912Af12d1365F3415620Bb44bD'
                         }).then(function (response) {
-
+                            console.log(response.data)
                             vm.message = response.data
 
                         })
@@ -171,7 +173,7 @@
                     getStatus:function () {
 
                         vm = this;
-                        axios.get('{{route('getStatus')}}',{
+                        axios.post('{{route('getStatus')}}',{
                             'id':'r3683fkrakha91yl'
                         }).then(function (response) {
 
@@ -182,7 +184,7 @@
                 watch:{
                     sendNumber:function (number) {
                         vm = this;
-                        axios.get('{{route('getMinAmount')}}',{'from':vm.send,'to':vm.receive}).then(function (response) {
+                        axios.post('{{route('getMinAmount')}}',{'from':vm.send,'to':vm.receive}).then(function (response) {
                             if(response.data['error'] == 500){
 
                                 vm.minAmount = NAN

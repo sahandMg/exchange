@@ -59,7 +59,7 @@ Route::post('get-currencies','TradeController@getCurrencies')->name('getCurrenci
 
 Route::post('get-min-amount','TradeController@getMinAmount')->name('getMinAmount');
 
-Route::get('get-exchange-amount','TradeController@getExchangeAmount')->name('getExchangeAmount');
+Route::post('get-exchange-amount','TradeController@getExchangeAmount')->name('getExchangeAmount');
 
 Route::post('create-transaction','TradeController@createTransaction')->name('createTransaction');
 

@@ -496,18 +496,21 @@
 
 
     function exchangeRate() {
-      var link = 'http://localhost:70/exchange/public/get-exchange-amount?from='+$('#inputCoinKind').text()+'&to='+$('#outputCoinKind').text()+'&amount='+$('#inputCoinValue').val();
-      console.log(link);
+
+//      var link = 'http://localhost:70/exchange/public/get-exchange-amount?from='+$('#inputCoinKind').text()+'&to='+$('#outputCoinKind').text()+'&amount='+$('#inputCoinValue').val();
       if( isNumeric($('#inputCoinValue').val()) && ($('#inputCoinValue').val() !== "") ) {
         console.log("exchangeRate");$('#outputCoinValue').val("...");
-        axios.get(link).then(function (response) {
-               console.log("axios test");
+        axios.post('{{route('getExchangeAmount')}}',{
+                    'from':$('#inputCoinKind').text(),
+                    'to':$('#outputCoinKind').text(),
+                    'amount':$('#inputCoinValue').val()
+                }).then(function (response) {
                console.log(response);
               if(response.data == 500){
                  
               } else {
                  // vm.receiveNumber = response.data.toFixed(8);
-                 $('#outputCoinValue').val(response.data);
+                 $('#outputCoinValue').val(response.data.result);
               }
           })
       }

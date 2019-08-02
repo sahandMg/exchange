@@ -26,7 +26,7 @@ class TradeController extends Controller
        if(!Cache::has('cryptoList')){
            $response = $this->changellyHelper->getChangellyData('getCurrencies',[]);
            if(isset($response['error'])){
-               return $response['body'];
+               return $response;
            }
            $cryptoList = $this->checkForImage($response['result']);
            $cryptoDetail = $this->getCryptoDetails($cryptoList);
@@ -43,10 +43,8 @@ class TradeController extends Controller
         $from = $request->from;
         $to = $request->to;
         $response = $this->changellyHelper->getChangellyData('getMinAmount',['from'=> $from,'to'=> $to]);
-        if(isset($response['error'])){
-            return $response['body'];
-        }
-        return $response['result'];
+
+        return $response;
     }
 
     public function getExchangeAmount(Request $request){
@@ -54,10 +52,8 @@ class TradeController extends Controller
             $to = $request->to;
             $amount = $request->amount;
             $response = $this->changellyHelper->getChangellyData('getExchangeAmount',['from'=> $from,'to'=> $to , 'amount'=>$amount]);
-            if(isset($response['error'])){
-                return $response['body'];
-            }
-        return $response['result'];
+
+        return $response;
     }
 // get refound address from user to take back user the found he sent when transaction failed
 // check min and max for entered value
@@ -77,8 +73,9 @@ class TradeController extends Controller
             'amount'=>$amount,
             'refundAddress'=>$refundAddress
         ]);
+
         if(isset($response['error'])){
-            return $response['body'];
+            return $response;
         }
         $transactionData = $response['result'];
         $trans = new Transaction();
@@ -98,7 +95,7 @@ class TradeController extends Controller
         $trans->payoutAddress = $transactionData['payoutAddress'];
         $trans->save();
 
-        return $transactionData['id'];
+        return $response;
     }
 
     public function createFixRateTransaction(Request $request){
@@ -124,7 +121,7 @@ class TradeController extends Controller
             'refundExtraId'=>$refundExtraId
         ]);
         if(isset($response['error'])){
-            return $response['body'];
+            return $response;
         }
         $transactionData = $response['result'];
         $trans = new FixRateTransaction();
@@ -145,7 +142,7 @@ class TradeController extends Controller
         $trans->payinAddress = $transactionData['payinAddress'];
         $trans->payoutAddress = $transactionData['payoutAddress'];
         $trans->save();
-        return $transactionData['id'];
+        return $response;
     }
 
     public function getTransactions(Request $request){
@@ -160,10 +157,8 @@ class TradeController extends Controller
             'limit'=>10,
             'offset'=> 0
         ]);
-        if(isset($response['error'])){
-            return $response['body'];
-        }
-        return $response['result'];
+
+        return $response;
     }
 
 
@@ -173,10 +168,8 @@ class TradeController extends Controller
         $response = $this->changellyHelper->getChangellyData('getTransactions',[
             'id'=> $id,
         ]);
-        if($response == 500){
-            return $this->apiError;
-        }
-        return $response['result'];
+
+        return $response;
     }
 
     // shows min & max values that chagelly accepts to convert
@@ -188,9 +181,7 @@ class TradeController extends Controller
             'from'=> $from,
             'to'=> $to,
         ]);
-        if(isset($response['error'])){
-            return $response['body'];
-        }
+
         return $response;
     }
 // gets all coin pairs fix rate

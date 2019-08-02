@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="06c4a399-ddd1-4a1a-9e24-15536f764dcd" name="chagelly" url="http://5.9.123.21">
+        <fileTransfer host="5.9.123.21" port="21" rootFolder="/ex.etrix.ir/main">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
