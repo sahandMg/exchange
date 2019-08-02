@@ -75,7 +75,29 @@
    	    <button class="btn btn-success mx-auto" id="submit">ثبت</button>
       </div>
   </div>
-
+  <br/>
+  <br/><hr/><br/>
+  <!-- Bitcoin gift card discription -->
+  <div style="text-align: right;direction: rtl;">
+   <h3 class="text-center">کارت هدیه بیت کوین، بهترین را برای هدیه دادن</h3>
+   <br/>
+   <p>کارت هدیه بیت کوین، باعث می شود به راحتی به دیگران بیت کوین هدیه بدهید. انتخاب خوبی برای هدیه تولد، عید نوروز و به عنوان کادو هستش. </p>
+   <br/>
+   <img  class="img-fluid rounded mx-auto d-block" src="assets/img/bitcoinGiftCard.png" alt="کارت هدیه بیت کوین">
+  </div>
+  <br/><hr/><br/>
+  <!-- Bitcoin gift card discription -->
+  <div style="text-align: right;direction: rtl;">
+   <h3 class="text-center">چگونه سفارش بدیم؟</h3>
+   <p>به آسانی ، چنتا کلیک می کنی و یه سری اطلاعات وارد می کنی همین.</p>
+  </div>
+  <br/><hr/><br/>
+  <!-- Bitcoin gift card discription -->
+  <div style="text-align: right;direction: rtl;">
+   <h3 class="text-center">برای سازمان هه و شرکت ها</h3>
+   <p>برای شرکت ها و سازمان ها اگر زیاد بخرند یه تخفیفی هم بهشون بدیم.</p>
+  </div>
+</div>
 <style type="text/css">
 	.giftcard-page { margin-top: 10%;direction: rtl; }
 	.square {
