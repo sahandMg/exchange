@@ -497,7 +497,8 @@
 
     function exchangeRate() {
 
-//      var link = 'http://localhost:70/exchange/public/get-exchange-amount?from='+$('#inputCoinKind').text()+'&to='+$('#outputCoinKind').text()+'&amount='+$('#inputCoinValue').val();
+      updateHiddenInputs();
+
       if( isNumeric($('#inputCoinValue').val()) && ($('#inputCoinValue').val() !== "") ) {
         console.log("exchangeRate");$('#outputCoinValue').val("...");
         axios.post('{{route('getExchangeAmount')}}',{
@@ -514,6 +515,12 @@
               }
           })
       }
+    }
+
+    function updateHiddenInputs() {
+      $('#inputCoinKindHidden').val($('#inputCoinKind').text());
+      $('#outputCoinKindHidden').val($('#outputCoinKind').text());
+      $('#inputCoinvalueHidden').val($('#inputCoinValue').val());
     }
 
     function isNumeric(num){

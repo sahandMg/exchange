@@ -20,6 +20,7 @@ body {
 .pb_slant-light,
 .pb_slant-white {
   position: relative; }
+  
   .pb_slant-light:after,
   .pb_slant-white:after {
     content: "";
