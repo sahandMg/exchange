@@ -71,6 +71,9 @@
         <label>شماره تلفت:</label>
         <input type="text" class="form-control">
       </div>
+      <div class="text-center">
+   	    <button class="btn btn-success mx-auto" id="submit">ثبت</button>
+      </div>
   </div>
 
 <style type="text/css">
