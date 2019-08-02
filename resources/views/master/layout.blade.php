@@ -59,6 +59,8 @@
                 <li class="nav-item"><a class="nav-link" href="{{route('index')}}">خانه</a></li>
                 <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="" id="signupBtn"><span class="pb_rounded-4 px-4">ثبت نام</span></a></li>
                 <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href=""  id="loginBtn"><span class="pb_rounded-4 px-4">ورود</span></a></li>
+                <!-- for authentication -->
+                <!-- <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href=""><span class="pb_rounded-4 px-4">my account</span></a></li> -->
             </ul>
         </div>
     </div>
@@ -68,7 +70,12 @@
 
 <style>
     .media-body p {direction: rtl;}
-
+@media only screen and (max-width: 769px) {
+  .navbar {
+    text-align: center;
+  }
+  .navbar li { margin-top: 1%; }
+}
 /* The Modal (background) */
 .custom-modal {
   display: none; /* Hidden by default */

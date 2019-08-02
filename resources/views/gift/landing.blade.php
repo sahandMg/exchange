@@ -11,8 +11,8 @@
    </div>
    <div>
          <ul class="d-flex justify-content-around" style="padding-left: 0;">
-            <li class="white-circle enter_address">2</li>
-            <li class="white-circle enter_amount circle-active">1</li>
+            <li class="white-circle enter_info">2</li>
+            <li class="white-circle enter_cart circle-active">1</li>
          </ul>
        </div>
    <div class="exchange-card" style="direction: rtl;" id="step1"> 
@@ -55,6 +55,7 @@
   <div class="exchange-card" style="direction: rtl;" id="step2"> 
 	  <h3>مقدار بیت کوین کارت هدیه خود را انتخاب کنید.</h3>
 	  <br/>
+	  <form>
 	  <div class="form-group">
         <label>نام:</label>
         <input type="text" class="form-control">
@@ -68,12 +69,17 @@
         <input type="text" class="form-control">
       </div>
       <div class="form-group">
-        <label>شماره تلفت:</label>
+        <label>شماره تلفن:</label>
         <input type="text" class="form-control">
       </div>
-      <div class="text-center">
+      <div style="display: none;" id="cartInputshidden">
+      	
+      </div>
+      <div class="d-flex justify-content-between">
+        <button class="btn" id="return_step1">بازگشت</button>
    	    <button class="btn btn-success mx-auto" id="submit">ثبت</button>
       </div>
+      </form>
   </div>
   <br/>
   <br/><hr/><br/>
@@ -122,9 +128,25 @@
     
     var cart = []; var flag = 0;
 
+    $('#return_step1').on('click', function(event) {
+    	event.preventDefault();
+    	$('#step1').show();$('#step2').hide();
+    	$('.white-circle').removeClass("circle-active");
+    	$('.enter_cart').addClass("circle-active");
+    });
+
     $('#nextStepBtn').on('click', function() {
     	if(cart.length > 0) {
     		$('#step1').hide();$('#step2').show();
+    		$('.white-circle').removeClass("circle-active");
+    		$('.enter_info').addClass("circle-active");
+    		$('#cartInputshidden').empty();
+    		for(var i=0; i< cart.length; i++) {
+    		  $('#cartInputshidden').append(`
+    		     <input type="text" class="form-control" name="giftCart`+cart[i].kind+`"  value="`+cart[i].quantity+`"/>
+    		  `);	
+    		}
+    			
     	}
     });
 
