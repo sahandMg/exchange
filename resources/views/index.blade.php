@@ -496,6 +496,7 @@
 
 
     function exchangeRate() {
+      updateHiddenInputs();
       var link = 'http://localhost:70/exchange/public/get-exchange-amount?from='+$('#inputCoinKind').text()+'&to='+$('#outputCoinKind').text()+'&amount='+$('#inputCoinValue').val();
       console.log(link);
       if( isNumeric($('#inputCoinValue').val()) && ($('#inputCoinValue').val() !== "") ) {
@@ -511,6 +512,12 @@
               }
           })
       }
+    }
+
+    function updateHiddenInputs() {
+      $('#inputCoinKindHidden').val($('#inputCoinKind').text());
+      $('#outputCoinKindHidden').val($('#outputCoinKind').text());
+      $('#inputCoinvalueHidden').val($('#inputCoinValue').val());
     }
 
     function isNumeric(num){
