@@ -51,7 +51,7 @@ class TradeController extends Controller
             $from = $request->from;
             $to = $request->to;
             $amount = $request->amount;
-            $response = $this->changellyHelper->getChangellyData('getExchangeAmount',['from'=> $from,'to'=> $to , 'amount'=>$amount]);
+            $response = $this->changellyHelper->getChangellyData('getExchangeAmount',[['from'=> $from,'to'=> $to , 'amount'=>$amount],['from'=> $from,'to'=> $to , 'amount'=>$amount]]);
 
         return $response;
     }
@@ -94,6 +94,20 @@ class TradeController extends Controller
         $trans->payinAddress = $transactionData['payinAddress'];
         $trans->payoutAddress = $transactionData['payoutAddress'];
         $trans->save();
+
+        return $response;
+    }
+
+
+    // shows min & max values that chagelly accepts to convert
+    public function getFixRate(Request $request){
+
+        $from = $request->from;
+        $to = $request->to;
+        $response = $this->changellyHelper->getChangellyData('getFixRate',[
+            ['from'=> $from,
+            'to'=> $to]
+        ]);
 
         return $response;
     }
@@ -172,18 +186,6 @@ class TradeController extends Controller
         return $response;
     }
 
-    // shows min & max values that chagelly accepts to convert
-    public function getFixRate(Request $request){
-
-        $from = $request->from;
-        $to = $request->to;
-        $response = $this->changellyHelper->getChangellyData('getFixRate',[
-            'from'=> $from,
-            'to'=> $to,
-        ]);
-
-        return $response;
-    }
 // gets all coin pairs fix rate
     public function getFixRateBulk(){
 

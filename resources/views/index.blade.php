@@ -511,7 +511,7 @@
                  
               } else {
                  // vm.receiveNumber = response.data.toFixed(8);
-                 $('#outputCoinValue').val(response.data.result);
+                  $('#outputCoinValue').val(response.data.result[0].result);
               }
           })
       }

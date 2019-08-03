@@ -63,6 +63,8 @@ Route::post('get-exchange-amount','TradeController@getExchangeAmount')->name('ge
 
 Route::post('create-transaction','TradeController@createTransaction')->name('createTransaction');
 
+Route::post('create-fix-transaction','TradeController@createFixRateTransaction')->name('createFixRateTransaction');
+
 Route::post('get-transaction','TradeController@getTransactions')->name('getTransactions');
 
 Route::post('get-status','TradeController@getStatus')->name('getStatus');

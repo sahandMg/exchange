@@ -135,7 +135,7 @@
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">هزینه تبدیل</span>
-                   <span class="detail-value">0.0001 BTC</span>
+                   <span id="exchageFee" class="detail-value">0.0001 BTC</span>
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">هزینه شبکه</span>
@@ -399,7 +399,7 @@
         }
         
     })
-    // console.log('{{route('getCurrencies')}}');
+
     axios.post('{{route('getCurrencies')}}').then(function (response) {
         console.log("getCurrencies");console.log(response);
          coinList = response.data;
@@ -436,7 +436,7 @@
 //      var link = 'http://localhost:70/exchange/public/get-exchange-amount?from='+$('#inputCoinKind').text()+'&to='+$('#outputCoinKind').text()+'&amount='+$('#inputCoinValue').val();
 //      console.log(link);
       if( isNumeric($('#inputCoinValue').val()) && ($('#inputCoinValue').val() !== "") ) {
-        console.log("exchangeRate");$('#outputCoinValue').val("...");
+//        console.log("exchangeRate");$('#outputCoinValue').val("...");
 
           axios.post('{{route('getExchangeAmount')}}',{
               'from':$('#inputCoinKind').text(),
@@ -449,7 +449,7 @@
                  
               } else {
                  // vm.receiveNumber = response.data.toFixed(8);
-                 $('#outputCoinValue').val(response.data.result);
+                 $('#outputCoinValue').val(response.data.result[0].result);
               }
           })
       }

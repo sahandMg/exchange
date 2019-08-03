@@ -121,7 +121,8 @@
                     receive:'',
                     receiveNumber:0,
                     minAmount:0,
-                    message:''
+                    message:'',
+                    rateId:''
                 },
                 created:function () {
 
@@ -143,6 +144,7 @@
                         if(this.receiveNumber > 0){
 
                             this.getReceiveNumber();
+
                         }
                     },
 
@@ -153,17 +155,36 @@
 
                                 vm.receiveNumber = NAN
                             }else{
-                                console.log(response.data.result);
-                                var result = response.data.result;
-                                vm.receiveNumber = result;
+                                console.log(response.data);
+                                var obj = response.data.result[0].visibleAmount;
+                                vm.receiveNumber = obj;
+                            }
+                        })
+                    },
+
+                    getFixRate:function () {
+                        vm = this;
+                        axios.post('{{route('getFixRate')}}',{'from':vm.send,'to':vm.receive}).then(function (response) {
+                            if(response.data['error'] == 500){
+
+                                vm.receiveNumber = NAN
+                            }else{
+                                vm.rateId = response.data.result[0].id
+                                console.log(vm.rateId)
 
                             }
                         })
                     },
+
                     exchange:function(){
                         vm = this;
-                        axios.post('{{route('createTransaction')}}',{
-                            'from':vm.send,'to':vm.receive,'amount':vm.sendNumber,'address':'0xf8B1392351dcf6912Af12d1365F3415620Bb44bD'
+                        axios.post('{{route('createFixRateTransaction')}}',{
+                            'from':vm.send,
+                            'to':vm.receive,
+                            'amountFrom':vm.sendNumber,
+                            'address':'0xf8B1392351dcf6912Af12d1365F3415620Bb44bD',
+                            'rateId':vm.rateId,
+                            'refundAddress':'1PHL9r7A4wdg7FdMeK2hkA64GttfUhMk9R'
                         }).then(function (response) {
                             console.log(response.data)
                             vm.message = response.data
@@ -192,7 +213,7 @@
                                 vm.receiveNumber = 0;
                                 vm.minAmount = response.data;
                                 vm.getReceiveNumber();
-
+                                vm.getFixRate();
                             }
                         })
                     },
