@@ -23,19 +23,19 @@
                  <h3 class="text-right">جزئیات</h3>
                  <div class="exchange-details">
                    <span class="detail-desc">مقدار تبدیل مورد انتظار</span>
-                   <span class="detail-value">1 BTC = 100 ETH</span>
+                   <span class="detail-value" id="expectedVal"></span>
                  </div>
                  <div class="exchange-details">
                      <span class="detail-desc">هزینه تبدیل</span>
-                     <span class="detail-value" id="enter_amount_exchange_fee">0.0001 BTC</span>
+                     <span class="detail-value" id="enter_amount_exchange_fee"></span>
                  </div>
-                 <!-- <div class="exchange-details">
+                  <div class="exchange-details">
                      <span class="detail-desc">هزینه شبکه</span>
-                     <span class="detail-value">0.00002</span>
-                 </div> -->
+                     <span class="detail-value" id="networkFee"></span>
+                 </div>
                  <div class="exchange-details">
                      <span class="detail-desc">زمان تقریبی</span>
-                     <span class="detail-value">5 تا 30 دقیقه</span>
+                     <span class="detail-value" style="direction: rtl">5 تا 30 دقیقه</span>
                  </div>
                  <br/><br/>
              </div>
@@ -118,12 +118,12 @@
            </div>
            <div style=" padding-right: 2%;">
                <div class="exchange-details">
-                   <span class="detail-desc">شما واریز می کنید</span>
-                   <span class="detail-value">1 BTC</span>
+                   <span class="detail-desc" >شما واریز می کنید</span>
+                   <span class="detail-value" id="sending"></span>
                </div>
                <div class="exchange-details">
-                   <span class="detail-desc">شما دریافت می کنید</span>
-                   <span class="detail-value">100 ETH</span>
+                   <span class="detail-desc" >شما دریافت می کنید</span>
+                   <span class="detail-value" id="receiving"></span>
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">آدرس کیف پول شما</span>
@@ -131,19 +131,19 @@
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">مقدار تبدیل مورد انتظار</span>
-                   <span class="detail-value">1 BTC = 100 ETH</span>
+                   <span class="detail-value" id="expectedVal"></span>
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">هزینه تبدیل</span>
-                   <span id="exchageFee" class="detail-value">0.0001 BTC</span>
+                   <span class="detail-value" id="enter_amount_exchange_fee"></span>
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">هزینه شبکه</span>
-                   <span class="detail-value">0.00002</span>
+                   <span class="detail-value" id="networkFee"></span>
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">زمان تقریبی</span>
-                   <span class="detail-value">۵ تا ۳۰ دقیقه</span>
+                   <span class="detail-value" style="direction: rtl">۵ تا ۳۰ دقیقه</span>
                </div>
                <br/>
                <button class="btn btn-success" style="margin: auto;display: block;">مرحله بعدی</button>
@@ -449,7 +449,13 @@
                  
               } else {
                  // vm.receiveNumber = response.data.toFixed(8);
-                 $('#outputCoinValue').val(response.data.result[0].result);
+                  var resp = response.data.result[0];
+                  $('#outputCoinValue').val(resp.result);
+                  $('#enter_amount_exchange_fee').html(resp.fee +' ' + resp.to.toUpperCase());
+                  $('#expectedVal').html('1 '+ resp.from.toUpperCase() + ' = ' + resp.rate +' '+ resp.to.toUpperCase());
+                  $('#networkFee').html(resp.networkFee +' '+resp.to.toUpperCase());
+                  $('#sending').html(resp.amount +' '+resp.from.toUpperCase());
+                  $('#receiving').html(resp.result +' '+resp.to.toUpperCase());
               }
           })
       }
