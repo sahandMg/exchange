@@ -12,7 +12,7 @@
         <div class="col-md-7 col-sm-12 row">
           <div class="col-md-12">
             <div class="row mx-auto">
-              <input id="inputCoinValue"  oninput="exchangeRate()" type="text" class="form-control pb_height-50 inputCoin"  value="1" />
+              <input id="inputCoinValue"  oninput="exchangeRate()" type="text" class="form-control pb_height-50 inputCoin"  />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
                 <div>
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="col-md-12 text-center">
-            <button type="button" style="background-color: inherit;border: 0px;margin-top: 10px;font-size: 20px;"><i class="fa fa-exchange fa-3" aria-hidden="true"></i></button>
+            <button type="button" id="reverseBtn" style="background-color: inherit;border: 0px;margin-top: 10px;font-size: 20px;"><i class="fa fa-exchange fa-3" aria-hidden="true"></i></button>
           </div>
           <div class="col-md-12">
             <div class="row mx-auto">
@@ -435,34 +435,6 @@
         exchangeRate();
     });
 
-    // $('.item-exchange').on('click', function() {
-    //     console.log("item-select");
-    //     var txt = $(this).find('span').text();
-    //     console.log($(this));
-    //     console.log(txt);
-    //     $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
-    //     $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
-    // });
-
-    // $('.items-exchange > div').on('click', function() {
-    //     console.log("item-select");
-    //     var txt = $(this).find('.content-exchange > div:first-child b').text();
-    //     $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
-    //     $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
-    // });
-
-    // $('.item-search-exchange input').on('keyup', function() {
-    //     console.log("item-select-search");
-    //     var txt = $(this).val().toLowerCase();
-    //     console.log(txt);
-    //     $(this).parent().parent().parent().find('.items-exchange > div').hide();
-    //     for(var i=0; i<coinList.length; i++) {
-    //       if(coinList[i].full_name.toLowerCase().includes(txt) || coinList[i].name.toLowerCase().includes(txt)) {
-    //         $('#coin'+i).show();
-    //       } else {console.log(coinList[i].full_name+" , "+txt);}
-    //     }
-        
-    // });
 
     $('#inputCoinKindSearch').on('keyup', function() {
         // console.log("item-select-search");
@@ -495,13 +467,7 @@
         console.log("getCurrencies");console.log(response);
          coinList = response.data;
         for(var i=0; i<coinList.length; i++) {
-          // $('.items-exchange').append(`
-          //      <div class="row item-exchange" id="coin`+i+`">
-          //          <img  width="20" height="20" src="assets/img/icons/`+coinList[i].name+`.png">
-          //          <span class="coinSmallName" style="color:`+coinList[i].color+`;">`+coinList[i].name+`</span>
-          //          <span>`+coinList[i].full_name+`</span>
-          //      </div>
-          //   `);
+        
           $('#inputCoinKindSelect').append(`
                <div class="row item-exchange" id="coin1`+i+`">
                    <img  width="20" height="20" src="assets/img/icons/`+coinList[i].name+`.png">
@@ -518,6 +484,7 @@
             `);
         }
         $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
+        $('#inputCoinValue').val(1);
           // console.log($('#inputCoinValue').val());
           // console.log($('#inputCoinKind').text());
           // console.log($('#inputCoinValue').val());
@@ -533,9 +500,17 @@
           
         });
     });
-
-    // document.getElementById("inputCoinValue").addEventListener('change', exchangeRate);
-
+     
+     // reverse exchange
+     
+     $('#reverseBtn').on('click', function() {
+          console.log("reverseBtn");
+          var Temp = $('#inputCoinKind').text();
+          $('#inputCoinKind').html($('#outputCoinKind').text());
+          $('#outputCoinKind').html(Temp);
+          $('#inputCoinValue').val($('#outputCoinValue').val());
+          exchangeRate();
+      });
 
     function exchangeRate() {
 

@@ -54,9 +54,9 @@
                   </div>
                   <div class="select-dropdown-exchange">
                     <div class="item-search-exchange">
-                      <input autocomplete="off" placeholder="جست و جو..." style="text-align: center;direction: rtl;">
+                      <input  id="inputCoinKindSearch" autocomplete="off" placeholder="جست و جو..." style="text-align: center;direction: rtl;">
                     </div>
-                    <div class="items-exchange">
+                    <div class="items-exchange" id="inputCoinKindSelect">
                     </div>
                   </div>
                 </div>
@@ -78,9 +78,9 @@
                   </div>
                   <div class="select-dropdown-exchange">
                     <div class="item-search-exchange">
-                      <input autocomplete="off" placeholder="جست و جو..." style="text-align: center;direction: rtl;">
+                      <input id="outputCoinKindSearch" autocomplete="off" placeholder="جست و جو..." style="text-align: center;direction: rtl;">
                     </div>
-                    <div class="items-exchange">
+                    <div class="items-exchange" id="outputCoinKindSelect">
                     </div>
                     <!-- <div class="item-count-exchange">
                        30 products
@@ -389,32 +389,55 @@
     });
 
 
-    $('.item-search-exchange input').on('keyup', function() {
-        console.log("item-select-search");
+    
+    $('#inputCoinKindSearch').on('keyup', function() {
+        // console.log("item-select-search");
         var txt = $(this).val().toLowerCase();
         console.log(txt);
-        $(this).parent().parent().parent().find('.items-exchange > div').hide();
+        $(this).parent().parent().parent().find('#inputCoinKindSelect > div').hide();
         for(var i=0; i<coinList.length; i++) {
           if(coinList[i].full_name.toLowerCase().includes(txt) || coinList[i].name.toLowerCase().includes(txt)) {
-            $('#coin'+i).show();
+            $('#coin1'+i).show();
           } else {console.log(coinList[i].full_name+" , "+txt);}
         }
         
-    })
+    });
 
+    $('#outputCoinKindSearch').on('keyup', function() {
+        // console.log("item-select-search");
+        var txt = $(this).val().toLowerCase();
+        console.log(txt);
+        $(this).parent().parent().parent().find('#outputCoinKindSelect > div').hide();
+        for(var i=0; i<coinList.length; i++) {
+          if(coinList[i].full_name.toLowerCase().includes(txt) || coinList[i].name.toLowerCase().includes(txt)) {
+            $('#coin2'+i).show();
+          } else {console.log(coinList[i].full_name+" , "+txt);}
+        }
+        
+    });
+
+    // Get currencies
     axios.post('{{route('getCurrencies')}}').then(function (response) {
         console.log("getCurrencies");console.log(response);
          coinList = response.data;
         for(var i=0; i<coinList.length; i++) {
-          $('.items-exchange').append(`
-               <div class="row item-exchange" id="coin`+i+`">
+        
+          $('#inputCoinKindSelect').append(`
+               <div class="row item-exchange" id="coin1`+i+`">
+                   <img  width="20" height="20" src="assets/img/icons/`+coinList[i].name+`.png">
+                   <span class="coinSmallName" style="color:`+coinList[i].color+`;">`+coinList[i].name+`</span>
+                   <span>`+coinList[i].full_name+`</span>
+               </div>
+            `);
+          $('#outputCoinKindSelect').append(`
+               <div class="row item-exchange" id="coin2`+i+`">
                    <img  width="20" height="20" src="assets/img/icons/`+coinList[i].name+`.png">
                    <span class="coinSmallName" style="color:`+coinList[i].color+`;">`+coinList[i].name+`</span>
                    <span>`+coinList[i].full_name+`</span>
                </div>
             `);
         }
-        // $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
+        $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
           // console.log($('#inputCoinValue').val());
           // console.log($('#inputCoinKind').text());
           // console.log($('#inputCoinValue').val());
