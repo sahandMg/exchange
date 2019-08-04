@@ -22,7 +22,7 @@
                   </div>
                   <div class="select-dropdown-exchange">
                     <div class="item-search-exchange">
-                      <input autocomplete="off" placeholder="جست و جو...">
+                      <input autocomplete="off" placeholder="جست و جو..." style="text-align: center;direction: rtl;">
                     </div>
                     <div class="items-exchange">
                     </div>
@@ -46,7 +46,7 @@
                   </div>
                   <div class="select-dropdown-exchange">
                     <div class="item-search-exchange">
-                      <input autocomplete="off" placeholder="جست و جو...">
+                      <input autocomplete="off" placeholder="جست و جو..." style="text-align: center;direction: rtl;">
                     </div>
                     <div class="items-exchange">
                     </div>
