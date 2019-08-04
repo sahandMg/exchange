@@ -377,7 +377,7 @@
    var inputCoinKind = `{!! isset($_GET["from"])?$_GET["from"]:'btc'  !!}`;
    // output coin kind
    var outputCoinKind = `{!! isset($_GET["to"])?$_GET["to"]:'eth'  !!}`;
-   $('#inputCoinKind').html("inputCoinKind");$('#outputCoinKind').html("outputCoinKind");
+   $('#inputCoinKind').html(inputCoinKind);$('#outputCoinKind').html(outputCoinKind);
    $('#inputCoinValue').val(inputCoinValue);
    // console.log(inputCoinValue);console.log(inputCoinKind);console.log(outputCoinKind);
     var coinList = [];
