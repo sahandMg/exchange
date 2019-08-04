@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\BitCoinPrice;
 use App\ChangellyHelper;
 use App\Repo\IpFinder;
 use Illuminate\Support\Facades\Schema;
@@ -35,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('ChangellyHelper',function ($app){
 
             return new ChangellyHelper($app->make('ChangellyHelper'));
+        });
+
+        $this->app->bind('btcPrice',function ($app){
+
+            return new BitCoinPrice($app->make('btcPrice'));
         });
     }
 }

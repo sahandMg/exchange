@@ -47,7 +47,14 @@ Route::get('password-reset','AuthController@passwordReset')->name('passwordReset
 
 Route::post('password-reset','AuthController@post_passwordReset')->name('passwordReset');
 
+// ===================== Gift Card Routes =============================
+
+Route::get('make-key','GiftCardController@makeKey');
+
+Route::get('generate-qr','GiftCardController@generateQr');
+
 Route::get('gift-card','GiftCardController@index')->name('giftIndex');
+
 
 // ===================== Panel Routes =============================
 

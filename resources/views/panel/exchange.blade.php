@@ -372,11 +372,11 @@
 
 <script type="text/javascript">
    // input coin value
-   var inputCoinValue = `{!! $_GET["amount"] !!}`;
+   var inputCoinValue = `{!! isset($_GET["amount"])?$_GET["amount"]:1  !!}`;
    // input coin kind
-   var inputCoinKind = `{!! $_GET["from"] !!}`;
+   var inputCoinKind = `{!! isset($_GET["from"])?$_GET["from"]:'btc'  !!}`;
    // output coin kind
-   var outputCoinKind = `{!! $_GET["to"] !!}`;
+   var outputCoinKind = `{!! isset($_GET["to"])?$_GET["to"]:'eth'  !!}`;
    $('#inputCoinKind').html("inputCoinKind");$('#outputCoinKind').html("outputCoinKind");
    $('#inputCoinValue').val(inputCoinValue);
    // console.log(inputCoinValue);console.log(inputCoinKind);console.log(outputCoinKind);
