@@ -23,19 +23,50 @@ class TradeController extends Controller
 
     public function getCurrencies(){
 
-       if(!Cache::has('cryptoList')){
-           $response = $this->changellyHelper->getChangellyData('getCurrencies',[]);
-           if(isset($response['error'])){
-               return $response;
-           }
-           $cryptoList = $this->checkForImage($response['result']);
-           $cryptoDetail = $this->getCryptoDetails($cryptoList);
-           Cache::put('cryptoList',$cryptoDetail,1000000);
-
-       }else{
-
-           $cryptoDetail = Cache::get('cryptoList');
-       }
+        //
+        $cryptoDetail = [
+            [
+                'color'=> "#F7931A",
+                'created_at'=> null,
+                'full_name'=> "Bitcoin",
+                'id'=> 61,
+                'name'=> "btc",
+                'persian'=> null,
+                'updated_at'=> null
+            ],
+            [
+            'color'=> "#627EEA",
+            'created_at'=> null,
+            'full_name'=> "Ethereum",
+            'id'=> 142,
+            'name'=> "eth",
+            'persian'=> null,
+            'updated_at'=> null
+        ],
+            [
+                'color'=> "#8dc351",
+                'created_at'=> null,
+                'full_name'=> "Bitcoin Cash",
+                'id'=> 38,
+                'name'=> "bch",
+                'persian'=> null,
+                'updated_at'=> null
+            ],
+        ];
+        //
+//       if(!Cache::has('cryptoList')){
+//           $response = $this->changellyHelper->getChangellyData('getCurrencies',[]);
+//           if(isset($response['error'])){
+//               return $response;
+//           }
+//           $cryptoList = $this->checkForImage($response['result']);
+//           $cryptoDetail = $this->getCryptoDetails($cryptoList);
+//           Cache::put('cryptoList',$cryptoDetail,1000000);
+//
+//       }else{
+//
+//           $cryptoDetail = Cache::get('cryptoList');
+//       }
         return $cryptoDetail;
     }
 
@@ -48,10 +79,40 @@ class TradeController extends Controller
     }
 
     public function getExchangeAmount(Request $request){
-            $from = $request->from;
-            $to = $request->to;
-            $amount = $request->amount;
-            $response = $this->changellyHelper->getChangellyData('getExchangeAmount',[['from'=> $from,'to'=> $to , 'amount'=>$amount],['from'=> $from,'to'=> $to , 'amount'=>$amount]]);
+
+        //  Fake data
+            $response =
+                [
+                'id'=>1,
+                'result'=>[
+                            [
+                            'amount'=> "1",
+                            'fee'=> "0.2443841321608040201005",
+                            'from'=> "btc",
+                            'networkFee' => "0.0020000000000000000000",
+                            'rate'=> "48.8768264321608040201",
+                            'result'=> "48.6324423",
+                            'to'=> "eth",
+                            'visibleAmount'=> "48.8768264321608040201"
+                                ],
+                    [
+                        'amount'=> "1",
+                        'fee'=> "0.2443841321608040201005",
+                        'from'=> "btc",
+                        'networkFee' => "0.0020000000000000000000",
+                        'rate'=> "48.8768264321608040201",
+                        'result'=> "48.6324423",
+                        'to'=> "eth",
+                        'visibleAmount'=> "48.8768264321608040201"
+                    ]
+
+                        ]
+                ];
+        //
+//            $from = $request->from;
+//            $to = $request->to;
+//            $amount = $request->amount;
+//            $response = $this->changellyHelper->getChangellyData('getExchangeAmount',[['from'=> $from,'to'=> $to , 'amount'=>$amount],['from'=> $from,'to'=> $to , 'amount'=>$amount]]);
 
         return $response;
     }
@@ -234,7 +295,7 @@ class TradeController extends Controller
         return $output;
     }
 
-    public function exchagePage(){
+    public function exchangePage(){
 
         return view('panel.exchange');
     }

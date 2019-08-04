@@ -59,7 +59,7 @@
             </div>
           </div>
           <div class="col-md-12 exchange-button-container">
-            <button class="btn btn-primary exchange-button" type="submit">تبدیل</button>
+              <a href="{{route('exchangePage',['from'=>'btc','to'=>'eth','amountFrom'=>0.01])}}"><button class="btn btn-primary exchange-button" type="submit">تبدیل</button></a>
           </div>
         </div>
        </div>

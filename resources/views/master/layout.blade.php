@@ -54,7 +54,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{route('faq')}}">سوالات متداول</a></li>
                 {{--<!--<li class="nav-item"><a class="nav-link" href="#section-pricing">Pricing</a></li>-->--}}
                 <li class="nav-item"><a class="nav-link" href="{{route('coins')}}">coins</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{route('exchagePage')}}">Exchage</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{route('exchangePage')}}">Exchage</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('giftIndex')}}">GiftCard</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('index')}}">خانه</a></li>
                 <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="" id="signupBtn"><span class="pb_rounded-4 px-4">ثبت نام</span></a></li>

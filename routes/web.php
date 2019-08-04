@@ -51,7 +51,7 @@ Route::get('gift-card','GiftCardController@index')->name('giftIndex');
 
 // ===================== Panel Routes =============================
 
-Route::get('exchage','TradeController@exchagePage')->name('exchagePage');
+Route::get('exchange','TradeController@exchangePage')->name('exchangePage');
 
 // ==================== API EndPoints ===========================
 

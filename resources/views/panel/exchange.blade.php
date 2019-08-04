@@ -444,7 +444,7 @@
               'amount':$('#inputCoinValue').val()
           }).then(function (response) {
                console.log("axios test");
-               console.log(response);
+               console.log(response.data);
               if(response.data == 500){
                  
               } else {
