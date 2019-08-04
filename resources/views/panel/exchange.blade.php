@@ -31,7 +31,7 @@
                  </div>
                   <div class="exchange-details">
                      <span class="detail-desc">هزینه شبکه</span>
-                     <span class="detail-value" id="networkFee"></span>
+                     <span class="detail-value" id="enter_amount_networkFee"></span>
                  </div>
                  <div class="exchange-details">
                      <span class="detail-desc">زمان تقریبی</span>
@@ -64,7 +64,7 @@
             </div>
           </div>
           <div class="col-md-12 text-center">
-            <button type="button" style="background-color: inherit;border: 0px;margin-top: 10px;font-size: 20px;"><i class="fa fa-exchange fa-3" aria-hidden="true"></i></button>
+            <button type="button" id="reverseBtn" style="background-color: inherit;border: 0px;margin-top: 10px;font-size: 20px;"><i class="fa fa-exchange fa-3" aria-hidden="true"></i></button>
           </div>
           <div class="col-md-12">
             <div class="row mx-auto">
@@ -106,7 +106,7 @@
            </div>
            <div class="form-group">
                <label>آدرس کیف پول</label>
-               <input type="text" class="form-control">
+               <input type="text" class="form-control" id="walletAddressInput">
            </div>
            <button id="enter_address_btn" class="btn btn-success" style="margin: auto;display: block;">مرحله بعدی</button>
        </div>
@@ -127,19 +127,19 @@
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">آدرس کیف پول شما</span>
-                   <span class="detail-value">0xa552e9E883636C1aad8FacD3F52DDc2A9d6cbc28</span>
+                   <span class="detail-value" id="walletAddress">0xa552e9E883636C1aad8FacD3F52DDc2A9d6cbc28</span>
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">مقدار تبدیل مورد انتظار</span>
-                   <span class="detail-value" id="expectedVal"></span>
+                   <span class="detail-value" id="send_funds_expectedVal"></span>
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">هزینه تبدیل</span>
-                   <span class="detail-value" id="enter_amount_exchange_fee"></span>
+                   <span class="detail-value" id="send_funds_exchange_fee"></span>
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">هزینه شبکه</span>
-                   <span class="detail-value" id="networkFee"></span>
+                   <span class="detail-value" id="send_funds_networkFee"></span>
                </div>
                <div class="exchange-details">
                    <span class="detail-desc">زمان تقریبی</span>
@@ -454,8 +454,16 @@
         });
     });
 
-    // document.getElementById("inputCoinValue").addEventListener('change', exchangeRate);
-
+     // reverse exchange
+     
+     $('#reverseBtn').on('click', function() {
+          console.log("reverseBtn");
+          var Temp = $('#inputCoinKind').text();
+          $('#inputCoinKind').html($('#outputCoinKind').text());
+          $('#outputCoinKind').html(Temp);
+          $('#inputCoinValue').val($('#outputCoinValue').val());
+          exchangeRate();
+      });
 
     function exchangeRate() {
 //      var link = 'http://localhost:70/exchange/public/get-exchange-amount?from='+$('#inputCoinKind').text()+'&to='+$('#outputCoinKind').text()+'&amount='+$('#inputCoinValue').val();
@@ -479,8 +487,11 @@
                   // console.log(parseFloat(resp.fee).toFixed(8));
                   $('#outputCoinValue').val(resp.result);
                   $('#enter_amount_exchange_fee').html(parseFloat(resp.fee).toFixed(8) +' ' + resp.to.toUpperCase());
+                  $('#send_funds_exchange_fee').html(parseFloat(resp.fee).toFixed(8) +' ' + resp.to.toUpperCase());
                   $('#enter_amount_expectedVal').html('1 '+ resp.from.toUpperCase() + ' = ' + parseFloat(resp.rate).toFixed(8) +' '+ resp.to.toUpperCase());
-                  $('#networkFee').html(parseFloat(resp.networkFee).toFixed(8) +' '+resp.to.toUpperCase());
+                  $('#send_funds_expectedVal').html('1 '+ resp.from.toUpperCase() + ' = ' + parseFloat(resp.rate).toFixed(8) +' '+ resp.to.toUpperCase());
+                  $('#enter_amount_networkFee').html(parseFloat(resp.networkFee).toFixed(8) +' '+resp.to.toUpperCase());
+                  $('#send_funds_networkFee').html(parseFloat(resp.networkFee).toFixed(8) +' '+resp.to.toUpperCase());
                   $('#sending').html(parseFloat(resp.amount).toFixed(8) +' '+resp.from.toUpperCase());
                   $('#receiving').html(parseFloat(resp.result).toFixed(8) +' '+resp.to.toUpperCase());
               }
@@ -531,6 +542,7 @@
     });
     $('#enter_address_btn').on('click', function() {
         hideAllExchangeParts();showExchangePart3();
+        $('#walletAddress').html($('#walletAddressInput').val());
     }); 
     $('#return_enter_address').on('click', function() {
         hideAllExchangeParts();showExchangePart2();
