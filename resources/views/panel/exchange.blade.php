@@ -23,7 +23,7 @@
                  <h3 class="text-right">جزئیات</h3>
                  <div class="exchange-details">
                    <span class="detail-desc">مقدار تبدیل مورد انتظار</span>
-                   <span class="detail-value" id="expectedVal"></span>
+                   <span class="detail-value" id="enter_amount_expectedVal"></span>
                  </div>
                  <div class="exchange-details">
                      <span class="detail-desc">هزینه تبدیل</span>
@@ -372,12 +372,14 @@
 
 <script type="text/javascript">
    // input coin value
-   var inputCoinValue;
+   var inputCoinValue = `{!! $_GET["amount"] !!}`;
    // input coin kind
-   var inputCoinKind;
+   var inputCoinKind = `{!! $_GET["from"] !!}`;
    // output coin kind
-   var outputCoinKind;
-
+   var outputCoinKind = `{!! $_GET["to"] !!}`;
+   $('#inputCoinKind').html("inputCoinKind");$('#outputCoinKind').html("outputCoinKind");
+   $('#inputCoinValue').val(inputCoinValue);
+   // console.log(inputCoinValue);console.log(inputCoinKind);console.log(outputCoinKind);
     var coinList = [];
 
     $('.selected-exchange').on('click', function() {
@@ -412,7 +414,7 @@
                </div>
             `);
         }
-        $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
+        // $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
           // console.log($('#inputCoinValue').val());
           // console.log($('#inputCoinKind').text());
           // console.log($('#inputCoinValue').val());
@@ -450,12 +452,14 @@
               } else {
                  // vm.receiveNumber = response.data.toFixed(8);
                   var resp = response.data.result[0];
+
+                  // console.log(parseFloat(resp.fee).toFixed(8));
                   $('#outputCoinValue').val(resp.result);
-                  $('#enter_amount_exchange_fee').html(resp.fee +' ' + resp.to.toUpperCase());
-                  $('#expectedVal').html('1 '+ resp.from.toUpperCase() + ' = ' + resp.rate +' '+ resp.to.toUpperCase());
-                  $('#networkFee').html(resp.networkFee +' '+resp.to.toUpperCase());
-                  $('#sending').html(resp.amount +' '+resp.from.toUpperCase());
-                  $('#receiving').html(resp.result +' '+resp.to.toUpperCase());
+                  $('#enter_amount_exchange_fee').html(parseFloat(resp.fee).toFixed(8) +' ' + resp.to.toUpperCase());
+                  $('#enter_amount_expectedVal').html('1 '+ resp.from.toUpperCase() + ' = ' + parseFloat(resp.rate).toFixed(8) +' '+ resp.to.toUpperCase());
+                  $('#networkFee').html(parseFloat(resp.networkFee).toFixed(8) +' '+resp.to.toUpperCase());
+                  $('#sending').html(parseFloat(resp.amount).toFixed(8) +' '+resp.from.toUpperCase());
+                  $('#receiving').html(parseFloat(resp.result).toFixed(8) +' '+resp.to.toUpperCase());
               }
           })
       }

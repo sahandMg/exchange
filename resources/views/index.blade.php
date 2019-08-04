@@ -22,7 +22,7 @@
                   </div>
                   <div class="select-dropdown-exchange">
                     <div class="item-search-exchange">
-                      <input autocomplete="off" placeholder="search...">
+                      <input autocomplete="off" placeholder="جست و جو...">
                     </div>
                     <div class="items-exchange">
                     </div>
@@ -46,7 +46,7 @@
                   </div>
                   <div class="select-dropdown-exchange">
                     <div class="item-search-exchange">
-                      <input autocomplete="off" placeholder="search...">
+                      <input autocomplete="off" placeholder="جست و جو...">
                     </div>
                     <div class="items-exchange">
                     </div>
@@ -59,7 +59,7 @@
             </div>
           </div>
           <div class="col-md-12 exchange-button-container">
-              <a href="{{route('exchangePage',['from'=>'btc','to'=>'eth','amountFrom'=>0.01])}}"><button class="btn btn-primary exchange-button" type="submit">تبدیل</button></a>
+              <a href="" id="exchangePageLink"><button class="btn btn-primary exchange-button" type="submit">تبدیل</button></a>
           </div>
         </div>
        </div>
@@ -425,7 +425,8 @@
 
   <script type="text/javascript">
     console.log("Start");
-
+    var exchangeLink = `{!! route("exchangePage")!!}`;
+   
     var coinList = [];
 
     $('.selected-exchange').on('click', function() {
@@ -512,6 +513,7 @@
               } else {
                  // vm.receiveNumber = response.data.toFixed(8);
                   $('#outputCoinValue').val(response.data.result[0].result);
+                  $('#exchangePageLink').attr("href", exchangeLink+"?from="+$('#inputCoinKind').text()+"&to="+$('#outputCoinKind').text()+"&amount="+$('#inputCoinValue').val())
               }
           })
       }
