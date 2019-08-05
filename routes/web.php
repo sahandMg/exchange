@@ -55,6 +55,8 @@ Route::get('generate-qr','GiftCardController@generateQr');
 
 Route::get('gift-card','GiftCardController@index')->name('giftIndex');
 
+Route::post('value','GiftCardController@getCardPrice')->name('getCardPrice');
+
 
 // ===================== Panel Routes =============================
 
