@@ -80,8 +80,8 @@
             <div class="media d-block pb_feature-v1 text-right">
               <div class="pb_icon"><i class="ion-ios-bookmarks-outline pb_icon-gradient"></i></div>
               <div class="media-body">
-                <h5 class="mt-0 mb-3">دفتر حساب</h5>
-                <p>می توانید تمام تبدیل های خود را ببینید.</p>
+                <h5 class="mt-0 mb-3">فراهم کردن دفتر حسابداری</h5>
+                <p>امکان مشاهده و مدیریت مبادلات انجام شده توسط کاربر. تمامی مبادلات انجام شده توسط شما در دفتر حسابداریتان ذخیره می¬گردد. شما می توانید از طریق پنل خود به این دفتر دسترسی داشته باشید و تراکنش های خود را مدیریت نمایید.</p>
               </div>
             </div>
           </div>
@@ -89,8 +89,8 @@
             <div class="media d-block pb_feature-v1 text-right">
               <div class="pb_icon"><i class="ion-ios-speedometer-outline pb_icon-gradient"></i></div>
               <div class="media-body">
-                <h5 class="mt-0 mb-3">تبدیل سریع</h5>
-                <p>در سریع ترین زمان ممکن تبدیل ارز را انجام می دهیم</p>
+                <h5 class="mt-0 mb-3">سرعت بالا</h5>
+                <p>سرعت بالا در هنگام تبدیل. با توجه به اهمیت سرعت تبدیل برای تبادل گران فعال در بازار رمزها، نانا سرعت انجام فرآیند پس از تایید نهایی کاربر را تا حد امکان افزایش داده است.</p>
               </div>
             </div>
           </div>
@@ -98,8 +98,8 @@
             <div class="media d-block pb_feature-v1 text-right">
               <div class="pb_icon"><i class="ion-ios-infinite-outline pb_icon-gradient"></i></div>
               <div class="media-body">
-                <h5 class="mt-0 mb-3">بیش از 140 ارز</h5>
-                <p>صرافی ما بیش از 140 ارز را برای شما تبدیل می کند.</p>
+                <h5 class="mt-0 mb-3">پشتیبانی گسترده</h5>
+                <p>پشتیبانی از 140 ارز دیجیتال مختلف. شما می¬توانید در نانا اقدام به تبدیل 140 رمز ارز مختلف به یکدیگر نمایید.</p>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@
             <div class="media d-block pb_feature-v1 text-right">
               <div class="pb_icon"><i class="fa fa-exchange pb_icon-gradient" style="line-height: 1.8;"></i></div>
               <div class="media-body">
-                <h5 class="mt-0 mb-3">نرخ تبدیل کم</h5>
+                <h5 class="mt-0 mb-3">نرخ کارمز پایین </h5>
                 <p>0.5 درصد از تبدیل شما به عنوان نزخ تبدیل کسر می شود.</p>
               </div>
             </div>
@@ -126,8 +126,8 @@
             <div class="media d-block pb_feature-v1 text-right">
               <div class="pb_icon"><i class="ion-ios-paperplane-outline pb_icon-gradient"></i></div>
               <div class="media-body">
-                <h5 class="mt-0 mb-3">پاسخگو تماس ها</h5>
-                <p>تمامی سوالات شما را در اسرع وقت پاسخگو هستیم.</p>
+                <h5 class="mt-0 mb-3">پشتیبانی شبانه روز</h5>
+                <p>امکان تماس با پشتیبانی نانا به صورت شبانه روز. در صورت وجود هرگونه سوال یا پیشامد هر نوع مشکلی، شما میتوانید به صورت شبانه روز حتی در ایام تعطیل با تیم پشتیبانی ما تماس حاصل فرمایید.</p>
               </div>
             </div>
           </div>

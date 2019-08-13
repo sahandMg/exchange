@@ -6,12 +6,8 @@
 
 <section class="pb_section pb_slant-white" id="section-faq">
     <div class="container">
-        <div class="row justify-content-center mb-5">
-            <div class="col-md-6 text-center mb-5">
-                <!--<h5 class="text-uppercase pb_font-15 mb-2 pb_color-dark-opacity-3 pb_letter-spacing-2"><strong>FAQ</strong></h5>-->
-                <h2>تماس با ما</h2>
-            </div>
-        </div>
+        <h2 class="text-center">تماس با ما</h2>
+        <p>در صورت وجود هرگونه پرسش و یا مشکل با تیم پشتیبانی ما تماس بگیرید. کارشناسان پشتیبانی در تمامی روزهای هفته به صورت شبانه روز پاسخگوی شما خواهند بود.</p>
         <form action="/action_page.php" style="direction: rtl;">
             <div class="form-group">
                 <label for="email">آدرس ایمیل:</label>
