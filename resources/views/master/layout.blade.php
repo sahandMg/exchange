@@ -7,18 +7,15 @@
     <meta name="description" content="Free Bootstrap 4 Template by uicookies.com">
     <meta name="keywords" content="Free website templates, Free bootstrap themes, Free template, Free bootstrap, Free website template">
 
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400" rel="stylesheet">
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js" ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::asset('assets/css/bootstrap/bootstrap.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/fonts/ionicons/css/ionicons.min.css')}}">
-    {{--<link rel="stylesheet" href="{{URL::asset('assets/fonts/law-icons/font/flaticon.css')}}">--}}
-
     <link rel="stylesheet" href="{{URL::asset('assets/fonts/fontawesome/css/font-awesome.min.css')}}">
-
-
     <link rel="stylesheet" href="{{URL::asset('assets/css/slick.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/slick-theme.css')}}">
-
     <link rel="stylesheet" href="{{URL::asset('assets/css/helpers.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/landing-2.css')}}">

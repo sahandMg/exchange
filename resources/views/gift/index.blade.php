@@ -19,22 +19,12 @@
 	  <h3>مقدار بیت کوین کارت هدیه خود را انتخاب کنید.</h3>
 	  <br/>
 	  <div class="d-flex justify-content-around">
-	  	<div class="square text-center" id="giftCart1">
-	  		<span>0.0001 BTC</span>
-	  		<p style="direction: rtl;">12,000 تومان</p>
+          @for($i=0;$i<count($cardsType);$i++)
+	  	<div class="square text-center" id="giftCart{{$i}}">
+	  		<span id="cardType{{$i}}"></span>
+	  		<p id="cardPrice{{$i}}" style="direction: rtl;"></p>
 	  	</div>
-	  	<div class="square text-center" id="giftCart2">
-	  		<span>0.0005 BTC</span>
-	  		<p style="direction: rtl;">60,000 تومان</p>
-	  	</div>
-	  	<div class="square text-center" id="giftCart3">
-	  		<span>0.001 BTC</span>
-	  		<p style="direction: rtl;">120,000 تومان</p>
-	  	</div>
-	  	<div class="square text-center" id="giftCart4">
-	  		<span>0.01 BTC</span>
-	  		<p style="direction: rtl;">1,200,000 تومان</p>
-	  	</div>
+          @endfor
 	  </div>
 	  <br/>
 	  <table class="table text-center" id="cart-table" >
@@ -123,6 +113,15 @@
 @include('master.footer')
 @include('master.scripts')
 <script type="text/javascript">
+
+    axios.post('{{route('getCardPrice')}}',{'amount':0.001}).then(function (response) {
+
+        var cards = response.data
+        for(var t=0;t<cards.length;t++){
+            $('#cardType'+t).html(cards[t]['type']+' BTC');
+            $('#cardPrice'+t).html(cards[t]['price']+' تومان ')
+        }
+    });
     $('#pb-navbar').addClass("scrolled awake"); 
     $('#cart-table').hide();$('#nextStep').hide(); $('#step2').hide();
     
@@ -148,6 +147,24 @@
     		}
     			
     	}
+    });
+
+    $('#giftCart0').on('click', function() {
+        var price = $('#giftCart0 p').text().replace(',','').replace(',','');
+        var btcValue =  $('#giftCart0 span').text().replace(' ','').replace('BTC','');
+        for(var i =0; i<cart.length;i++) {
+            if(cart[i].kind === 1) {
+                cart[i].quantity = cart[i].quantity+1;
+                updateCart();
+                return;
+            }
+        }
+        $('#cart-table').show();$('#nextStep').show();
+        cart.push({kind: 1, quantity: 1, text: 'کارت هدیه '+btcValue+' بیت کوین' , price: price.replace(' ','').replace('تومان','') });
+        updateCart();
+        $('.circle-btn').on('click', function(event) {
+            cartAddOrRemoveHandler(event) ;
+        });
     });
 
     $('#giftCart1').on('click', function() {

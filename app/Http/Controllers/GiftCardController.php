@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BitCoinPrice;
 use App\GiftCard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -577,11 +578,26 @@ class GiftCardController extends Controller
 
     public function index(){
 
+        // DON'T DELETE THIS LINE !!!!
         $cardsType = array_values(array_unique(
-            DB::table('gift_cards')->get()->pluck('btc')->toArray()
-        )
-        );
+            DB::table('gift_cards')->get()->pluck('btc')->toArray()));
+        return view('gift.index',compact('cardsType'));
+    }
 
-        return view('gift.landing');
+    // getting giftcard btc amount and send back price in toman
+    public function getCardPrice(BitCoinPrice $bitCoinPrice,Request $request){
+
+        $cards = DB::table('gift_cards')->get();
+        $cardsBTCPrice = array_values(array_unique(
+                $cards->pluck('btc')->toArray())
+        );
+        $setting = DB::table('settings')->first();
+        $resp = [];
+        for($i=0;$i<count($cardsBTCPrice);$i++){
+
+            $cardTomanPrice = round($bitCoinPrice->getPrice() * $cardsBTCPrice[$i] * $setting->usd_toman);
+            $resp[$i] = ['type'=>$cardsBTCPrice[$i],'price'=>$cardTomanPrice];
+        }
+        return $resp;
     }
 }
