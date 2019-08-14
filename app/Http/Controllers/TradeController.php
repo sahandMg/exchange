@@ -174,7 +174,7 @@ class TradeController extends Controller
     }
 
     public function createFixRateTransaction(Request $request){
-
+        dd($request->all());
         $from = $request->from;
         $to = $request->to;
         $extraId = $request->extraId;
@@ -184,38 +184,40 @@ class TradeController extends Controller
         $refundExtraId =  $request->refundExtraId;
         $address = $request->address;
         $refundAddress = $request->refundAddress;
-//        $response = $this->changellyHelper->getChangellyData('createFixTransaction',[
-//            'from'=> $from,
-//            'to'=> $to ,
-//            'address'=>$address,
-//            'extraId'=>$extraId,
-//            'amountTo'=>$amountTo,
-//            'amountFrom'=>$amountFrom,
-//            'rateId'=>$rateId,
-//            'refundAddress'=>$refundAddress,
-//            'refundExtraId'=>$refundExtraId
-//        ]);
-//        if(isset($response['error'])){
-//            return $response;
-//        }
-//        $transactionData = $response['result'];
-        $transactionData = [
-            'id'=>'g3u2ia9qav0d4xd1',
-            'apiExtraFee'=>0,
-            'changellyFee'=>'0.5',
-            'payinExtraId'=>'',
-            'payoutExtraId'=>'',
-            'refundAddress'=>'',
-            'amountExpectedFrom'=>'0.2',
-            'amountExpectedTo'=>'9.097285',
-            'payTill'=>'2019-08-02T11:43:56.521Z',
-            'status'=>'new',
-            'currencyFrom'=>'btc',
-            'currencyTo'=>'eth',
-            'amountTo'=>0,
-            'payinAddress'=>'33cP1Q9Zvx3nGBB6wjxbENz6peLJQtNn7x',
-            'payoutAddress'=>'0xf8B1392351dcf6912Af12d1365F3415620Bb44bD'
-        ];
+        $response = $this->changellyHelper->getChangellyData('createFixTransaction',[
+            'from'=> $from,
+            'to'=> $to ,
+            'address'=>$address,
+            'extraId'=>$extraId,
+            'amountTo'=>$amountTo,
+            'amountFrom'=>$amountFrom,
+            'rateId'=>$rateId,
+            'refundAddress'=>$refundAddress,
+            'refundExtraId'=>$refundExtraId
+        ]);
+        if(isset($response['error'])){
+            return $response;
+        }
+        $transactionData = $response['result'];
+        // ===== Fake
+//        $transactionData = [
+//            'id'=>'g3u2ia9qav0d4xd1',
+//            'apiExtraFee'=>0,
+//            'changellyFee'=>'0.5',
+//            'payinExtraId'=>'',
+//            'payoutExtraId'=>'',
+//            'refundAddress'=>'',
+//            'amountExpectedFrom'=>'0.2',
+//            'amountExpectedTo'=>'9.097285',
+//            'payTill'=>'2019-08-02T11:43:56.521Z',
+//            'status'=>'new',
+//            'currencyFrom'=>'btc',
+//            'currencyTo'=>'eth',
+//            'amountTo'=>0,
+//            'payinAddress'=>'33cP1Q9Zvx3nGBB6wjxbENz6peLJQtNn7x',
+//            'payoutAddress'=>'0xf8B1392351dcf6912Af12d1365F3415620Bb44bD'
+//        ];
+        // ======
         $trans = new FixRateTransaction();
         $trans->trans_id = $transactionData['id'];
         $trans->user_id = 1;
@@ -234,8 +236,16 @@ class TradeController extends Controller
         $trans->payinAddress = $transactionData['payinAddress'];
         $trans->payoutAddress = $transactionData['payoutAddress'];
         $trans->save();
-        return $transactionData['payinAddress'];
+       return $this->exchangePaying($transactionData['payinAddress']);
     }
+
+    private function exchangePaying($transId){
+
+        $trans = $trans = DB::connection('mysql')->table('fix_rate_transactions')->where('id',$transId)->first();
+
+        return view('panel.ExchangePaying',compact('trans'));
+    }
+
 
     public function getTransactions(Request $request){
 
@@ -252,7 +262,6 @@ class TradeController extends Controller
 
         return $response;
     }
-
 
     public function getStatus(Request $request){
 
@@ -317,27 +326,5 @@ class TradeController extends Controller
         return view('panel.exchange');
     }
 
-    // get trans id from submited form and show page with QR for payment
-    public function post_exchangePaying(Request $request){
 
-        $transId = $request->id;
-        if(is_null($transId)){
-            return ['error'=>500,'body'=>'invalid trans id'];
-        }else{
-            $trans = DB::connection('mysql')->table('fix_rate_transactions')->where('id',$transId)->first();
-            if(is_null($trans)){
-                return ['error'=>500,'body'=>'invalid transaction'];
-            }
-            session()->flash('transData',$trans);
-            return redirect()->route('exchangePaying');
-        }
-    }
-
-    public function exchangePaying(){
-
-        $trans = session('transData');
-        $trans = $trans = DB::connection('mysql')->table('fix_rate_transactions')->where('id',1)->first();
-
-        return view('panel.ExchangePaying',compact('trans'));
-    }
 }

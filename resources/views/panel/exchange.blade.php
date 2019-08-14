@@ -146,14 +146,15 @@
                    <span class="detail-value" style="direction: rtl">۵ تا ۳۰ دقیقه</span>
                </div>
                <br/>
-               <form action="" method="post">
-                <input type="text" name="asd" style="display: none;" id="sendingValue">
-                <input type="text" name="asd" style="display: none;" id="sendingKind">
-                <input type="text" name="asd" style="display: none;" id="recievingKind">
-                <input type="text" name="asd" style="display: none;" id="exchangeToken">
-                <input type="text" name="asd" style="display: none;" id="exteraId">
-                <input type="text" name="asd" style="display: none;" id="walletAdd">
-                <button class="btn btn-success" style="margin: auto;display: block;">مرحله بعدی</button>
+               <form action="{{route('createFixRateTransaction')}}" method="post">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <input type="text" name="amountFrom" style="display: none;" id="sendingValue">
+                <input type="text" name="from" style="display: none;" id="sendingKind">
+                <input type="text" name="to" style="display: none;" id="recievingKind">
+                <input type="text" name="rateId" style="display: none;" id="exchangeToken">
+                <input type="text" name="extraId" style="display: none;" id="exteraId">
+                <input type="text" name="address" style="display: none;" id="walletAdd">
+                <button class="btn btn-success" type="submit" style="margin: auto;display: block;">مرحله بعدی</button>
                </form>
                <br/>
            </div>
