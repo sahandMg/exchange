@@ -7,4 +7,5 @@
 
     {!! QrCode::size(150)->generate($trans->payinAddress) !!}
 
+
 @endsection
