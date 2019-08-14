@@ -247,7 +247,7 @@ class TradeController extends Controller
 
            return ['error'=>500,'body'=>'invalid trans id'];
        }
-        return view('panel.ExchangePaying',compact('trans'));
+        return view('panel.WalletPaying',compact('trans'));
     }
 
     public function getTransactions(Request $request){
