@@ -386,7 +386,17 @@
    var inputCoinKind = `{!! isset($_GET["from"])?$_GET["from"]:'btc'  !!}`;
    // output coin kind
    var outputCoinKind = `{!! isset($_GET["to"])?$_GET["to"]:'eth'  !!}`;
-   $('#inputCoinKind').html(inputCoinKind);$('#outputCoinKind').html(outputCoinKind);
+   $('#inputCoinKind').html(`
+               <div class="row" style="margin-left: 10px;">
+                   <img  width="30" height="30" src="assets/img/icons/`+inputCoinKind+`.png">
+                   <span  style="margin-left: 10px;margin-top: 3px;">`+inputCoinKind.toUpperCase()+`</span>
+               </div>`);
+    $('#outputCoinKind').html(`
+               <div class="row" style="margin-left: 10px;">
+                   <img  width="30" height="30" src="assets/img/icons/`+outputCoinKind+`.png">
+                   <span  style="margin-left: 10px;margin-top: 3px;">`+outputCoinKind.toUpperCase()+`</span>
+               </div>`);
+   // $('#inputCoinKind').html(inputCoinKind);$('#outputCoinKind').html(outputCoinKind);
    $('#inputCoinValue').val(inputCoinValue);
    // console.log(inputCoinValue);console.log(inputCoinKind);console.log(outputCoinKind);
     var coinList = [];
@@ -446,7 +456,7 @@
                </div>
             `);
         }
-        $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
+        // $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
           // console.log($('#inputCoinValue').val());
           // console.log($('#inputCoinKind').text());
           // console.log($('#inputCoinValue').val());
@@ -456,7 +466,12 @@
           var txt = $(this).find('span.coinSmallName').text();
           console.log($(this));
           console.log(txt);
-          $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
+          $(this).parent().parent().parent().find('.selected-exchange div').html(`
+               <div class="row" style="margin-left: 10px;">
+                   <img  width="30" height="30" src="assets/img/icons/`+txt+`.png">
+                   <span  style="margin-left: 10px;margin-top: 3px;">`+txt.toUpperCase()+`</span>
+               </div>`
+            );
           $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
            exchangeRate();
           
@@ -467,8 +482,8 @@
      
      $('#reverseBtn').on('click', function() {
           console.log("reverseBtn");
-          var Temp = $('#inputCoinKind').text();
-          $('#inputCoinKind').html($('#outputCoinKind').text());
+          var Temp = $('#inputCoinKind').html();
+          $('#inputCoinKind').html($('#outputCoinKind').html());
           $('#outputCoinKind').html(Temp);
           $('#inputCoinValue').val($('#outputCoinValue').val());
           exchangeRate();
@@ -481,8 +496,8 @@
 //        console.log("exchangeRate");$('#outputCoinValue').val("...");
 
           axios.post('{{route('getExchangeAmount')}}',{
-              'from':$('#inputCoinKind').text(),
-              'to':$('#outputCoinKind').text(),
+              'from':$('#inputCoinKind span').text(),
+              'to':$('#outputCoinKind span').text(),
               'amount':$('#inputCoinValue').val()
           }).then(function (response) {
                console.log("axios test");
@@ -495,8 +510,8 @@
                   var resp = response.data.result[0];
                   
                   $('#sendingValue').val($('#inputCoinValue').val());
-                  $('#sendingKind').val($('#inputCoinKind').text());
-                  $('#recievingKind').val($('#outputCoinKind').text());
+                  $('#sendingKind').val($('#inputCoinKind span').text());
+                  $('#recievingKind').val($('#outputCoinKind span').text());
                   $('#exchangeToken').val(resp.rateId);
                   $('#exteraId').val("");
                   
