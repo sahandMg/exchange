@@ -1,4 +1,4 @@
-<footer class="pb_footer bg-light" role="contentinfo">
+<footer class="bg-light" role="contentinfo">
       <div class="container">
        <!--  <div class="row text-center">
           <div class="col">
@@ -27,9 +27,12 @@
 </footer>
 
 <style type="text/css">
-footer {margin-top: 5%;}  
-  @media only screen and (max-width: 415px) {
-       footer {margin-top: 20%;}  
+footer {padding-top: 10%;}
+  @media only screen and (max-width: 1025px) { 
+       footer {padding-top: 14%;}  
+  }  
+  @media only screen and (max-width: 420px) {
+       footer {padding-top: 20%;}  
   }
 </style>
 

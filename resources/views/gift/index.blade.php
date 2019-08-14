@@ -3,7 +3,7 @@
     <title> اکسچنج - اسم سایت </title>
 @endsection
 @section('content')
-
+<section class="pb_section pb_slant-light">
 <div class="container">
    <div class="text-center giftcard-page">
     <h1 class="text-center">خرید کارت هدیه بیت کوین</h1>
@@ -94,6 +94,7 @@
    <p>برای شرکت ها و سازمان ها اگر زیاد بخرند یه تخفیفی هم بهشون بدیم.</p>
   </div>
 </div>
+</section>
 <style type="text/css">
 	.giftcard-page { margin-top: 10%;direction: rtl; }
 	.square {
@@ -178,9 +179,9 @@
         $('#cart-table').show();$('#nextStep').show();
         cart.push({kind: 1, quantity: 1, text: 'کارت هدیه '+btcValue+' بیت کوین' , price: price.replace(' ','').replace('تومان','') });
         updateCart();
-        $('.circle-btn').on('click', function(event) {
-            cartAddOrRemoveHandler(event) ;
-        });
+        // $('.circle-btn').on('click', function(event) {
+        //     cartAddOrRemoveHandler(event) ;
+        // });
     });
 
     $('#giftCart1').on('click', function() {
@@ -196,9 +197,9 @@
         $('#cart-table').show();$('#nextStep').show(); 
         cart.push({kind: 1, quantity: 1, text: 'کارت هدیه '+btcValue+' بیت کوین' , price: price.replace(' ','').replace('تومان','') });
         updateCart();
-        $('.circle-btn').on('click', function(event) {        
-           cartAddOrRemoveHandler(event) ;
-        });
+        // $('.circle-btn').on('click', function(event) {        
+        //    cartAddOrRemoveHandler(event) ;
+        // });
     });
 
     $('#giftCart2').on('click', function() {
@@ -214,9 +215,9 @@
         $('#cart-table').show();$('#nextStep').show(); 
         cart.push({kind: 2, quantity: 1, text: 'کارت هدیه '+btcValue+' بیت کوین' , price: price.replace(' ','').replace('تومان','') });
         updateCart();
-        $('.circle-btn').on('click', function(event) {        
-           cartAddOrRemoveHandler(event) ;
-        });
+        // $('.circle-btn').on('click', function(event) {        
+        //    cartAddOrRemoveHandler(event) ;
+        // });
     });
 
     $('#giftCart3').on('click', function() {
@@ -232,9 +233,9 @@
         $('#cart-table').show();$('#nextStep').show(); 
         cart.push({kind: 3, quantity: 1, text: 'کارت هدیه '+btcValue+' بیت کوین' , price: price.replace(' ','').replace('تومان','') });
         updateCart();
-        $('.circle-btn').on('click', function(event) {        
-           cartAddOrRemoveHandler(event) ;
-        });
+        // $('.circle-btn').on('click', function(event) {        
+        //    cartAddOrRemoveHandler(event) ;
+        // });
     });
 
     $('#giftCart4').on('click', function() {
@@ -250,9 +251,9 @@
         $('#cart-table').show();$('#nextStep').show(); 
         cart.push({kind: 4, quantity: 1, text: 'کارت هدیه '+btcValue+' بیت کوین' , price: price.replace(' ','').replace('تومان','') });
         updateCart();
-        $('.circle-btn').on('click', function(event) {        
-           cartAddOrRemoveHandler(event) ;
-        });
+        // $('.circle-btn').on('click', function(event) {        
+        //    cartAddOrRemoveHandler(event) ;
+        // });
     });
 
     function appendToCart() {
@@ -283,7 +284,9 @@
     function updateCart() {
     	console.log("updateCart");console.log(cart);
     	$("#cart-table tbody").empty();
+      var sum = 0;
     	for(var i =0; i<cart.length;i++) {
+          sum = sum + parseInt(cart[i].price)*parseInt(cart[i].quantity) ; 
         	$('#cart-table tbody').append(`
             <tr class="cart-row">
               <td>`+cart[i].text+`</td>
@@ -296,9 +299,19 @@
             </tr>
         	`);
         }
-        $('.circle-btn').on('click', function(event) {
+        if(cart.length > 0) {
+          $('#cart-table tbody').append(`
+            <tr class="cart-row">
+              <td></td>
+              <td> جمع کل:</td>
+              <td>`+sum+` تومان</td>
+            </tr>
+          `);
+
+         $('.circle-btn').on('click', function(event) {
            cartAddOrRemoveHandler(event) ;
-        });
+          });
+        }
     }
 
     function cartAddOrRemoveHandler(event) {

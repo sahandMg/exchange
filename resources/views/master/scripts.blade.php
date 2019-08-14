@@ -11,6 +11,7 @@
 <script src="{{URL::asset('assets/js/jquery.easing.1.3.js')}}"></script>
 
 <script src="{{URL::asset('assets/js/main.js')}}"></script>
+<script src="{{URL::asset('js/alertify.min.js')}}"></script>
 
 <script>
     
