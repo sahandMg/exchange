@@ -24,13 +24,13 @@
             src: url(assets/fonts/Yekan.ttf);
         }
         * {
-            font-family:B Yekan;
+            font-family:BYekanFont;
         }
         h1, h2, h3, h4, h5, h6 {
-            font-family: B Yekan;
+            font-family: BYekanFont;
         }
-        th, a, p, input, button, legend, label, blockquote {font-family: B Yekan;}
-        .btn {font-family: B Yekan;}
+        th, a, p, input, button, legend, label, blockquote {font-family: BYekanFont;}
+        .btn {font-family: BYekanFont;}
     </style>
 </head>
 <body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
@@ -154,22 +154,23 @@
     <span class="custom-close" style="margin-right: 2%;margin-top: 2%; ">&times;</span>
 
     <h3 class="text-center" style="margin-top: 2%;">ثبت نام</h3>
-    <form class="auth-form" id="authForm">
+    <form class="auth-form" method="post" id="authForm">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
        <div class="form-group" id="userName">
         <label>نام کاربری:</label>
-        <input type="text" class="form-control">
+        <input name="name" type="text" class="form-control">
       </div>
       <div class="form-group">
         <label>ایمیل:</label>
-        <input type="email" class="form-control">
+        <input name="email" type="email" class="form-control">
       </div>
       <div class="form-group">
         <label>رمز:</label>
-        <input type="password" class="form-control">
+        <input name="password" type="password" class="form-control">
       </div>
       <div class="form-group" id="passwordRepeat">
         <label>تکرار رمز:</label>
-        <input type="password" class="form-control">
+        <input name="confirm_password" type="password" class="form-control">
       </div>
         <div class="form-group" id="passwordRepeat">
             <label>کد امنیتی:</label>
@@ -177,9 +178,9 @@
             <br>
             <input name="captcha" type="text" class="form-control">
         </div>
-      <input type="text" class="form-control" id="inputCoinKindHidden" style="display: none;">
-      <input type="text" class="form-control" id="outputCoinKindHidden" style="display: none;">
-      <input type="text" class="form-control" id="inputCoinvalueHidden" style="display: none;">
+      <input type="text" name="from" class="form-control" id="inputCoinKindHidden" style="display: none;">
+      <input type="text" name="to" class="form-control" id="outputCoinKindHidden" style="display: none;">
+      <input type="text" name="amount" class="form-control" id="inputCoinvalueHidden" style="display: none;">
       <div class="text-center">
         <button class="btn btn-success mx-auto" type="submit">ثبت</button>
       </div>
@@ -203,7 +204,7 @@ var span = document.getElementsByClassName("custom-close")[0];
 btn.onclick = function(event) {
   console.log("sign up clicked;");
   event.preventDefault();
-  frm.action = 'whatever_you_need.ext';
+  frm.action = {!! route('signup') !!};
   $('#userName').show();
   $('#passwordRepeat').show();
   modal.style.display = "block";
@@ -212,7 +213,7 @@ btn.onclick = function(event) {
 loginBtn.onclick = function(event) {
   console.log("loginBtn clicked;");
   event.preventDefault();
-  frm.action = 'whatever_you_need.ext';
+  frm.action = '{!! route('login') !!}';
   $('#userName').hide();
   $('#passwordRepeat').hide();
   modal.style.display = "block";
