@@ -243,6 +243,10 @@ class TradeController extends Controller
     public function exchangePaying($transId){
 
         $trans = $trans = DB::connection('mysql')->table('fix_rate_transactions')->where('trans_id',$transId)->first();
+       if(is_null($trans)){
+
+           return ['error'=>500,'body'=>'invalid trans id'];
+       }
         return view('panel.ExchangePaying',compact('trans'));
     }
 
