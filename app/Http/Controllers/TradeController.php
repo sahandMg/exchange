@@ -25,35 +25,35 @@ class TradeController extends Controller
     public function getCurrencies(){
 
         // Fake
-        $cryptoDetail = [
-            [
-                'color'=> "#F7931A",
-                'created_at'=> null,
-                'full_name'=> "Bitcoin",
-                'id'=> 61,
-                'name'=> "btc",
-                'persian'=> null,
-                'updated_at'=> null
-            ],
-            [
-            'color'=> "#627EEA",
-            'created_at'=> null,
-            'full_name'=> "Ethereum",
-            'id'=> 142,
-            'name'=> "eth",
-            'persian'=> null,
-            'updated_at'=> null
-        ],
-            [
-                'color'=> "#8dc351",
-                'created_at'=> null,
-                'full_name'=> "Bitcoin Cash",
-                'id'=> 38,
-                'name'=> "bch",
-                'persian'=> null,
-                'updated_at'=> null
-            ],
-        ];
+//        $cryptoDetail = [
+//            [
+//                'color'=> "#F7931A",
+//                'created_at'=> null,
+//                'full_name'=> "Bitcoin",
+//                'id'=> 61,
+//                'name'=> "btc",
+//                'persian'=> null,
+//                'updated_at'=> null
+//            ],
+//            [
+//            'color'=> "#627EEA",
+//            'created_at'=> null,
+//            'full_name'=> "Ethereum",
+//            'id'=> 142,
+//            'name'=> "eth",
+//            'persian'=> null,
+//            'updated_at'=> null
+//        ],
+//            [
+//                'color'=> "#8dc351",
+//                'created_at'=> null,
+//                'full_name'=> "Bitcoin Cash",
+//                'id'=> 38,
+//                'name'=> "bch",
+//                'persian'=> null,
+//                'updated_at'=> null
+//            ],
+//        ];
         //
 
            $response = $this->changellyHelper->getChangellyData('getCurrencies',[]);

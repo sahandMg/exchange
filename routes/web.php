@@ -14,6 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('captcha-refresh',function (){
+
+    $captcha = \Mews\Captcha\Facades\Captcha::create();
+    return Captcha::src();
+
+});
+
 Route::get('/','LandingController@index')->name('index');
 
 Route::get('coins-list','LandingController@coinsList')->name('coins');

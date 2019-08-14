@@ -171,6 +171,12 @@
         <label>تکرار رمز:</label>
         <input type="password" class="form-control">
       </div>
+        <div class="form-group" id="passwordRepeat">
+            <label>کد امنیتی:</label>
+            <a onclick="refreshCaptcha(event)" style="cursor: pointer;">{{Captcha::img()}}</a>
+            <br>
+            <input name="captcha" type="text" class="form-control">
+        </div>
       <input type="text" class="form-control" id="inputCoinKindHidden" style="display: none;">
       <input type="text" class="form-control" id="outputCoinKindHidden" style="display: none;">
       <input type="text" class="form-control" id="inputCoinvalueHidden" style="display: none;">
@@ -222,7 +228,16 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+};
+
+function refreshCaptcha(e) {
+    var element = e;
+    axios.get('captcha-refresh').then(function (response) {
+        element.target.src = response.data
+
+    });
 }
+
 </script>
 </body>
 </html>
