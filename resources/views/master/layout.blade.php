@@ -210,7 +210,7 @@ var span = document.getElementsByClassName("custom-close")[0];
 btn.onclick = function(event) {
   console.log("sign up clicked;");
   event.preventDefault();
-  frm.action = {!! route('signup') !!};
+  frm.action = `{!! route('signup') !!}`;
   $('#userName').show();
   $('#passwordRepeat').show();
   $('#signUpGoogle').show();
@@ -221,7 +221,7 @@ btn.onclick = function(event) {
 loginBtn.onclick = function(event) {
   console.log("loginBtn clicked;");
   event.preventDefault();
-  frm.action = '{!! route('login') !!}';
+  frm.action = `{!! route('login') !!}`;
   $('#userName').hide();
   $('#passwordRepeat').hide();
   $('#signUpGoogle').hide();
