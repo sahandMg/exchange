@@ -18,7 +18,7 @@
    <div class="exchange-card" style="direction: rtl;" id="step1"> 
 	  <h3>مقدار بیت کوین کارت هدیه خود را انتخاب کنید.</h3>
 	  <br/>
-	  <div class="d-flex justify-content-around">
+	  <div class="d-flex flex-wrap justify-content-around">
           @for($i=0;$i<count($cardsType);$i++)
 	  	<div class="square text-center" id="giftCart{{$i}}">
 	  		<span id="cardType{{$i}}"></span>
@@ -108,6 +108,22 @@
 	.circle-btn {border-radius: 50%;padding:3px 8px;}
 	.square span {font-weight: bold;font-size: 1.4rem;}
 	.cart-row span {  margin-right: 4%;margin-left: 4%;font-weight: 400; font-size: 1.4rem; }
+  .square {margin-top: 1%;margin-bottom: 1%;}
+  @media only screen and (max-width: 1025px) {
+        .square {
+          padding: 2% 3%;
+        }
+     }
+  @media only screen and (max-width: 769px) {
+        .square {
+          padding: 1% 1%;
+        }
+  }
+   @media only screen and (max-width: 420px) {
+       .square span {font-weight: bold;font-size: 1rem;}
+       .square p {font-weight: bold;font-size: 0.9rem;}
+       .exchange-card h3 {font-size: 1rem;}
+  }
 </style>
 
 @include('master.footer')
