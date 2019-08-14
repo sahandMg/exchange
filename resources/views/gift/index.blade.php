@@ -3,7 +3,7 @@
     <title> اکسچنج - اسم سایت </title>
 @endsection
 @section('content')
-
+<section class="pb_section pb_slant-light">
 <div class="container">
    <div class="text-center giftcard-page">
     <h1 class="text-center">خرید کارت هدیه بیت کوین</h1>
@@ -94,6 +94,7 @@
    <p>برای شرکت ها و سازمان ها اگر زیاد بخرند یه تخفیفی هم بهشون بدیم.</p>
   </div>
 </div>
+</section>
 <style type="text/css">
 	.giftcard-page { margin-top: 10%;direction: rtl; }
 	.square {

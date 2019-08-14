@@ -3,7 +3,7 @@
     <title> اکسچنج - اسم سایت </title>
 @endsection
 @section('content')
-<section class="pb_section pb_slant-white" id="section-faq">
+<section class="pb_section pb_slant-light" id="section-faq">
     <div class="container">
       <div class="exchange-card" id="waitForExchange"  style="direction: rtl;">
            <div class="d-flex justify-content-between">

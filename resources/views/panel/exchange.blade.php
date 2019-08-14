@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-<section class="pb_section pb_slant-white" id="section-faq">
+<section class="pb_section pb_slant-light" id="section-faq">
     <div class="container">
        <div>
          <ul class="d-flex justify-content-around" style="padding-left: 0;">
