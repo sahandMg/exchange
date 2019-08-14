@@ -87,3 +87,9 @@ Route::post('get-crypto-color','HandyController@getCryptoColor');
 Route::post('set-crypto-color','HandyController@setCryptoColor');
 
 Route::post('set-crypto-fname','HandyController@setCryptoFullName');
+
+// =================================================================================
+
+Route::get('exchage-paying',['as'=>'exchangePaying','uses'=>'TradeController@exchangePaying']);
+
+Route::post('exchage-paying',['as'=>'exchangePaying','uses'=>'TradeController@post_exchangePaying']);
