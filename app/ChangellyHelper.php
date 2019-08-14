@@ -29,7 +29,6 @@ class ChangellyHelper
         $response = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($response,true);
-
         if(isset($response['error'])){
             $response = ['error'=>500,'body'=>$response['error']['message']];
             return $response;

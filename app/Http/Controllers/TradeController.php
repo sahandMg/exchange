@@ -9,6 +9,7 @@ use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 class TradeController extends Controller
 {
@@ -23,7 +24,7 @@ class TradeController extends Controller
 
     public function getCurrencies(){
 
-        //
+        // Fake
         $cryptoDetail = [
             [
                 'color'=> "#F7931A",
@@ -54,19 +55,14 @@ class TradeController extends Controller
             ],
         ];
         //
-//       if(!Cache::has('cryptoList')){
-//           $response = $this->changellyHelper->getChangellyData('getCurrencies',[]);
-//           if(isset($response['error'])){
-//               return $response;
-//           }
-//           $cryptoList = $this->checkForImage($response['result']);
-//           $cryptoDetail = $this->getCryptoDetails($cryptoList);
-//           Cache::put('cryptoList',$cryptoDetail,1000000);
-//
-//       }else{
-//
-//           $cryptoDetail = Cache::get('cryptoList');
-//       }
+
+           $response = $this->changellyHelper->getChangellyData('getCurrencies',[]);
+           if(isset($response['error'])){
+               return $response;
+           }
+           $cryptoList = $this->checkForImage($response['result']);
+           $cryptoDetail = $this->getCryptoDetails($cryptoList);
+
         return $cryptoDetail;
     }
 
@@ -81,39 +77,41 @@ class TradeController extends Controller
     public function getExchangeAmount(Request $request){
 
         //  Fake data
-            $response =
-                [
-                'id'=>1,
-                'result'=>[
-                            [
-                            'amount'=> "1",
-                            'fee'=> "0.2443841321608040201005",
-                            'from'=> "btc",
-                            'networkFee' => "0.0020000000000000000000",
-                            'rate'=> "48.8768264321608040201",
-                            'result'=> "48.6324423",
-                            'to'=> "eth",
-                            'visibleAmount'=> "48.8768264321608040201"
-                                ],
-                    [
-                        'amount'=> "1",
-                        'fee'=> "0.2443841321608040201005",
-                        'from'=> "btc",
-                        'networkFee' => "0.0020000000000000000000",
-                        'rate'=> "48.8768264321608040201",
-                        'result'=> "48.6324423",
-                        'to'=> "eth",
-                        'visibleAmount'=> "48.8768264321608040201"
-                    ]
-
-                        ]
-                ];
-            $rateId = $this->getFixRate('btc','eth');
-//            $from = $request->from;
-//            $to = $request->to;
-//            $amount = $request->amount;
-//            $response = $this->changellyHelper->getChangellyData('getExchangeAmount',[['from'=> $from,'to'=> $to , 'amount'=>$amount],['from'=> $from,'to'=> $to , 'amount'=>$amount]]);
-        $response['result'][0]['rateId'] = $rateId;
+//            $response =
+//                [
+//                'id'=>1,
+//                'result'=>[
+//                            [
+//                            'amount'=> "1",
+//                            'fee'=> "0.2443841321608040201005",
+//                            'from'=> "btc",
+//                            'networkFee' => "0.0020000000000000000000",
+//                            'rate'=> "48.8768264321608040201",
+//                            'result'=> "48.6324423",
+//                            'to'=> "eth",
+//                            'visibleAmount'=> "48.8768264321608040201"
+//                                ],
+//                    [
+//                        'amount'=> "1",
+//                        'fee'=> "0.2443841321608040201005",
+//                        'from'=> "btc",
+//                        'networkFee' => "0.0020000000000000000000",
+//                        'rate'=> "48.8768264321608040201",
+//                        'result'=> "48.6324423",
+//                        'to'=> "eth",
+//                        'visibleAmount'=> "48.8768264321608040201"
+//                    ]
+//
+//                        ]
+//                ];
+        //===============
+            $rateId = $this->getFixRate($request->from,$request->to);
+            $from = $request->from;
+            $to = $request->to;
+            $amount = $request->amount;
+            $response = $this->changellyHelper->getChangellyData('getExchangeAmount',[['from'=> $from,'to'=> $to , 'amount'=>$amount],['from'=> $from,'to'=> $to , 'amount'=>$amount]]);
+//        $response['result'][0]['rateId'] = $rateId['result'][0]['id'];
+//        $response['result'][0]['rate'] = $rateId['result'][0]['result'];
         return $response;
     }
 // get refound address from user to take back user the found he sent when transaction failed
@@ -132,7 +130,7 @@ class TradeController extends Controller
             'address'=>$address,
             'extraId'=>$extraId,
             'amount'=>$amount,
-            'refundAddress'=>$refundAddress
+            'refundAddress'=>'1GhPXFa8p9Chdd4hHrBuknpv8o7cfyuYqH'
         ]);
 
         if(isset($response['error'])){
@@ -156,21 +154,21 @@ class TradeController extends Controller
         $trans->payoutAddress = $transactionData['payoutAddress'];
         $trans->save();
 
-        return $response;
+        return redirect()->route('exchangePaying',['id'=>$trans->trans_id]);
     }
 
 
     // shows min & max values that changelly accepts to convert
     public function getFixRate($from,$to){
 
-//        $response = $this->changellyHelper->getChangellyData('getFixRate',[
-//            [
-//            'from'=> $from,
-//            'to'=> $to
-//            ]
-//        ]);
+        $response = $this->changellyHelper->getChangellyData('getFixRate',[
+            [
+            'from'=> $from,
+            'to'=> $to
+            ]
+        ]);
 
-        return 'dsahjkbdkasduhkhkjhkdjsadiasknjdkahksadakjn';
+        return $response;
     }
 
     public function createFixRateTransaction(Request $request){
@@ -183,40 +181,41 @@ class TradeController extends Controller
         $rateId =  $request->rateId;
         $refundExtraId =  $request->refundExtraId;
         $address = $request->address;
-        $refundAddress = $request->refundAddress;
-//        $response = $this->changellyHelper->getChangellyData('createFixTransaction',[
-//            'from'=> $from,
-//            'to'=> $to ,
-//            'address'=>$address,
-//            'extraId'=>$extraId,
-//            'amountTo'=>$amountTo,
-//            'amountFrom'=>$amountFrom,
-//            'rateId'=>$rateId,
-//            'refundAddress'=>$refundAddress,
-//            'refundExtraId'=>$refundExtraId
-//        ]);
-//        if(isset($response['error'])){
-//            return $response;
-//        }
-//        $transactionData = $response['result'];
+        $refundAddress = '1GhPXFa8p9Chdd4hHrBuknpv8o7cfyuYqH';
+//        $refundAddress = $request->refundAddress;
+        $response = $this->changellyHelper->getChangellyData('createFixTransaction',[
+            'from'=> $from,
+            'to'=> $to ,
+            'address'=>$address,
+            'extraId'=>$extraId,
+            'amountTo'=>$amountTo,
+            'amountFrom'=>$amountFrom,
+            'rateId'=>$rateId,
+            'refundAddress'=>$refundAddress,
+            'refundExtraId'=>$refundExtraId
+        ]);
+        if(isset($response['error'])){
+            return $response;
+        }
+        $transactionData = $response['result'];
         // ===== Fake
-        $transactionData = [
-            'id'=>'g3u2ia9qav0d4xd1',
-            'apiExtraFee'=>0,
-            'changellyFee'=>'0.5',
-            'payinExtraId'=>'',
-            'payoutExtraId'=>'',
-            'refundAddress'=>'',
-            'amountExpectedFrom'=>'0.2',
-            'amountExpectedTo'=>'9.097285',
-            'payTill'=>'2019-08-02T11:43:56.521Z',
-            'status'=>'new',
-            'currencyFrom'=>'btc',
-            'currencyTo'=>'eth',
-            'amountTo'=>0,
-            'payinAddress'=>'33cP1Q9Zvx3nGBB6wjxbENz6peLJQtNn7x',
-            'payoutAddress'=>'0xf8B1392351dcf6912Af12d1365F3415620Bb44bD'
-        ];
+//        $transactionData = [
+//            'id'=>'g3u2ia9qav0d4xd1',
+//            'apiExtraFee'=>0,
+//            'changellyFee'=>'0.5',
+//            'payinExtraId'=>'',
+//            'payoutExtraId'=>'',
+//            'refundAddress'=>'',
+//            'amountExpectedFrom'=>'0.2',
+//            'amountExpectedTo'=>'9.097285',
+//            'payTill'=>'2019-08-02T11:43:56.521Z',
+//            'status'=>'new',
+//            'currencyFrom'=>'btc',
+//            'currencyTo'=>'eth',
+//            'amountTo'=>0,
+//            'payinAddress'=>'33cP1Q9Zvx3nGBB6wjxbENz6peLJQtNn7x',
+//            'payoutAddress'=>'0xf8B1392351dcf6912Af12d1365F3415620Bb44bD'
+//        ];
         // ======
         $trans = new FixRateTransaction();
         $trans->trans_id = $transactionData['id'];
@@ -269,10 +268,9 @@ class TradeController extends Controller
     public function getStatus(Request $request){
 
         $id = $request->id;
-        $response = $this->changellyHelper->getChangellyData('getTransactions',[
+        $response = $this->changellyHelper->getChangellyData('getStatus',[
             'id'=> $id,
         ]);
-
         return $response;
     }
 

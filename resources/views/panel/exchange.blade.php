@@ -146,9 +146,10 @@
                    <span class="detail-value" style="direction: rtl">۵ تا ۳۰ دقیقه</span>
                </div>
                <br/>
-               <form action="{{route('createFixRateTransaction')}}" method="post">
+               <form action="{{route('createTransaction')}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                <input type="text" name="amountFrom" style="display: none;" id="sendingValue">
+                {{--<input type="text" name="amountFrom" style="display: none;" id="sendingValue">--}}
+                <input type="text" name="amount" style="display: none;" id="sendingValue">
                 <input type="text" name="from" style="display: none;" id="sendingKind">
                 <input type="text" name="to" style="display: none;" id="recievingKind">
                 <input type="text" name="rateId" style="display: none;" id="exchangeToken">

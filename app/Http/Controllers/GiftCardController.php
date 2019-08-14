@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BitCoinPrice;
 use App\GiftCard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -585,7 +586,12 @@ class GiftCardController extends Controller
     }
 
     // getting giftcard btc amount and send back price in toman
-    public function getCardPrice(BitCoinPrice $bitCoinPrice,Request $request){
+    public function getCardPrice(Request $request){
+
+        if(!Cache::has('btcPrice')){
+            $bitCoinPrice = new BitCoinPrice();
+            Cache::put('btcPrice',$bitCoinPrice->getPrice(),600);
+        }
 
         $cards = DB::table('gift_cards')->get();
         $cardsBTCPrice = array_values(array_unique(
@@ -595,7 +601,7 @@ class GiftCardController extends Controller
         $resp = [];
         for($i=0;$i<count($cardsBTCPrice);$i++){
 
-            $cardTomanPrice = round($bitCoinPrice->getPrice() * $cardsBTCPrice[$i] * $setting->usd_toman);
+            $cardTomanPrice = round(Cache::get('btcPrice') * $cardsBTCPrice[$i] * $setting->usd_toman);
             $resp[$i] = ['type'=>$cardsBTCPrice[$i],'price'=>$cardTomanPrice];
         }
         return $resp;

@@ -7,9 +7,8 @@
     <meta name="description" content="Free Bootstrap 4 Template by uicookies.com">
     <meta name="keywords" content="Free website templates, Free bootstrap themes, Free template, Free bootstrap, Free website template">
 
-    <script  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js" ></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+    {{--<script  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js" ></script>--}}
+    <script src="{{URL::asset('assets/js/axios.js')}}"></script>
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::asset('assets/css/bootstrap/bootstrap.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/fonts/ionicons/css/ionicons.min.css')}}">
@@ -25,13 +24,13 @@
             src: url(assets/fonts/Yekan.ttf);
         }
         * {
-            font-family: BYekanFont;
+            font-family:B Yekan;
         }
         h1, h2, h3, h4, h5, h6 {
-            font-family: BYekanFont;
+            font-family: B Yekan;
         }
-        th, a, p, input, button, legend, label, blockquote {font-family: BYekanFont;}
-        .btn {font-family: BYekanFont;}
+        th, a, p, input, button, legend, label, blockquote {font-family: B Yekan;}
+        .btn {font-family: B Yekan;}
     </style>
 </head>
 <body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
