@@ -4,8 +4,6 @@
 @endsection
 @section('content')
 
-<section class="pb_section pb_slant-white" id="section-faq">
-    <div class="container">
         <h2 class="text-center">تماس با ما</h2>
         <p>در صورت وجود هرگونه پرسش و یا مشکل با تیم پشتیبانی ما تماس بگیرید. کارشناسان پشتیبانی در تمامی روزهای هفته به صورت شبانه روز پاسخگوی شما خواهند بود.</p>
         <form action="/action_page.php" style="direction: rtl;">

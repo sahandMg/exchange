@@ -174,7 +174,7 @@ class TradeController extends Controller
     }
 
     public function createFixRateTransaction(Request $request){
-        dd($request->all());
+
         $from = $request->from;
         $to = $request->to;
         $extraId = $request->extraId;
@@ -184,39 +184,39 @@ class TradeController extends Controller
         $refundExtraId =  $request->refundExtraId;
         $address = $request->address;
         $refundAddress = $request->refundAddress;
-        $response = $this->changellyHelper->getChangellyData('createFixTransaction',[
-            'from'=> $from,
-            'to'=> $to ,
-            'address'=>$address,
-            'extraId'=>$extraId,
-            'amountTo'=>$amountTo,
-            'amountFrom'=>$amountFrom,
-            'rateId'=>$rateId,
-            'refundAddress'=>$refundAddress,
-            'refundExtraId'=>$refundExtraId
-        ]);
-        if(isset($response['error'])){
-            return $response;
-        }
-        $transactionData = $response['result'];
+//        $response = $this->changellyHelper->getChangellyData('createFixTransaction',[
+//            'from'=> $from,
+//            'to'=> $to ,
+//            'address'=>$address,
+//            'extraId'=>$extraId,
+//            'amountTo'=>$amountTo,
+//            'amountFrom'=>$amountFrom,
+//            'rateId'=>$rateId,
+//            'refundAddress'=>$refundAddress,
+//            'refundExtraId'=>$refundExtraId
+//        ]);
+//        if(isset($response['error'])){
+//            return $response;
+//        }
+//        $transactionData = $response['result'];
         // ===== Fake
-//        $transactionData = [
-//            'id'=>'g3u2ia9qav0d4xd1',
-//            'apiExtraFee'=>0,
-//            'changellyFee'=>'0.5',
-//            'payinExtraId'=>'',
-//            'payoutExtraId'=>'',
-//            'refundAddress'=>'',
-//            'amountExpectedFrom'=>'0.2',
-//            'amountExpectedTo'=>'9.097285',
-//            'payTill'=>'2019-08-02T11:43:56.521Z',
-//            'status'=>'new',
-//            'currencyFrom'=>'btc',
-//            'currencyTo'=>'eth',
-//            'amountTo'=>0,
-//            'payinAddress'=>'33cP1Q9Zvx3nGBB6wjxbENz6peLJQtNn7x',
-//            'payoutAddress'=>'0xf8B1392351dcf6912Af12d1365F3415620Bb44bD'
-//        ];
+        $transactionData = [
+            'id'=>'g3u2ia9qav0d4xd1',
+            'apiExtraFee'=>0,
+            'changellyFee'=>'0.5',
+            'payinExtraId'=>'',
+            'payoutExtraId'=>'',
+            'refundAddress'=>'',
+            'amountExpectedFrom'=>'0.2',
+            'amountExpectedTo'=>'9.097285',
+            'payTill'=>'2019-08-02T11:43:56.521Z',
+            'status'=>'new',
+            'currencyFrom'=>'btc',
+            'currencyTo'=>'eth',
+            'amountTo'=>0,
+            'payinAddress'=>'33cP1Q9Zvx3nGBB6wjxbENz6peLJQtNn7x',
+            'payoutAddress'=>'0xf8B1392351dcf6912Af12d1365F3415620Bb44bD'
+        ];
         // ======
         $trans = new FixRateTransaction();
         $trans->trans_id = $transactionData['id'];
@@ -236,16 +236,15 @@ class TradeController extends Controller
         $trans->payinAddress = $transactionData['payinAddress'];
         $trans->payoutAddress = $transactionData['payoutAddress'];
         $trans->save();
-       return $this->exchangePaying($transactionData['payinAddress']);
+
+        return redirect()->route('exchangePaying',['id'=>$trans->trans_id]);
     }
 
-    private function exchangePaying($transId){
+    public function exchangePaying($transId){
 
-        $trans = $trans = DB::connection('mysql')->table('fix_rate_transactions')->where('id',$transId)->first();
-
+        $trans = $trans = DB::connection('mysql')->table('fix_rate_transactions')->where('trans_id',$transId)->first();
         return view('panel.ExchangePaying',compact('trans'));
     }
-
 
     public function getTransactions(Request $request){
 

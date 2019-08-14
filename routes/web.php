@@ -90,6 +90,5 @@ Route::post('set-crypto-fname','HandyController@setCryptoFullName');
 
 // =================================================================================
 
-Route::get('exchage-paying',['as'=>'exchangePaying','uses'=>'TradeController@exchangePaying']);
+Route::get('wallet-paying/{transId}',['as'=>'exchangePaying','uses'=>'TradeController@exchangePaying']);
 
-Route::post('exchage-paying',['as'=>'exchangePaying','uses'=>'TradeController@post_exchangePaying']);
