@@ -285,6 +285,8 @@
      
     .inputCoin {
       width: 40%;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background-color: white;
+      height: 51.8px;
+      border: 0px;
     }
 
     .selected-exchange span {
@@ -304,10 +306,11 @@
     }
 
     .selected-exchange {
-        height: 48.5px;
+        height: 100%;
         padding: 10px 10px;
         background: #f0f0f0;
         cursor: pointer;
+
     }
 
     select {
@@ -323,7 +326,8 @@
         overflow: hidden;
         /*box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.1);*/
         border-bottom-left-radius: 0px;
-        border-top-left-radius: 0px
+        border-top-left-radius: 0px;
+        border: 0px;
     }
 
     .item-search-exchange {
@@ -483,7 +487,17 @@
                </div>
             `);
         }
-        $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
+        var txt1 = 'btc'; var txt2 = 'eth';
+        $('#inputCoinKind').html(`
+               <div class="row" style="margin-left: 10px;">
+                   <img  width="30" height="30" src="assets/img/icons/`+txt1+`.png">
+                   <span  style="margin-left: 10px;margin-top: 3px;">`+txt1.toUpperCase()+`</span>
+               </div>`);
+        $('#outputCoinKind').html(`
+               <div class="row" style="margin-left: 10px;">
+                   <img  width="30" height="30" src="assets/img/icons/`+txt2+`.png">
+                   <span  style="margin-left: 10px;margin-top: 3px;">`+txt2.toUpperCase()+`</span>
+               </div>`);
         $('#inputCoinValue').val(1);
           // console.log($('#inputCoinValue').val());
           // console.log($('#inputCoinKind').text());
@@ -494,7 +508,13 @@
           var txt = $(this).find('span.coinSmallName').text();
           console.log($(this));
           console.log(txt);
-          $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
+          // $(this).parent().parent().parent().find('.selected-exchange div').html(txt);
+          $(this).parent().parent().parent().find('.selected-exchange div').html(`
+               <div class="row" style="margin-left: 10px;">
+                   <img  width="30" height="30" src="assets/img/icons/`+txt+`.png">
+                   <span  style="margin-left: 10px;margin-top: 3px;">`+txt.toUpperCase()+`</span>
+               </div>`
+            );
           $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
            exchangeRate();
           
@@ -505,8 +525,8 @@
      
      $('#reverseBtn').on('click', function() {
           console.log("reverseBtn");
-          var Temp = $('#inputCoinKind').text();
-          $('#inputCoinKind').html($('#outputCoinKind').text());
+          var Temp = $('#inputCoinKind').html();
+          $('#inputCoinKind').html($('#outputCoinKind').html());
           $('#outputCoinKind').html(Temp);
           $('#inputCoinValue').val($('#outputCoinValue').val());
           exchangeRate();
@@ -519,8 +539,8 @@
       if( isNumeric($('#inputCoinValue').val()) && ($('#inputCoinValue').val() !== "") ) {
         console.log("exchangeRate");$('#outputCoinValue').val("...");
         axios.post('{{route('getExchangeAmount')}}',{
-                    'from':$('#inputCoinKind').text(),
-                    'to':$('#outputCoinKind').text(),
+                    'from':$('#inputCoinKind span').text(),
+                    'to':$('#outputCoinKind span').text(),
                     'amount':$('#inputCoinValue').val()
                 }).then(function (response) {
                console.log(response);
@@ -529,15 +549,15 @@
               } else {
                  // vm.receiveNumber = response.data.toFixed(8);
                   $('#outputCoinValue').val(response.data.result[0].result);
-                  $('#exchangePageLink').attr("href", exchangeLink+"?from="+$('#inputCoinKind').text()+"&to="+$('#outputCoinKind').text()+"&amount="+$('#inputCoinValue').val())
+                  $('#exchangePageLink').attr("href", exchangeLink+"?from="+$('#inputCoinKind span').text()+"&to="+$('#outputCoinKind span').text()+"&amount="+$('#inputCoinValue').val())
               }
           })
       }
     }
 
     function updateHiddenInputs() {
-      $('#inputCoinKindHidden').val($('#inputCoinKind').text());
-      $('#outputCoinKindHidden').val($('#outputCoinKind').text());
+      $('#inputCoinKindHidden').val($('#inputCoinKind span').text());
+      $('#outputCoinKindHidden').val($('#outputCoinKind span').text());
       $('#inputCoinvalueHidden').val($('#inputCoinValue').val());
     }
 

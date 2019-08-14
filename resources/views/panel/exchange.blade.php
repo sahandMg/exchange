@@ -146,7 +146,15 @@
                    <span class="detail-value" style="direction: rtl">۵ تا ۳۰ دقیقه</span>
                </div>
                <br/>
-               <button class="btn btn-success" style="margin: auto;display: block;">مرحله بعدی</button>
+               <form action="" method="post">
+                <input type="text" name="asd" style="display: none;" id="sendingValue">
+                <input type="text" name="asd" style="display: none;" id="sendingKind">
+                <input type="text" name="asd" style="display: none;" id="recievingKind">
+                <input type="text" name="asd" style="display: none;" id="exchangeToken">
+                <input type="text" name="asd" style="display: none;" id="exteraId">
+                <input type="text" name="asd" style="display: none;" id="walletAdd">
+                <button class="btn btn-success" style="margin: auto;display: block;">مرحله بعدی</button>
+               </form>
                <br/>
            </div>
        </div>
@@ -481,9 +489,16 @@
               if(response.data == 500){
                  
               } else {
+              
                  // vm.receiveNumber = response.data.toFixed(8);
                   var resp = response.data.result[0];
-
+                  
+                  $('#sendingValue').val($('#inputCoinValue').text());
+                  $('#sendingKind').val($('#inputCoinKind').text());
+                  $('#recievingKind').val($('#outputCoinKind').text());
+                  $('#exchangeToken').val(resp.rateId);
+                  $('#exteraId').val("");
+                  
                   // console.log(parseFloat(resp.fee).toFixed(8));
                   $('#outputCoinValue').val(resp.result);
                   $('#enter_amount_exchange_fee').html(parseFloat(resp.fee).toFixed(8) +' ' + resp.to.toUpperCase());
@@ -543,6 +558,7 @@
     $('#enter_address_btn').on('click', function() {
         hideAllExchangeParts();showExchangePart3();
         $('#walletAddress').html($('#walletAddressInput').val());
+        $('#walletAdd').val($('#walletAddressInput').val());
     }); 
     $('#return_enter_address').on('click', function() {
         hideAllExchangeParts();showExchangePart2();
