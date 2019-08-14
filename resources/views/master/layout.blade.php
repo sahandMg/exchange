@@ -184,6 +184,12 @@
         <button class="btn btn-success mx-auto" type="submit">ثبت</button>
       </div>
     </form>
+    <!-- <br/> -->
+    <div class="text-center">
+      <a href="" id="signUpGoogle"><img src="assets/img/googleicon.png" /></a>
+      <a href="" id="loginGoogle"><img src="assets/img/googleicon.png" /></a>
+    </div>
+    <br/>
   </div>
 
 </div>
@@ -206,6 +212,8 @@ btn.onclick = function(event) {
   frm.action = 'whatever_you_need.ext';
   $('#userName').show();
   $('#passwordRepeat').show();
+  $('#signUpGoogle').show();
+  $('#loginGoogle').hide();
   modal.style.display = "block";
 }
 
@@ -215,6 +223,8 @@ loginBtn.onclick = function(event) {
   frm.action = 'whatever_you_need.ext';
   $('#userName').hide();
   $('#passwordRepeat').hide();
+  $('#signUpGoogle').hide();
+  $('#loginGoogle').show();
   modal.style.display = "block";
 }
 
