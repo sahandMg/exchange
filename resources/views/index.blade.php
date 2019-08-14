@@ -12,7 +12,7 @@
         <div class="col-md-7 col-sm-12 row">
           <div class="col-md-12">
             <div class="row mx-auto">
-              <input id="inputCoinValue"  oninput="exchangeRate()" type="text" class="form-control pb_height-50 inputCoin"  />
+              <input id="inputCoinValue"  oninput="exchangeRate()" type="text" class="form-control inputCoin"  />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
                 <div>
@@ -36,7 +36,7 @@
           </div>
           <div class="col-md-12">
             <div class="row mx-auto">
-              <input  id="outputCoinValue" type="text" class="form-control pb_height-50 inputCoin" placeholder="..." />
+              <input  id="outputCoinValue" type="text" class="form-control inputCoin" placeholder="..." />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
                 <div>

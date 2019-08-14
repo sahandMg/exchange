@@ -494,7 +494,7 @@
                  // vm.receiveNumber = response.data.toFixed(8);
                   var resp = response.data.result[0];
                   
-                  $('#sendingValue').val($('#inputCoinValue').text());
+                  $('#sendingValue').val($('#inputCoinValue').val());
                   $('#sendingKind').val($('#inputCoinKind').text());
                   $('#recievingKind').val($('#outputCoinKind').text());
                   $('#exchangeToken').val(resp.rateId);
