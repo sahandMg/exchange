@@ -47,7 +47,7 @@ Route::get('google/login','AuthController@redirectToProvider')->name('redirectTo
 
 Route::get('google/login/callback','AuthController@handleProviderCallback')->name('handleProviderCallback');
 
-Route::get('signup/','AuthController@signup')->name('signup')->middleware('guest');
+Route::get('signup','AuthController@signup')->name('signup')->middleware('guest');
 
 Route::post('signup','AuthController@post_signup')->name('signup');
 

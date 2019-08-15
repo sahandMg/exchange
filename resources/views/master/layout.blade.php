@@ -61,7 +61,7 @@
         </div>
     </div>
 </nav>
-
+    @include('errors.formError')
 @yield('content')
 
 <style>
@@ -154,7 +154,7 @@
     <span class="custom-close" style="margin-right: 2%;margin-top: 2%; ">&times;</span>
 
     <h3 class="text-center" style="margin-top: 2%;">ثبت نام</h3>
-    <form class="auth-form" method="post" id="authForm">
+    <form class="auth-form" action="{{route('signup')}}" method="POST" id="authForm">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
        <div class="form-group" id="userName">
         <label>نام کاربری:</label>

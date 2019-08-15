@@ -129,8 +129,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'captcha' => [
+            'captcha' => 'کد امنیتی نادرست است',
         ],
     ],
 
@@ -145,6 +145,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'captcha'=>'کد امنیتی'
+    ],
 
 ];

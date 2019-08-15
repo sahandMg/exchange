@@ -40,14 +40,13 @@ class AuthController extends Controller
         $user->ip = $ipFinder->getIp();
         try{
 
-            $user->country = strtolower(Location::get(Helpers::userIP())->countryCode);
+            $user->country = strtolower(Location::get($ipFinder->getIp())->countryCode);
         }catch (\Exception $exception){
             $user->country = 'fr';
         }
 
         $user->code = strtoupper(uniqid());
         $user->password = Hash::make($request->password);
-        $user->reset_password = str_random(10);
         $user->save();
         $data = [
             'code'=> $user->code,
@@ -59,7 +58,7 @@ class AuthController extends Controller
             'token' => $token
         ]);
 
-        Mail::send('email.VerifyEmail',['user'=>$user],function($message) use($data){
+        Mail::send('emails.VerifyEmail',['user'=>$user],function($message) use($data){
             $message->from (env('Admin_Mail'));
             $message->to ($data['email']);
             $message->subject ('فعال سازی حساب');
@@ -111,7 +110,7 @@ class AuthController extends Controller
         if(is_null($user)){
             return 'Invalid Token!';
         }
-        return view('auth.emailVerification',compact('token'));
+        return view('auth.resendEmailVerification',compact('token'));
     }
 
     // resend verification link
