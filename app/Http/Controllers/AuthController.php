@@ -59,22 +59,41 @@ class AuthController extends Controller
             'token' => $token
         ]);
 
-        Mail::send('emails.VerifyEmail',['user'=>$user],function($message) use($data){
-            $message->from (env('Admin_Mail'));
-            $message->to ($data['email']);
-            $message->subject ('فعال سازی حساب');
-        });
-
-        Mail::send('emails.admin.newUser',['user'=>$user],function($message) use($data){
-            $message->from (env('Admin_Mail'));
-            $message->to (env('Info_Mail'));
-            $message->subject ('New User');
-        });
-
         session(['pop'=>1]);
         Session::flash('message', 'ایمیل فعال سازی حساب ارسال شد. درصورت دریافت نکردن ایمیل، روی ارسال مجدد کلیک کنید');
         Session::put('userToken', $token);
+//
+//        Mail::send('emails.VerifyEmail',['user'=>$user],function($message) use($data){
+//            $message->from (env('Admin_Mail'));
+//            $message->to ($data['email']);
+//            $message->subject ('فعال سازی حساب');
+//        });
+//
+//        Mail::send('emails.admin.newUser',['user'=>$user],function($message) use($data){
+//            $message->from (env('Admin_Mail'));
+//            $message->to (env('Info_Mail'));
+//            $message->subject ('New User');
+//        });
+
         return redirect()->route('VerifyUserPage');
+    }
+
+
+    // redirect users to verification page for sending verification link again
+    public function VerifyUserPage(){
+
+        $token = Session::get('userToken');
+
+        if(!$token){
+            return redirect()->route('login');
+        }
+        $user = VerifyUser::where('token',$token)->first()->user;
+
+        if(is_null($user)){
+            return 'Invalid Token!';
+        }
+
+        return view('auth.resendEmailVerification',compact('token'));
     }
 
     // this function triggers when user click on verification link on email
@@ -91,28 +110,16 @@ class AuthController extends Controller
             'email'=>$user->email
         ];
 
-        Mail::send('emails.welcome',$data,function($message) use($data){
-            $message->from (env('Admin_Mail'));
-            $message->to ($data['email']);
-            $message->subject ('تایید عضویت');
-        });
+//        Mail::send('emails.welcome',$data,function($message) use($data){
+//            $message->from (env('Admin_Mail'));
+//            $message->to ($data['email']);
+//            $message->subject ('تایید عضویت');
+//        });
+
         Auth::guard('user')->login($user);
         return redirect()->route('dashboard');
     }
 
-    // redirect users to verification page for sending verification link again
-    public function VerifyUserPage(){
-
-        $token = Session::get('userToken');
-        if(!$token){
-            return redirect()->route('login');
-        }
-        $user = VerifyUser::where('token',$token)->first()->user;
-        if(is_null($user)){
-            return 'Invalid Token!';
-        }
-        return view('auth.resendEmailVerification',compact('token'));
-    }
 
     // resend verification link
     public function ResendVerification(Request $request){

@@ -7,6 +7,7 @@ use App\ChangellyHelper;
 use App\FixRateTransaction;
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -150,7 +151,7 @@ class TradeController extends Controller
         $transactionData = $response['result'];
         $trans = new Transaction();
         $trans->trans_id = $transactionData['id'];
-        $trans->user_id = 1;
+        $trans->user_id = Auth::guard('user')->id();
         $trans->apiExtraFee = $transactionData['apiExtraFee'];
         $trans->changellyFee = $transactionData['changellyFee'];
         $trans->payinExtraId = $transactionData['payinExtraId'];
