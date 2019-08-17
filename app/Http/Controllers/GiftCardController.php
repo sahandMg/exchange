@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\BitCoinPrice;
 use App\GiftCard;
+use App\GiftRequest;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -605,5 +608,59 @@ class GiftCardController extends Controller
             $resp[$i] = ['type'=>$cardsBTCPrice[$i],'price'=>$cardTomanPrice];
         }
         return $resp;
+    }
+
+    public function cardRegister(Request $request){
+
+        $this->validate($request,[
+            'lname'=>'required',
+            'fname'=>'required',
+            'email'=>'required',
+            'address'=>'required',
+            'phone'=>'required',
+//            'captcha'=>'required|captcha'
+        ]);
+
+        $cards = DB::table('gift_cards')->get();
+        $cardsBTCPrice = array_values(array_unique(
+                $cards->pluck('btc')->toArray())
+        );
+        $cardTypesArr =[];
+        $orderArr = [];
+        for($t=0;$t<count($cardsBTCPrice);$t++){
+
+            $cardTypesArr['giftCart'.($t+1)] = $cardsBTCPrice[$t];
+            if(isset($request->all()['giftCart'.($t+1)])){
+                $value = $cardTypesArr['giftCart'.($t+1)];
+                $orderArr["$value"] = $request->all()['giftCart'.($t+1)];
+            }
+        }
+
+        $giftRequest = new GiftRequest();
+        $giftRequest->name = $request->fname.' '.$request->lname;
+        $giftRequest->email = $request->email;
+        $giftRequest->phone = $request->phone;
+        $giftRequest->code = strtoupper(uniqid());
+        $giftRequest->address = $request->address;
+        $giftRequest->order = serialize($orderArr);
+        $giftRequest->save();
+
+        // send invoice to email address
+       /*
+        $data = [
+            'email'=>$request->email,
+            'name'=> $giftRequest->name,
+            'code'=>$giftRequest->code,
+            'address'=>$giftRequest->address,
+            'phone'=>$giftRequest->phone,
+            ];
+        Mail::send('emails.giftInvoice',$data,function($message)use($data){
+
+            $message->to($data['email']);
+            $message->from($data['gift@exchange.com']);
+            $message->subject($data['رسید سفارش']);
+        });
+       */
+       return 'done';
     }
 }

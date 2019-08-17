@@ -45,29 +45,42 @@
   <div class="exchange-card" style="direction: rtl;" id="step2"> 
 	  <h3>مقدار بیت کوین کارت هدیه خود را انتخاب کنید.</h3>
 	  <br/>
-	  <form>
+      @include('errors.formError')
+	  <form method="POST" action="{{route('cardRegister')}}">
 	  <div class="form-group">
+          <input type="hidden" name="_token" value="{{csrf_token()}}">
         <label>نام:</label>
-        <input type="text" class="form-control">
+        <input name="fname" pattern='[a-zA-Z0-9 آ ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ی]+'  required type="text" value="{{old('fname')}}" class="form-control">
       </div>
       <div class="form-group">
         <label >نام خانوادگی:</label>
-        <input type="text" class="form-control">
+        <input name="lname" required type="text" pattern='[a-zA-Z0-9 آ ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ی]+'  value="{{old('lname')}}" class="form-control">
       </div>
-      <div class="form-group">
+          <div class="form-group">
+              <label>شماره تلفن:</label>
+              <input name="phone" required type="tel" pattern="[0-9]+" value="{{old('phone')}}" class="form-control">
+          </div>
+          <div class="form-group">
+              <label>ایمیل:</label>
+              <input name="email" required type="email" value="{{old('email')}}"  class="form-control">
+          </div>
+          <div class="form-group">
         <label>آدرس:</label>
-        <input type="text" class="form-control">
+        <input name="address" required type="text" value="{{old('address')}}" pattern='[a-zA-Z0-9 آ ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ی]+' class="form-control">
       </div>
-      <div class="form-group">
-        <label>شماره تلفن:</label>
-        <input type="text" class="form-control">
-      </div>
+
+          <div class="form-group" >
+              <label>کد امنیتی:</label>
+              <a onclick="refreshCaptcha(event)" style="cursor: pointer;">{{Captcha::img()}}</a>
+              <br>
+              <input name="captcha" type="text" class="form-control">
+          </div>
       <div style="display: none;" id="cartInputshidden">
       	
       </div>
       <div class="d-flex justify-content-between">
         <button class="btn" id="return_step1">بازگشت</button>
-   	    <button class="btn btn-success mx-auto" id="submit">ثبت</button>
+   	    <button type="submit" class="btn btn-success mx-auto" id="submit">ثبت</button>
       </div>
       </form>
   </div>
@@ -96,7 +109,9 @@
 </div>
 </section>
 <style type="text/css">
-	.giftcard-page { margin-top: 10%;direction: rtl; }
+
+
+    .giftcard-page { margin-top: 10%;direction: rtl; }
 	.square {
 		border: 1px solid;
 		border-radius: 2px;
@@ -130,6 +145,14 @@
 @include('master.footer')
 @include('master.scripts')
 <script type="text/javascript">
+
+    function refreshCaptcha(e) {
+        var element = e;
+        axios.get('captcha-refresh').then(function (response) {
+            element.target.src = response.data
+
+        });
+    }
 
     axios.post('{{route('getCardPrice')}}',{'amount':0.001}).then(function (response) {
 

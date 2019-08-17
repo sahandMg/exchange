@@ -55,6 +55,8 @@ Route::get('password-reset','AuthController@passwordReset')->name('passwordReset
 
 Route::post('password-reset','AuthController@post_passwordReset')->name('passwordReset');
 
+Route::get('logout','AuthController@logout')->name('logout');
+
 // ===================== Gift Card Routes =============================
 
 Route::get('make-key','GiftCardController@makeKey');
@@ -64,6 +66,8 @@ Route::get('generate-qr','GiftCardController@generateQr');
 Route::get('gift-card','GiftCardController@index')->name('giftIndex');
 
 Route::post('value','GiftCardController@getCardPrice')->name('getCardPrice');
+
+Route::post('card-register','GiftCardController@cardRegister')->name('cardRegister');
 
 
 // ===================== Panel Routes =============================
@@ -98,5 +102,5 @@ Route::post('set-crypto-fname','HandyController@setCryptoFullName');
 
 // =================================================================================
 
-Route::get('wallet-paying/{transId}',['as'=>'exchangePaying','uses'=>'TradeController@exchangePaying']);
+Route::get('wallet-paying/{transId}',['as'=>'walletPaying','uses'=>'TradeController@walletPaying']);
 
