@@ -66,12 +66,6 @@
 
 <style>
     .media-body p {direction: rtl;}
-@media only screen and (max-width: 769px) {
-  .navbar {
-    text-align: center;
-  }
-  .navbar li { margin-top: 1%; }
-}
 /* The Modal (background) */
 .custom-modal {
   display: none; /* Hidden by default */
@@ -94,7 +88,7 @@
   margin: auto;
   padding: 0;
   border: 1px solid #888;
-  width: 80%;
+  width: 70%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -142,7 +136,21 @@
   color: white;
 }
 .auth-form {
-    text-align: right;direction: rtl; width: 80%; margin: auto; padding: 5%;
+    text-align: right;direction: rtl; width: 80%; margin: auto; padding: 2%;
+}
+@media only screen and (max-width: 769px) {
+  .navbar {
+    text-align: center;
+  }
+  .navbar li { margin-top: 1%; }
+  .custom-modal-content {
+     width: 80%;
+   }
+}
+@media only screen and (max-width: 420px) {
+  .custom-modal-content {
+     width: 90%;
+   }
 }
 </style>
 
@@ -211,6 +219,7 @@ btn.onclick = function(event) {
   console.log("sign up clicked;");
   event.preventDefault();
   $('#authForm h3').text("ثبت نام");
+  $('#authForm button').text("ثبت نام");
   // frm.action = `{!! route('signup') !!}`;
   $('#authForm form').attr('action', `{!! route('signup') !!}`);
   $('#userName').show();
@@ -224,6 +233,7 @@ loginBtn.onclick = function(event) {
   console.log("loginBtn clicked;");
   event.preventDefault();
   $('#authForm h3').text("ورود");
+  $('#authForm button').text("ورود");
   var actionLink = `{!! route('login') !!}`;
    $('#authForm form').attr('action', actionLink);
    console.log(actionLink)
