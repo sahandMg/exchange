@@ -381,7 +381,10 @@
 @include('master.scripts')
 
 <script type="text/javascript">
-   // input coin value
+
+    var auth = {!! json_encode(Auth::guard('user')->check()) !!}
+
+    // input coin value
    var inputCoinValue = `{!! isset($_GET["amount"])?$_GET["amount"]:1  !!}`;
    // input coin kind
    var inputCoinKind = `{!! isset($_GET["from"])?$_GET["from"]:'btc'  !!}`;
