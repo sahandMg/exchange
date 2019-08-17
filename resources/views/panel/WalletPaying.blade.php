@@ -68,14 +68,24 @@
         "hold":"تراکنش مسدود شده",
         "expired":"تراکنش منقضی شده",
     };
-    setTimeout(function () {
+
+    $(document).ready(function () {
+        getStatus()
+    });
+    function getStatus() {
 
         axios.post('{{route('getStatus')}}',{'id':ID}).then(function (response) {
 
             status = response.data.result;
             $('#status').html(states[status])
         })
-    },10)
+    }
+    setInterval(function () {
+
+        getStatus();
+
+    },10000);
+
 </script>
 
 @endsection

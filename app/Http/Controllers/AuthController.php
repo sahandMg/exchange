@@ -150,11 +150,10 @@ class AuthController extends Controller
             'password'=>'required|min:6',
             'captcha'=>'required|captcha'
         ]);
-
         if(Auth::guard('user')->attempt(['email'=>$request->email,'password'=>$request->password],true)){
 
-            if(Auth::guard('user')->user()->verified == 0){
 
+            if(Auth::guard('user')->user()->verified == 0){
                 $token = Auth::guard('user')->user()->verifyUser->token;
                 Auth::guard('user')->logout();
                 Session::flash('error','حساب کاربری شما فعال نیست. با مراجعه به لینک ارسال شده به ایمیلتان، اقدام به فعال سازی حساب خود کنید');
@@ -227,8 +226,7 @@ class AuthController extends Controller
         $user->avatar = $client->avatar;
         $user->ip = $ipFinder->getIp();
         $user->verified = 1;
-        $user->total_mining = 0;
-        $user->pending = 0;
+
         try{
 
             $user->country = strtolower(Location::get($ipFinder->getIp())->countryCode);

@@ -66,9 +66,9 @@ class TradeController extends Controller
         return $cryptoDetail;
     }
 
-    public function getMinAmount(Request $request){
-        $from = $request->from;
-        $to = $request->to;
+    public function getMinAmount($from,$to){
+
+
         $response = $this->changellyHelper->getChangellyData('getMinAmount',['from'=> $from,'to'=> $to]);
 
         return $response;
@@ -105,10 +105,21 @@ class TradeController extends Controller
 //                        ]
 //                ];
         //===============
+        if(!$request->has('from') || !$request->has('to') || !$request->has('amount')){
+
+            $response = ['error'=>500,'body'=>'invalid request params'];
+            return $response;
+        }
             $rateId = $this->getFixRate($request->from,$request->to);
             $from = $request->from;
             $to = $request->to;
             $amount = $request->amount;
+            $minAmount =  $this->getMinAmount($from,$to)['result'];
+        if($amount < $minAmount){
+
+            $response = ['error'=>505,'body'=>'minimum '.$from.' to send is '.$minAmount];
+            return $response;
+        }
             $response = $this->changellyHelper->getChangellyData('getExchangeAmount',[['from'=> $from,'to'=> $to , 'amount'=>$amount],['from'=> $from,'to'=> $to , 'amount'=>$amount]]);
 //        $response['result'][0]['rateId'] = $rateId['result'][0]['id'];
 //        $response['result'][0]['rate'] = $rateId['result'][0]['result'];
@@ -123,14 +134,14 @@ class TradeController extends Controller
         $extraId = $request->extraId;
         $amount = $request->amount;
         $address = $request->address;
-        $refundAddress = $request->refundAddress;
+        $refundAddress = '1GhPXFa8p9Chdd4hHrBuknpv8o7cfyuYqH';
         $response = $this->changellyHelper->getChangellyData('createTransaction',[
             'from'=> $from,
             'to'=> $to ,
             'address'=>$address,
             'extraId'=>$extraId,
             'amount'=>$amount,
-            'refundAddress'=>'1GhPXFa8p9Chdd4hHrBuknpv8o7cfyuYqH'
+            'refundAddress'=> $refundAddress
         ]);
 
         if(isset($response['error'])){
@@ -159,7 +170,7 @@ class TradeController extends Controller
 
 
     // shows min & max values that changelly accepts to convert
-    public function getFixRate($from,$to){
+    private function getFixRate($from,$to){
 
         $response = $this->changellyHelper->getChangellyData('getFixRate',[
             [
@@ -239,9 +250,9 @@ class TradeController extends Controller
         return redirect()->route('exchangePaying',['id'=>$trans->trans_id]);
     }
 
-    public function exchangePaying($transId){
+    public function walletPaying($transId){
 
-        $trans = $trans = DB::connection('mysql')->table('fix_rate_transactions')->where('trans_id',$transId)->first();
+        $trans = $trans = DB::connection('mysql')->table('transactions')->where('trans_id',$transId)->first();
        if(is_null($trans)){
 
            return ['error'=>500,'body'=>'invalid trans id'];

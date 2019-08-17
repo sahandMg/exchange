@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Sahand
- * Date: 8/4/19
- * Time: 3:01 PM
- */
 
 namespace App;
-
 
 class BitCoinPrice
 {

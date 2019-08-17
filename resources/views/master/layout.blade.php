@@ -53,10 +53,13 @@
                 <li class="nav-item"><a class="nav-link" href="{{route('exchangePage')}}">Exchage</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('giftIndex')}}">GiftCard</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('index')}}">خانه</a></li>
-                <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="" id="signupBtn"><span class="pb_rounded-4 px-4">ثبت نام</span></a></li>
-                <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href=""  id="loginBtn"><span class="pb_rounded-4 px-4">ورود</span></a></li>
+                @if(!Auth::guard('user')->check())
+                    <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="" id="signupBtn"><span class="pb_rounded-4 px-4">ثبت نام</span></a></li>
+                    <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href=""  id="loginBtn"><span class="pb_rounded-4 px-4">ورود</span></a></li>
+                @else
                 <!-- for authentication -->
-                <!-- <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href=""><span class="pb_rounded-4 px-4">my account</span></a></li> -->
+                    <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="{{route('logout')}}"><span class="pb_rounded-4 px-4">حساب کاربری</span></a></li>
+                @endif
             </ul>
         </div>
     </div>
@@ -162,7 +165,11 @@
     <span class="custom-close" style="margin-right: 2%;margin-top: 2%; ">&times;</span>
 
     <h3 class="text-center" style="margin-top: 2%;">ثبت نام</h3>
+
+
+
     <form class="auth-form" action="{{route('signup')}}" method="POST">
+
         <input type="hidden" name="_token" value="{{csrf_token()}}">
        <div class="form-group" id="userName">
         <label>نام کاربری:</label>

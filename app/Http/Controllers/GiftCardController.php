@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\BitCoinPrice;
 use App\GiftCard;
+use App\GiftRequest;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -586,24 +589,90 @@ class GiftCardController extends Controller
     }
 
     // getting giftcard btc amount and send back price in toman
-    public function getCardPrice(Request $request){
+    public function getCardPrice($type = null){
 
         if(!Cache::has('btcPrice')){
             $bitCoinPrice = new BitCoinPrice();
             Cache::put('btcPrice',$bitCoinPrice->getPrice(),600);
         }
+        $setting = DB::table('settings')->first();
+        // gets all cards values
+        if(is_null($type)) {
+            $cards = DB::table('gift_cards')->get();
+            $cardsBTCPrice = array_values(array_unique(
+                    $cards->pluck('btc')->toArray())
+            );
+            $resp = [];
+            for ($i = 0; $i < count($cardsBTCPrice); $i++) {
+
+                $cardTomanPrice = round(Cache::get('btcPrice') * $cardsBTCPrice[$i] * $setting->usd_toman);
+                $resp[$i] = ['type' => $cardsBTCPrice[$i], 'price' => $cardTomanPrice];
+            }
+            return $resp;
+
+        }
+        // gets specific card value
+        else{
+           return $cardTomanPrice = round(Cache::get('btcPrice') * $type * $setting->usd_toman);
+        }
+    }
+
+    public function cardRegister(Request $request){
+
+        $this->validate($request,[
+            'lname'=>'required',
+            'fname'=>'required',
+            'email'=>'required',
+            'address'=>'required',
+            'phone'=>'required',
+//            'captcha'=>'required|captcha'
+        ]);
 
         $cards = DB::table('gift_cards')->get();
         $cardsBTCPrice = array_values(array_unique(
                 $cards->pluck('btc')->toArray())
         );
-        $setting = DB::table('settings')->first();
-        $resp = [];
-        for($i=0;$i<count($cardsBTCPrice);$i++){
+        $cardTypesArr =[];
+        $orderArr = [];
+        $totalPrice = 0;
+        // creating an array of type=>number : 0.01 => 3/ $request->all()['giftCart'.($t+1)] shows order number
+        for($t=0;$t<count($cardsBTCPrice);$t++){
 
-            $cardTomanPrice = round(Cache::get('btcPrice') * $cardsBTCPrice[$i] * $setting->usd_toman);
-            $resp[$i] = ['type'=>$cardsBTCPrice[$i],'price'=>$cardTomanPrice];
+            $cardTypesArr['giftCart'.($t+1)] = $cardsBTCPrice[$t];
+            if(isset($request->all()['giftCart'.($t+1)])){
+                $btcValue = $cardTypesArr['giftCart'.($t+1)];
+                $orderArr["$btcValue"] = $request->all()['giftCart'.($t+1)];
+                echo $this->getCardPrice($btcValue).'<br>'.$btcValue.'<br>';
+                $totalPrice = $totalPrice + $this->getCardPrice($btcValue) * $request->all()['giftCart'.($t+1)];
+            }
         }
-        return $resp;
+        //====
+        dd($totalPrice);
+        $giftRequest = new GiftRequest();
+        $giftRequest->name = $request->fname.' '.$request->lname;
+        $giftRequest->email = $request->email;
+        $giftRequest->phone = $request->phone;
+        $giftRequest->code = strtoupper(uniqid());
+        $giftRequest->address = $request->address;
+        $giftRequest->order = serialize($orderArr);
+        $giftRequest->save();
+
+        // send invoice to email address
+       /*
+        $data = [
+            'email'=>$request->email,
+            'name'=> $giftRequest->name,
+            'code'=>$giftRequest->code,
+            'address'=>$giftRequest->address,
+            'phone'=>$giftRequest->phone,
+            ];
+        Mail::send('emails.giftInvoice',$data,function($message)use($data){
+
+            $message->to($data['email']);
+            $message->from($data['gift@exchange.com']);
+            $message->subject($data['رسید سفارش']);
+        });
+       */
+       return 'done';
     }
 }
