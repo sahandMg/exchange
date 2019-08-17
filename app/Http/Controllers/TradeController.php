@@ -166,7 +166,7 @@ class TradeController extends Controller
         $trans->payoutAddress = $transactionData['payoutAddress'];
         $trans->save();
 
-        return redirect()->route('exchangePaying',['id'=>$trans->trans_id]);
+        return redirect()->route('walletPaying',['id'=>$trans->trans_id]);
     }
 
 

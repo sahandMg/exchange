@@ -82,7 +82,7 @@ Route::post('get-min-amount','TradeController@getMinAmount')->name('getMinAmount
 
 Route::post('get-exchange-amount','TradeController@getExchangeAmount')->name('getExchangeAmount');
 
-Route::post('create-transaction','TradeController@createTransaction')->name('createTransaction');
+Route::post('create-transaction','TradeController@createTransaction')->name('createTransaction')->middleware('guest');
 
 Route::post('create-fix-transaction','TradeController@createFixRateTransaction')->name('createFixRateTransaction');
 

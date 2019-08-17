@@ -82,16 +82,17 @@ class AuthController extends Controller
     // redirect users to verification page for sending verification link again
     public function VerifyUserPage(){
 
-        $token = Session::get('userToken');
-
-        if(!$token){
-            return redirect()->route('login');
-        }
-        $user = VerifyUser::where('token',$token)->first()->user;
-
-        if(is_null($user)){
-            return 'Invalid Token!';
-        }
+//        $token = Session::get('userToken');
+//
+//        if(!$token){
+//            return 'Not Authorized';
+//        }
+//        $user = VerifyUser::where('token',$token)->first()->user;
+//
+//        if(is_null($user)){
+//            return 'Invalid Token!';
+//        }
+        $token = 'tkoE3pW1Ek9ffLaq4UBivrwV31Vg93Jp902WEFdz';
 
         return view('auth.resendEmailVerification',compact('token'));
     }
@@ -142,7 +143,7 @@ class AuthController extends Controller
         });
         Session::flash('message','لینک فعال سازی ارسال شد');
 
-        return redirect()->route('login');
+        return redirect()->route('index');
 
     }
 
