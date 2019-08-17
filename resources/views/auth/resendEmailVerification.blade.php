@@ -1,14 +1,31 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <div class="limiter">
+@extends('master.layout')
+@section('title')
+    <title> اسم سایت - تایید ایمیل</title>
+@endsection
+@section('content')
+    <section class="pb_section pb_slant-light pb_pb-220">
+        <div class="container">
+        <h2 class="text-center">تایید ایمیل</h2>
+        <p>برای تایید ایمیل خود، کدی را که به ایمیل شما فرستاده شده است را وارد کنید.</p>
+        <form method="post" action="{{route('ResendVerification',['locale'=>session('locale')])}}"  style="direction: rtl;">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+           <input type="hidden" name="userToken" value="{{$token}}">
+            <div class="form-group">
+                <label>کد ارسال شده:</label>
+                <input class="form-control" type="text" pattern="[a-zA-Z0-9]+" required name="captcha" placeholder="کد ایمیل شده را وارد کنید">
+            </div>
+            <div class="form-group">
+               <div class="wrap-input100 validate-input pass m-b-10" data-validate = "Please enter password">
+                    <a onclick="refreshCaptcha(event)" style="cursor: pointer;">{{Captcha::img()}}</a>
+               </div>
+               <input class="form-control" style="width: 120px;margin-top: 5px;" type="text" pattern="[a-zA-Z0-9]+" required name="captcha" placeholder="کد امنیتی">
+             </div>
+             <br/>
+            <button type="submit" class="btn btn-primary">تایید</button>
+        </form>
+    </div>
+    </section>
+<!--     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
                 <form onsubmit="submitForm()" method="post" action="{{route('ResendVerification',['locale'=>session('locale')])}}" class="login100-form validate-form p-l-55 p-r-55 p-t-178">
@@ -55,36 +72,16 @@
                 </form>
             </div>
         </div>
-    </div>
-
-    @include('master.footer')
-    <!--===============================================================================================-->
-    <!-- <script src="vendor/jquery/jquery-3.2.1.min.js"></script> -->
-    <!--===============================================================================================-->
-    <script src="{{URL::asset('vendor/animsition/js/animsition.min.js')}}"></script>
-    <!--===============================================================================================-->
-    <script src="{{URL::asset('vendor/bootstrap/js/popper.js')}}"></script>
-    <!-- <script src="vendor/bootstrap/js/bootstrap.min.js"></script> -->
-    <!--===============================================================================================-->
-    <script src="{{URL::asset('vendor/select2/select2.min.js')}}"></script>
-    <!--===============================================================================================-->
-    <script src="{{URL::asset('vendor/daterangepicker/moment.min.js')}}"></script>
-    <script src="{{URL::asset('vendor/daterangepicker/daterangepicker.js')}}"></script>
-    <!--===============================================================================================-->
-    <script src="{{URL::asset('vendor/countdowntime/countdowntime.js')}}"></script>
-    <!--===============================================================================================-->
-    <script src="{{URL::asset('js/main.js')}}"></script>
-    <script>
-        function submitForm(){
-            document.getElementById('submitBtn').disabled = true
-        }
-        function refreshCaptcha(e){
-            var element = e;
-            axios.get('{{url('captcha-refresh')}}').then(function(response){
-                element.target.src = response.data
-
-            });
-        }
-    </script>
-</body>
-</html>
+    </div> -->
+<style>
+    .pb_section p{
+        direction: rtl;
+    }
+    .pb_footer {padding-top: 15%;}
+</style>
+@include('master.footer')
+@include('master.scripts')
+<script type="text/javascript">
+    $('#pb-navbar').addClass("scrolled awake"); 
+</script>
+@endsection
