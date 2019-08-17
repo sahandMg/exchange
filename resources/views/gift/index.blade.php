@@ -193,14 +193,14 @@
         var price = $('#giftCart0 p').text().replace(',','').replace(',','');
         var btcValue =  $('#giftCart0 span').text().replace(' ','').replace('BTC','');
         for(var i =0; i<cart.length;i++) {
-            if(cart[i].kind === 1) {
+            if(cart[i].kind === 0) {
                 cart[i].quantity = cart[i].quantity+1;
                 updateCart();
                 return;
             }
         }
         $('#cart-table').show();$('#nextStep').show();
-        cart.push({kind: 1, quantity: 1, text: 'کارت هدیه '+btcValue+' بیت کوین' , price: price.replace(' ','').replace('تومان','') });
+        cart.push({kind: 0, quantity: 1, text: 'کارت هدیه '+btcValue+' بیت کوین' , price: price.replace(' ','').replace('تومان','') });
         updateCart();
         // $('.circle-btn').on('click', function(event) {
         //     cartAddOrRemoveHandler(event) ;
