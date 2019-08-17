@@ -576,7 +576,7 @@
     showExchangePart1();
     
      $('#converBtn').on('click', function() {
-      if(auth === true) {
+      if(auth === "true") {
         hideAllExchangeParts();showExchangePart2();
       } else {
         $('#authForm h3').text("ثبت نام");
