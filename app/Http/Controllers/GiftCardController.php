@@ -589,25 +589,32 @@ class GiftCardController extends Controller
     }
 
     // getting giftcard btc amount and send back price in toman
-    public function getCardPrice(Request $request){
+    public function getCardPrice($type = null){
 
         if(!Cache::has('btcPrice')){
             $bitCoinPrice = new BitCoinPrice();
             Cache::put('btcPrice',$bitCoinPrice->getPrice(),600);
         }
-
-        $cards = DB::table('gift_cards')->get();
-        $cardsBTCPrice = array_values(array_unique(
-                $cards->pluck('btc')->toArray())
-        );
         $setting = DB::table('settings')->first();
-        $resp = [];
-        for($i=0;$i<count($cardsBTCPrice);$i++){
+        // gets all cards values
+        if(is_null($type)) {
+            $cards = DB::table('gift_cards')->get();
+            $cardsBTCPrice = array_values(array_unique(
+                    $cards->pluck('btc')->toArray())
+            );
+            $resp = [];
+            for ($i = 0; $i < count($cardsBTCPrice); $i++) {
 
-            $cardTomanPrice = round(Cache::get('btcPrice') * $cardsBTCPrice[$i] * $setting->usd_toman);
-            $resp[$i] = ['type'=>$cardsBTCPrice[$i],'price'=>$cardTomanPrice];
+                $cardTomanPrice = round(Cache::get('btcPrice') * $cardsBTCPrice[$i] * $setting->usd_toman);
+                $resp[$i] = ['type' => $cardsBTCPrice[$i], 'price' => $cardTomanPrice];
+            }
+            return $resp;
+
         }
-        return $resp;
+        // gets specific card value
+        else{
+           return $cardTomanPrice = round(Cache::get('btcPrice') * $type * $setting->usd_toman);
+        }
     }
 
     public function cardRegister(Request $request){
@@ -627,15 +634,20 @@ class GiftCardController extends Controller
         );
         $cardTypesArr =[];
         $orderArr = [];
+        $totalPrice = 0;
+        // creating an array of type=>number : 0.01 => 3/ $request->all()['giftCart'.($t+1)] shows order number
         for($t=0;$t<count($cardsBTCPrice);$t++){
 
             $cardTypesArr['giftCart'.($t+1)] = $cardsBTCPrice[$t];
             if(isset($request->all()['giftCart'.($t+1)])){
-                $value = $cardTypesArr['giftCart'.($t+1)];
-                $orderArr["$value"] = $request->all()['giftCart'.($t+1)];
+                $btcValue = $cardTypesArr['giftCart'.($t+1)];
+                $orderArr["$btcValue"] = $request->all()['giftCart'.($t+1)];
+                echo $this->getCardPrice($btcValue).'<br>'.$btcValue.'<br>';
+                $totalPrice = $totalPrice + $this->getCardPrice($btcValue) * $request->all()['giftCart'.($t+1)];
             }
         }
-
+        //====
+        dd($totalPrice);
         $giftRequest = new GiftRequest();
         $giftRequest->name = $request->fname.' '.$request->lname;
         $giftRequest->email = $request->email;

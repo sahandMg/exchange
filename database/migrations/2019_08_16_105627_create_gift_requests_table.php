@@ -19,6 +19,7 @@ class CreateGiftRequestsTable extends Migration
 //            $table->unsignedInteger('user_id');
 //            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
+            $table->float('total_price');
             $table->string('email');
             $table->string('phone');
             $table->string('code');
