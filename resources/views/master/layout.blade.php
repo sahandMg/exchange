@@ -21,7 +21,7 @@
     <style>
         @font-face {
             font-family: BYekanFont;
-            src: url(assets/fonts/Yekan.ttf);
+            src: url('{{URL::asset('assets/fonts/Yekan.ttf')}}');
         }
         * {
             font-family:BYekanFont;
