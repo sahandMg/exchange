@@ -154,7 +154,7 @@
     <span class="custom-close" style="margin-right: 2%;margin-top: 2%; ">&times;</span>
 
     <h3 class="text-center" style="margin-top: 2%;">ثبت نام</h3>
-    <form class="auth-form" action="{{route('signup')}}" method="POST" id="authForm">
+    <form class="auth-form" action="{{route('signup')}}" method="POST">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
        <div class="form-group" id="userName">
         <label>نام کاربری:</label>
@@ -202,7 +202,7 @@ var modal = document.getElementById("authForm");
 // Get the button that opens the modal
 var btn = document.getElementById("signupBtn");
 var loginBtn = document.getElementById("loginBtn");
-var frm = document.getElementById('authForm');
+// var frm = document.getElementById('authForm');
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("custom-close")[0];
 
@@ -210,7 +210,9 @@ var span = document.getElementsByClassName("custom-close")[0];
 btn.onclick = function(event) {
   console.log("sign up clicked;");
   event.preventDefault();
-  frm.action = `{!! route('signup') !!}`;
+  $('#authForm h3').text("ثبت نام");
+  // frm.action = `{!! route('signup') !!}`;
+  $('#authForm form').attr('action', `{!! route('signup') !!}`);
   $('#userName').show();
   $('#passwordRepeat').show();
   $('#signUpGoogle').show();
@@ -221,7 +223,11 @@ btn.onclick = function(event) {
 loginBtn.onclick = function(event) {
   console.log("loginBtn clicked;");
   event.preventDefault();
-  frm.action = `{!! route('login') !!}`;
+  $('#authForm h3').text("ورود");
+  var actionLink = `{!! route('login') !!}`;
+   $('#authForm form').attr('action', actionLink);
+   console.log(actionLink)
+  // frm.action = `{!! route('login') !!}`;
   $('#userName').hide();
   $('#passwordRepeat').hide();
   $('#signUpGoogle').hide();
