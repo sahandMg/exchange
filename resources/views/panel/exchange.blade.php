@@ -382,7 +382,14 @@
 
 <script type="text/javascript">
 
-    var auth = {!! json_encode(Auth::guard('user')->check()) !!}
+    var auth = `{!! json_encode(Auth::guard('user')->check()) !!}`;
+    console.log("auth");
+    console.log(auth);
+    if(auth === true) {
+       console.log("login");
+    } else {
+       console.log("not login");
+    }
 
     // input coin value
    var inputCoinValue = `{!! isset($_GET["amount"])?$_GET["amount"]:1  !!}`;
@@ -553,7 +560,7 @@
       $('#enter_amount').show(); $('.enter_amount').addClass("circle-active");
     }
     function showExchangePart2() {
-      $('#enter_address').show(); $('.enter_address').addClass("circle-active");
+        $('#enter_address').show(); $('.enter_address').addClass("circle-active");
     }
     function showExchangePart3() {
       $('#send_funds').show(); $('.send_funds').addClass("circle-active");
@@ -569,7 +576,18 @@
     showExchangePart1();
     
      $('#converBtn').on('click', function() {
+      if(auth === true) {
         hideAllExchangeParts();showExchangePart2();
+      } else {
+        $('#authForm h3').text("ثبت نام");
+       $('#authForm button').text("ثبت نام");
+      $('#authForm form').attr('action', `{!! route('signup') !!}`);
+       $('#userName').show();
+      $('#passwordRepeat').show();
+     $('#signUpGoogle').show();
+      $('#loginGoogle').hide();
+        modal.style.display = "block";
+      }
     });
 
      $('#return_enter_amount').on('click', function() {
