@@ -625,7 +625,7 @@ class GiftCardController extends Controller
             'email'=>'required',
             'address'=>'required',
             'phone'=>'required',
-//            'captcha'=>'required|captcha'
+            'captcha'=>'required|captcha'
         ]);
 
         $cards = DB::table('gift_cards')->get();
@@ -638,16 +638,15 @@ class GiftCardController extends Controller
         // creating an array of type=>number : 0.01 => 3/ $request->all()['giftCart'.($t+1)] shows order number
         for($t=0;$t<count($cardsBTCPrice);$t++){
 
-            $cardTypesArr['giftCart'.($t+1)] = $cardsBTCPrice[$t];
-            if(isset($request->all()['giftCart'.($t+1)])){
-                $btcValue = $cardTypesArr['giftCart'.($t+1)];
-                $orderArr["$btcValue"] = $request->all()['giftCart'.($t+1)];
-                echo $this->getCardPrice($btcValue).'<br>'.$btcValue.'<br>';
-                $totalPrice = $totalPrice + $this->getCardPrice($btcValue) * $request->all()['giftCart'.($t+1)];
+            $cardTypesArr['giftCart'.($t)] = $cardsBTCPrice[$t];
+            if(isset($request->all()['giftCart'.($t)])){
+                $btcValue = $cardTypesArr['giftCart'.($t)];
+                $orderArr["$btcValue"] = $request->all()['giftCart'.($t)];
+                $totalPrice = $totalPrice + $this->getCardPrice($btcValue) * $request->all()['giftCart'.($t)];
             }
         }
         //====
-        dd($totalPrice);
+
         $giftRequest = new GiftRequest();
         $giftRequest->name = $request->fname.' '.$request->lname;
         $giftRequest->email = $request->email;
@@ -655,6 +654,7 @@ class GiftCardController extends Controller
         $giftRequest->code = strtoupper(uniqid());
         $giftRequest->address = $request->address;
         $giftRequest->order = serialize($orderArr);
+        $giftRequest->total_price = $totalPrice;
         $giftRequest->save();
 
         // send invoice to email address
@@ -672,6 +672,8 @@ class GiftCardController extends Controller
             $message->from($data['gift@exchange.com']);
             $message->subject($data['رسید سفارش']);
         });
+
+       send SMS
        */
        return 'done';
     }

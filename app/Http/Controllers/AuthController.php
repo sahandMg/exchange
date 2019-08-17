@@ -7,6 +7,7 @@ use App\Repo\IpFinder;
 use App\User;
 use App\VerifyUser;
 use BaconQrCode\Encoder\QrCode;
+use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
 use Stevebauman\Location\Facades\Location;
 use Illuminate\Http\Request;
@@ -169,7 +170,8 @@ class AuthController extends Controller
             }
             Auth::guard('user')->user()->update(['ip'=>$ipFinder->getIp(),'country'=>$country]);
 
-            return redirect()->route('dashboard');
+
+            return redirect($_SERVER['HTTP_REFERER']);
 
         }else{
 
