@@ -1,3 +1,8 @@
 @if(session()->has('message'))
-    <p style="color: green;">{{session('message')}}</p>
+   <div class="alert alert-danger">
+   {{session('message')}}
+   </div>
 @endif
+
+<!--     <p style="color: green;"></p>
+ -->

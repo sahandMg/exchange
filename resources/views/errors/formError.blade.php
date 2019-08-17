@@ -1,5 +1,7 @@
-<ul>
+<!-- <ul> -->
     @foreach($errors->all() as $error)
-        <li style="color: red;">{{$error}}</li>
+     <div class="alert alert-danger">
+           {{$error}}
+       </div>
     @endforeach
-</ul>
+<!-- </ul> -->

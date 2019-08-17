@@ -144,6 +144,10 @@
 
 @include('master.footer')
 @include('master.scripts')
+<!-- ************ for showing message **************** -->
+<!-- <script type="text/javascript">
+  alertify.success(`success`);
+</script> -->
 <script type="text/javascript">
 
     function refreshCaptcha(e) {
