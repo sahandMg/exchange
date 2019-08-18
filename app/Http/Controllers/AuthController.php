@@ -159,6 +159,7 @@ class AuthController extends Controller
             'password'=>'required|min:6',
             'captcha'=>'required|captcha'
         ]);
+
         if(Auth::guard('user')->attempt(['email'=>$request->email,'password'=>$request->password],true)){
 
 
@@ -177,7 +178,6 @@ class AuthController extends Controller
                 $country = 'fr';
             }
             Auth::guard('user')->user()->update(['ip'=>$ipFinder->getIp(),'country'=>$country]);
-
 
             return redirect($_SERVER['HTTP_REFERER']);
 

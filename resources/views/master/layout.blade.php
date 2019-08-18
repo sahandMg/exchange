@@ -64,7 +64,7 @@
         </div>
     </div>
 </nav>
-    @include('errors.formError')
+
 @yield('content')
 
 <style>
@@ -166,8 +166,10 @@
 
     <h3 class="text-center" style="margin-top: 2%;">ثبت نام</h3>
 
-
-
+{{-- Form error--}}
+    @if(count($errors->all()) > 0)
+     @include('errors.formError')
+    @endif
     <form class="auth-form"  method="POST">
 
         <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -185,7 +187,7 @@
       </div>
       <div class="form-group" id="passwordRepeat">
         <label>تکرار رمز:</label>
-        <input name="confirm_password" type="password" required class="form-control">
+        <input name="confirm_password" type="password"  class="form-control">
       </div>
         <div class="form-group" id="passwordRepeat">
             <label>کد امنیتی:</label>
