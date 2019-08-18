@@ -160,7 +160,7 @@
 
     axios.post('{{route('getCardPrice')}}',{'amount':0.001}).then(function (response) {
 
-        var cards = response.data
+        var cards = response.data;
         for(var t=0;t<cards.length;t++){
             $('#cardType'+t).html(cards[t]['type']+' BTC');
             $('#cardPrice'+t).html(cards[t]['price']+' تومان ')

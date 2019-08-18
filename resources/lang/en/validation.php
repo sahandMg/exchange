@@ -85,7 +85,7 @@ return [
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'numeric' => 'The :attribute must be at least :min.',
+        'numeric' => 'حداقل تعداد کارکتر کلمه عبور ۶ است',
         'file' => 'The :attribute must be at least :min kilobytes.',
         'string' => 'The :attribute must be at least :min characters.',
         'array' => 'The :attribute must have at least :min items.',
@@ -102,7 +102,7 @@ return [
     'required_with_all' => 'The :attribute field is required when :values are present.',
     'required_without' => 'The :attribute field is required when :values is not present.',
     'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same' => 'The :attribute and :other must match.',
+    'same' => 'کلمه عبور مطابقت ندارد',
     'size' => [
         'numeric' => 'The :attribute must be :size.',
         'file' => 'The :attribute must be :size kilobytes.',
@@ -112,7 +112,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid zone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => ' :attribute تکراری است',
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
@@ -131,7 +131,15 @@ return [
     'custom' => [
         'captcha' => [
             'captcha' => 'کد امنیتی نادرست است',
+            'required'=>'کد امنیتی را وارد کنید'
         ],
+        'email'=>[
+            'required'=>'ایمیل را وارد کنید'
+        ],
+        'password'=>[
+            'required'=>'کلمه عبور را وارد کنید',
+        ]
+
     ],
 
     /*
@@ -146,7 +154,10 @@ return [
     */
 
     'attributes' => [
-        'captcha'=>'کد امنیتی'
+        'captcha'=>'کد امنیتی',
+        'name'=>'نام کاربری',
+        'password'=>'کلمه عبور',
+        'email'=>'ایمیل'
     ],
 
 ];

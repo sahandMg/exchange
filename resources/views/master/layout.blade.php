@@ -168,24 +168,24 @@
 
 
 
-    <form class="auth-form" action="{{route('signup')}}" method="POST">
+    <form class="auth-form"  method="POST">
 
         <input type="hidden" name="_token" value="{{csrf_token()}}">
        <div class="form-group" id="userName">
         <label>نام کاربری:</label>
-        <input name="name" type="text" class="form-control">
+        <input name="name" type="text" required class="form-control">
       </div>
       <div class="form-group">
         <label>ایمیل:</label>
-        <input name="email" type="email" class="form-control">
+        <input name="email" type="email" required class="form-control">
       </div>
       <div class="form-group">
         <label>رمز:</label>
-        <input name="password" type="password" class="form-control">
+        <input name="password" type="password" required class="form-control">
       </div>
       <div class="form-group" id="passwordRepeat">
         <label>تکرار رمز:</label>
-        <input name="confirm_password" type="password" class="form-control">
+        <input name="confirm_password" type="password" required class="form-control">
       </div>
         <div class="form-group" id="passwordRepeat">
             <label>کد امنیتی:</label>
