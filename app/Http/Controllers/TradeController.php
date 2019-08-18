@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\ChangellyHelper;
+use App\ExchangeTransaction;
 use App\FixRateTransaction;
 use App\Transaction;
 use Illuminate\Http\Request;
@@ -149,7 +150,7 @@ class TradeController extends Controller
             return $response;
         }
         $transactionData = $response['result'];
-        $trans = new Transaction();
+        $trans = new ExchangeTransaction();
         $trans->trans_id = $transactionData['id'];
         $trans->user_id = Auth::guard('user')->id();
         $trans->apiExtraFee = $transactionData['apiExtraFee'];

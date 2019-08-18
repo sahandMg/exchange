@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\BitCoinPrice;
 use App\GiftCard;
 use App\GiftRequest;
+use App\Repo\IpFinder;
 use App\User;
+use App\ZarrinPal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Stevebauman\Location\Facades\Location;
 
 class GiftCardController extends Controller
 {
@@ -657,6 +660,20 @@ class GiftCardController extends Controller
         $giftRequest->total_price = $totalPrice;
         $giftRequest->save();
 
+        $ipFinder = new IpFinder();
+        $zarrin = new ZarrinPal($request);
+        try{
+            $country = strtolower(Location::get($ipFinder->getIp())->countryCode);
+        }catch (\Exception $exception){
+            $country = 'ir';
+        }
+        $result = $zarrin->create($totalPrice,$giftRequest->code,$country,$request->email);
+        if($result != 404){
+            $request->session()->save();
+            return redirect()->to('https://www.zarinpal.com/pg/StartPay/' . $result["Authority"]);
+        }else{
+            return 'مشکلی در پرداخت پیش آمده';
+        }
         // send invoice to email address
        /*
         $data = [
@@ -675,6 +692,7 @@ class GiftCardController extends Controller
 
        send SMS
        */
-       return 'done';
+
+
     }
 }

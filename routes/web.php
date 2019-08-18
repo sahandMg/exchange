@@ -104,3 +104,11 @@ Route::post('set-crypto-fname','HandyController@setCryptoFullName');
 
 Route::get('wallet-paying/{transId}',['as'=>'walletPaying','uses'=>'TradeController@walletPaying']);
 
+
+// ============================== Payment Routes ===================================
+
+Route::get('payment/success',['as'=>'PaymentSuccess','uses'=>'TransactionController@successPayment']);
+
+Route::get('payment/failed',['as'=>'PaymentFailed','uses'=>'TransactionController@FailedPayment']);
+
+Route::get('zarrin/callback', 'TransactionController@ZarrinCallback')->name('ZarrinCallback');

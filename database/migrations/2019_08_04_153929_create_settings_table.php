@@ -16,6 +16,7 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('usd_toman')->nullable();
+            $table->string('zarrin_pin')->nullable();
             $table->timestamps();
         });
     }

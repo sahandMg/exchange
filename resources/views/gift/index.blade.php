@@ -80,7 +80,7 @@
       </div>
       <div class="d-flex justify-content-between">
         <button class="btn" id="return_step1">بازگشت</button>
-   	    <button type="submit" class="btn btn-success mx-auto" id="submit">ثبت</button>
+   	    <button type="submit" class="btn btn-success mx-auto" id="submit">ثبت و پرداخت</button>
       </div>
       </form>
   </div>
@@ -144,10 +144,7 @@
 
 @include('master.footer')
 @include('master.scripts')
-<!--  ******** for showing Tab 2 ********** -->
-<!-- <script type="text/javascript">
-  $('#step1').hide();$('#step2').show();
-</script> -->
+
 <script type="text/javascript">
 
     function refreshCaptcha(e) {
@@ -172,16 +169,17 @@
     var cart = []; var flag = 0;
 
     // *************** 
-    // var flag = `{}` ; 
-    // if(flag === "true") {
-    //   cart = JSON.parse(localStorage.getItem("cart"));
-    //   updateCart();
-    //   for(var i=0; i< cart.length; i++) {
-    //       $('#cartInputshidden').append(`
-    //          <input type="text" class="form-control" name="giftCart`+cart[i].kind+`"  value="`+cart[i].quantity+`"/>
-    //       `); 
-    //     }
-    // }
+     var flag = {!! json_encode(count($errors) > 0 )!!} ;
+     if(flag == true) {
+         console.log('active')
+       cart = JSON.parse(localStorage.getItem("cart"));
+       updateCart();
+       for(var i=0; i< cart.length; i++) {
+           $('#cartInputshidden').append(`
+              <input type="text" class="form-control" name="giftCart`+cart[i].kind+`"  value="`+cart[i].quantity+`"/>
+           `);
+         }
+     }
 
     $('#return_step1').on('click', function(event) {
     	event.preventDefault();
@@ -370,4 +368,14 @@
            }
     }
 </script>
+<!--  ******** for showing Tab 2 ********** -->
+@if(count($errors->all()) > 0)
+    <script type="text/javascript">
+        console.log('ad');
+        $('#step1').hide();$('#step2').show();
+        $('.white-circle').removeClass("circle-active");
+        $('.enter_info').addClass("circle-active");
+        console.log('finished');
+    </script>
+@endif
 @endsection
