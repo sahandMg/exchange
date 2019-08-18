@@ -144,9 +144,9 @@
 
 @include('master.footer')
 @include('master.scripts')
-<!-- ************ for showing message **************** -->
+<!--  ******** for showing Tab 2 ********** -->
 <!-- <script type="text/javascript">
-  alertify.success(`success`);
+  $('#step1').hide();$('#step2').show();
 </script> -->
 <script type="text/javascript">
 
@@ -171,6 +171,18 @@
     
     var cart = []; var flag = 0;
 
+    // *************** 
+    // var flag = `{}` ; 
+    // if(flag === "true") {
+    //   cart = JSON.parse(localStorage.getItem("cart"));
+    //   updateCart();
+    //   for(var i=0; i< cart.length; i++) {
+    //       $('#cartInputshidden').append(`
+    //          <input type="text" class="form-control" name="giftCart`+cart[i].kind+`"  value="`+cart[i].quantity+`"/>
+    //       `); 
+    //     }
+    // }
+
     $('#return_step1').on('click', function(event) {
     	event.preventDefault();
     	$('#step1').show();$('#step2').hide();
@@ -189,7 +201,7 @@
     		     <input type="text" class="form-control" name="giftCart`+cart[i].kind+`"  value="`+cart[i].quantity+`"/>
     		  `);	
     		}
-    			
+    			localStorage.setItem("cart", JSON.stringify(cart));
     	}
     });
 
