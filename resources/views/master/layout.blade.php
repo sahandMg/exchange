@@ -166,19 +166,21 @@
 
     <h3 class="text-center" style="margin-top: 2%;">ثبت نام</h3>
 
-{{-- Form error--}}
-    @if(count($errors->all()) > 0)
-     @include('errors.formError')
-    @endif
-      @if(session()->has('error'))
-         @include('errors.ErrorMessage')
-      @endif
-    <form class="auth-form"  method="POST">
 
+{{-- Form error--}}
+
+    <form class="auth-form"  method="POST">
+    @if(count($errors->all()) > 0)
+      @include('errors.formError')
+     @endif
         <input type="hidden" name="_token" value="{{csrf_token()}}">
        <div class="form-group" id="userName">
         <label>نام کاربری:</label>
+
         <input name="name" type="text" required value="{{old('name')}}" class="form-control">
+
+
+
       </div>
       <div class="form-group">
         <label>ایمیل:</label>
@@ -228,11 +230,11 @@ var span = document.getElementsByClassName("custom-close")[0];
 
 // When the user clicks the button, open the modal 
 btn.onclick = function(event) {
+  localStorage.setItem("formKind", "signup");
   console.log("sign up clicked;");
   event.preventDefault();
   $('#authForm h3').text("ثبت نام");
   $('#authForm button').text("ثبت نام");
-  // frm.action = `{!! route('signup') !!}`;
   $('#authForm form').attr('action', `{!! route('signup') !!}`);
   $('#userName').show();
   $('#passwordRepeat').show();
@@ -242,6 +244,7 @@ btn.onclick = function(event) {
 }
 
 loginBtn.onclick = function(event) {
+  localStorage.setItem("formKind", "login");
   console.log("loginBtn clicked;");
   event.preventDefault();
   $('#authForm h3').text("ورود");
@@ -278,5 +281,32 @@ function refreshCaptcha(e) {
 }
 
 </script>
+@if(count($errors->all()) > 0)
+<script type="text/javascript">
+  var temp = localStorage.getItem("formKind");
+  if(temp === "signup") {
+   $('#authForm h3').text("ثبت نام");
+   $('#authForm button').text("ثبت نام");
+   $('#authForm form').attr('action', `{!! route('signup') !!}`);
+   $('#userName').show();
+   $('#passwordRepeat').show();
+   $('#signUpGoogle').show();
+   $('#loginGoogle').hide();
+   modal.style.display = "block";
+  } else {
+   $('#authForm h3').text("ورود");
+   $('#authForm button').text("ورود");
+   var actionLink = `{!! route('login') !!}`;
+    $('#authForm form').attr('action', actionLink);
+   // console.log(actionLink)
+  // frm.action = `{!! route('login') !!}`;
+  $('#userName').hide();
+  $('#passwordRepeat').hide();
+  $('#signUpGoogle').hide();
+  $('#loginGoogle').show();
+  modal.style.display = "block";
+  }
+</script>
+@endif
 </body>
 </html>
