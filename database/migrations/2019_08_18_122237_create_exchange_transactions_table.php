@@ -32,7 +32,7 @@ class CreateExchangeTransactionsTable extends Migration
             $table->string('amountExpectedTo')->nullable();
             $table->string('payinAddress')->nullable();
             $table->string('payoutAddress')->nullable();
-
+            $table->timestamps();
         });
     }
 

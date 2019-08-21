@@ -1,6 +1,6 @@
 @extends('master.layout')
 @section('title')
-    <title> اسم سایت - سوالات متداول</title>
+    <title> اسم سایت | سوالات متداول</title>
 @endsection
 @section('content')
 <section class="pb_section pb_slant-light" id="section-faq">

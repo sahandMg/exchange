@@ -1,6 +1,6 @@
 @extends('master.layout')
 @section('title')
-    <title> اکسچنج - اسم سایت </title>
+    <title> اسم سایت | کارت هدیه</title>
 @endsection
 @section('content')
 <section class="pb_section pb_slant-light">
@@ -71,7 +71,7 @@
 
           <div class="form-group" >
               <label>کد امنیتی:</label>
-              <a onclick="refreshCaptcha(event)" style="cursor: pointer;">{{Captcha::img()}}</a>
+              <a id="captchaTag" onclick="refreshCaptcha(event)" style="cursor: pointer;"></a>
               <br>
               <input name="captcha" type="text" class="form-control">
           </div>
@@ -92,7 +92,7 @@
    <br/>
    <p>کارت هدیه بیت کوین، باعث می شود به راحتی به دیگران بیت کوین هدیه بدهید. انتخاب خوبی برای هدیه تولد، عید نوروز و به عنوان کادو هستش. </p>
    <br/>
-   <img  class="img-fluid rounded mx-auto d-block" src="assets/img/bitcoinGiftCard.png" alt="کارت هدیه بیت کوین">
+   <img  class="img-fluid rounded mx-auto d-block" src="{{URL::asset('assets/img/bitcoinGiftCard.png')}}" alt="کارت هدیه بیت کوین">
   </div>
   <br/><hr/><br/>
   <!-- Bitcoin gift card discription -->
@@ -146,6 +146,11 @@
 @include('master.scripts')
 
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        var captcha = document.getElementById('captchaMaster').innerHTML;
+        $('#captchaTag').html(captcha);
+    });
 
     function refreshCaptcha(e) {
         var element = e;

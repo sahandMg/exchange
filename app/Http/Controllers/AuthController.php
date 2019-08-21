@@ -32,7 +32,7 @@ class AuthController extends Controller
             'email'=>'required|email|unique:users',
             'password'=> 'required',
             'confirm_password' => 'required|same:password',
-            'captcha'=>'required|captcha'
+//            'captcha'=>'required|captcha'
 
         ]);
         $user = new User();
@@ -62,7 +62,7 @@ class AuthController extends Controller
         session(['pop'=>1]);
         Session::flash('message', 'ایمیل فعال سازی حساب ارسال شد. درصورت دریافت نکردن ایمیل، روی ارسال مجدد کلیک کنید');
         Session::put('userToken', $token);
-//
+//   TODO new user Email Page
 //        Mail::send('emails.VerifyEmail',['user'=>$user],function($message) use($data){
 //            $message->from (env('Admin_Mail'));
 //            $message->to ($data['email']);
@@ -82,17 +82,16 @@ class AuthController extends Controller
     // redirect users to verification page for sending verification link again
     public function VerifyUserPage(){
 
-//        $token = Session::get('userToken');
-//
-//        if(!$token){
-//            return 'Not Authorized';
-//        }
-//        $user = VerifyUser::where('token',$token)->first()->user;
-//
-//        if(is_null($user)){
-//            return 'Invalid Token!';
-//        }
-        $token = 'tkoE3pW1Ek9ffLaq4UBivrwV31Vg93Jp902WEFdz';
+        $token = Session::get('userToken');
+
+        if(!$token){
+            return 'Not Authorized';
+        }
+        $user = VerifyUser::where('token',$token)->first()->user;
+
+        if(is_null($user)){
+            return 'Invalid Token!';
+        }
 
         return view('auth.resendEmailVerification',compact('token'));
     }
@@ -110,7 +109,7 @@ class AuthController extends Controller
             'code'=> $user->code,
             'email'=>$user->email
         ];
-
+// TODO Welcome Mail Page after clicking on link
 //        Mail::send('emails.welcome',$data,function($message) use($data){
 //            $message->from (env('Admin_Mail'));
 //            $message->to ($data['email']);
@@ -131,19 +130,22 @@ class AuthController extends Controller
         $token = $request->userToken;
         $VerifyUser = VerifyUser::where('token',$token)->first();
         $user = $VerifyUser->user;
-        $VerifyUser->update(['token'=>str_random(40)]);
+        $token = str_random(40);
+        session(['userToken'=>$token]);
+        $VerifyUser->update(['token'=>$token]);
         $data = [
             'email'=>$user->email,
             'token'=>$user->verifyUser->token,
         ];
-        Mail::send('emails.VerifyEmail',['user'=>$user],function($message) use($data){
-            $message->from (env('Admin_Mail'));
-            $message->to ($data['email']);
-            $message->subject ('فعال سازی حساب');
-        });
+        // TODO Email Verification Mail Page
+//        Mail::send('emails.VerifyEmail',['user'=>$user],function($message) use($data){
+//            $message->from (env('Admin_Mail'));
+//            $message->to ($data['email']);
+//            $message->subject ('فعال سازی حساب');
+//        });
         Session::flash('message','لینک فعال سازی ارسال شد');
 
-        return redirect()->route('index');
+        return redirect()->back()->with(['message'=>'لینک فعالسازی ارسال شد']);
 
     }
 
@@ -157,7 +159,7 @@ class AuthController extends Controller
         $this->validate($request,[
             'email'=> 'required|email',
             'password'=>'required|min:6',
-            'captcha'=>'required|captcha'
+//            'captcha'=>'required|captcha'
         ]);
 
         if(Auth::guard('user')->attempt(['email'=>$request->email,'password'=>$request->password],true)){
@@ -167,7 +169,7 @@ class AuthController extends Controller
                 $token = Auth::guard('user')->user()->verifyUser->token;
                 Auth::guard('user')->logout();
                 Session::flash('error','حساب کاربری شما فعال نیست. با مراجعه به لینک ارسال شده به ایمیلتان، اقدام به فعال سازی حساب خود کنید');
-                Session::flash('userToken',$token);
+                Session::put('userToken',$token);
                 return redirect()->route('VerifyUserPage');
             }
 
@@ -183,7 +185,7 @@ class AuthController extends Controller
 
         }else{
 
-            return redirect()->back()->with(['error'=>'Wrong email or password']);
+            return redirect()->back()->with(['error'=>'ایمیل یا کلمه عبور نادرست است']);
         }
 
     }
@@ -226,13 +228,13 @@ class AuthController extends Controller
             $user->save();
 
             Auth::guard('user')->login($user);
-            return redirect()->route('dashboard');
+            return redirect()->route('index');
         }
 
         $user = new User();
         $user->name = $client->name;
         $user->email = $client->email;
-        $user->code = uniqid();
+        $user->code = strtoupper(uniqid());
         $user->avatar = $client->avatar;
         $user->ip = $ipFinder->getIp();
         $user->verified = 1;
@@ -251,19 +253,19 @@ class AuthController extends Controller
             'email'=>$user->email
         ];
         Auth::guard('user')->login($user);
-
-        Mail::send('email.admin.newUser',['user'=>$user],function($message) use($data){
-            $message->from (env('Admin_Mail'));
-            $message->to (env('Info_Mail'));
-            $message->subject ('کاربر جدید');
-        });
-        Mail::send('email.thanks',$data,function($message) use($data){
-            $message->from (env('Admin_Mail'));
-            $message->to ($data['email']);
-            $message->subject ('Subscription Email');
-        });
+        // TODO new User Welcome Page
+//        Mail::send('email.admin.newUser',['user'=>$user],function($message) use($data){
+//            $message->from (env('Admin_Mail'));
+//            $message->to (env('Info_Mail'));
+//            $message->subject ('کاربر جدید');
+//        });
+//        Mail::send('email.thanks',$data,function($message) use($data){
+//            $message->from (env('Admin_Mail'));
+//            $message->to ($data['email']);
+//            $message->subject ('Subscription Email');
+//        });
         session(['pop'=>1]);
-        return redirect()->route('dashboard');
+        return redirect()->route('index');
     }
 
     public function passwordReset(){
@@ -285,11 +287,12 @@ class AuthController extends Controller
         $pass = strtolower(str_random(10));
         $user->password = bcrypt($pass);
         $user->save();
-        Mail::send('email.reset_password',['pass'=>$pass,'user'=>$user],function($message) use($user){
-            $message->from (env('Admin_Mail'));
-            $message->to ($user->email);
-            $message->subject ('Password Reset');
-        });
+        // TODO Password reset Mail Page
+//        Mail::send('email.reset_password',['pass'=>$pass,'user'=>$user],function($message) use($user){
+//            $message->from (env('Admin_Mail'));
+//            $message->to ($user->email);
+//            $message->subject ('Password Reset');
+//        });
 
         return redirect()->route('login')->with(['message'=>'An Email with a new password has been sent to your email address']);
 

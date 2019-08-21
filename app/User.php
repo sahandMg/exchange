@@ -41,4 +41,9 @@ class User extends Authenticatable
 
         return $this->hasOne(VerifyUser::class);
     }
+
+    public function exchange(){
+
+        return $this->hasMany(ExchangeTransaction::class);
+    }
 }

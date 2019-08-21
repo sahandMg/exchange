@@ -1,6 +1,6 @@
 @extends('master.layout')
 @section('title')
-    <title> اکسچنج - اسم سایت </title>
+    <title> اسم سایت | اکسچنج </title>
 @endsection
 @section('content')
 
@@ -68,7 +68,7 @@
           </div>
           <div class="col-md-12">
             <div class="row mx-auto">
-              <input  id="outputCoinValue" type="text" class="form-control pb_height-50 inputCoin" placeholder="..." />
+              <input  id="outputCoinValue" readonly type="text" class="form-control pb_height-50 inputCoin" placeholder="..." />
               <div class="select-exchange">
                 <select name="item"><option value=""></option></select>
                 <div>
@@ -91,7 +91,7 @@
             </div>
           </div>
           <div class="col-md-12 exchange-button-container">
-            <button class="btn btn-success exchange-button" type="submit" id="converBtn">تبدیل</button>
+            <button  class="btn btn-success exchange-button" type="submit"  id="converBtn"> تبدیل</button>
           </div>
                  </div>
              </div>
@@ -151,7 +151,7 @@
                 {{--<input type="text" name="amountFrom" style="display: none;" id="sendingValue">--}}
                 <input type="text" name="amount" style="display: none;" id="sendingValue">
                 <input type="text" name="from" style="display: none;" id="sendingKind">
-                <input type="text" name="to" style="display: none;" id="recievingKind">
+                <input type="text"  name="to" style="display: none;" id="recievingKind">
                 <input type="text" name="rateId" style="display: none;" id="exchangeToken">
                 <input type="text" name="extraId" style="display: none;" id="exteraId">
                 <input type="text" name="address" style="display: none;" id="walletAdd">
@@ -446,48 +446,66 @@
         
     });
 
-    // Get currencies
-    axios.post('{{route('getCurrencies')}}').then(function (response) {
-        console.log("getCurrencies");console.log(response);
-         coinList = response.data;
-        for(var i=0; i<coinList.length; i++) {
-        
-          $('#inputCoinKindSelect').append(`
-               <div class="row item-exchange" id="coin1`+i+`">
-                   <img  width="20" height="20" src="assets/img/icons/`+coinList[i].name+`.png">
-                   <span class="coinSmallName" style="color:`+coinList[i].color+`;">`+coinList[i].name+`</span>
-                   <span>`+coinList[i].full_name+`</span>
-               </div>
-            `);
-          $('#outputCoinKindSelect').append(`
-               <div class="row item-exchange" id="coin2`+i+`">
-                   <img  width="20" height="20" src="assets/img/icons/`+coinList[i].name+`.png">
-                   <span class="coinSmallName" style="color:`+coinList[i].color+`;">`+coinList[i].name+`</span>
-                   <span>`+coinList[i].full_name+`</span>
-               </div>
-            `);
-        }
-        // $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
-          // console.log($('#inputCoinValue').val());
-          // console.log($('#inputCoinKind').text());
-          // console.log($('#inputCoinValue').val());
-          exchangeRate();
-        $('.item-exchange').on('click', function() {
-          console.log("item-select");
-          var txt = $(this).find('span.coinSmallName').text();
-          console.log($(this));
-          console.log(txt);
-          $(this).parent().parent().parent().find('.selected-exchange div').html(`
-               <div class="row" style="margin-left: 10px;">
-                   <img  width="30" height="30" src="assets/img/icons/`+txt+`.png">
-                   <span  style="margin-left: 10px;margin-top: 3px;">`+txt.toUpperCase()+`</span>
-               </div>`
-            );
-          $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
-           exchangeRate();
-          
-        });
+    var status = 0;
+    var interval ;
+    $(document).ready(function () {
+        getCurrencies()
     });
+    function getCurrencies(){
+
+        // Get currencies
+        axios.post('{{route('getCurrencies')}}').then(function (response) {
+            console.log("getCurrencies");
+            console.log(response);
+            if (response.data['error'] == null) {
+                clearInterval(interval);
+                status = 1;
+                coinList = response.data;
+                for (var i = 0; i < coinList.length; i++) {
+
+                    $('#inputCoinKindSelect').append(`
+                   <div class="row item-exchange" id="coin1` + i + `">
+                       <img  width="20" height="20" src="assets/img/icons/` + coinList[i].name + `.png">
+                       <span class="coinSmallName" style="color:` + coinList[i].color + `;">` + coinList[i].name + `</span>
+                       <span>` + coinList[i].full_name + `</span>
+                   </div>
+                `);
+                    $('#outputCoinKindSelect').append(`
+                   <div class="row item-exchange" id="coin2` + i + `">
+                       <img  width="20" height="20" src="assets/img/icons/` + coinList[i].name + `.png">
+                       <span class="coinSmallName" style="color:` + coinList[i].color + `;">` + coinList[i].name + `</span>
+                       <span>` + coinList[i].full_name + `</span>
+                   </div>
+                `);
+                }
+                // $('#inputCoinKind').html("btc");$('#outputCoinKind').html("eth");
+                // console.log($('#inputCoinValue').val());
+                // console.log($('#inputCoinKind').text());
+                // console.log($('#inputCoinValue').val());
+                exchangeRate();
+                $('.item-exchange').on('click', function () {
+                    console.log("item-select");
+                    var txt = $(this).find('span.coinSmallName').text();
+                    console.log($(this));
+                    console.log(txt);
+                    $(this).parent().parent().parent().find('.selected-exchange div').html(`
+                   <div class="row" style="margin-left: 10px;">
+                       <img  width="30" height="30" src="assets/img/icons/` + txt + `.png">
+                       <span  style="margin-left: 10px;margin-top: 3px;">` + txt.toUpperCase() + `</span>
+                   </div>`
+                    );
+                    $(this).parent().parent().parent().find('.opened-exchange').removeClass('opened-exchange');
+                    exchangeRate();
+
+                });
+            }else{
+                interval = setInterval(function(){
+                    getCurrencies()
+                },5000)
+            }
+        });
+
+    }
 
      // reverse exchange
      
@@ -514,18 +532,18 @@
                console.log("axios test");
                console.log(response.data);
               if(response.data == 500){
-                 
+
               } else {
-              
+
                  // vm.receiveNumber = response.data.toFixed(8);
                   var resp = response.data.result[0];
-                  
+
                   $('#sendingValue').val($('#inputCoinValue').val());
                   $('#sendingKind').val($('#inputCoinKind span').text());
                   $('#recievingKind').val($('#outputCoinKind span').text());
                   $('#exchangeToken').val(resp.rateId);
                   $('#exteraId').val("");
-                  
+
                   // console.log(parseFloat(resp.fee).toFixed(8));
                   $('#outputCoinValue').val(resp.result);
                   $('#enter_amount_exchange_fee').html(parseFloat(resp.fee).toFixed(8) +' ' + resp.to.toUpperCase());

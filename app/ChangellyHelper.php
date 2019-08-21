@@ -34,7 +34,7 @@ class ChangellyHelper
             return $response;
         }
         if(!isset($response['result'])){
-            $response = ['error'=>502,'body'=>'changelly not responding'];
+            $response = ['error'=>502,'body'=>'Server not responding'];
             return $response;
         }
         return $response;

@@ -1,0 +1,1 @@
+<a onclick="refreshCaptcha(event)" style="cursor: pointer;">{{Captcha::img()}}</a>

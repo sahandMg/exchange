@@ -1,6 +1,6 @@
 @extends('master.layout')
 @section('title')
-  <title> اسم سایت - خانه</title>
+  <title> اسم سایت | خانه</title>
 @endsection
 @section('content')
 <section class="pb_cover_v3 overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_gradient_v1 pb_slant-light exchange-header-section" id="section-home">

@@ -170,16 +170,19 @@
     @if(count($errors->all()) > 0)
      @include('errors.formError')
     @endif
+      @if(session()->has('error'))
+         @include('errors.ErrorMessage')
+      @endif
     <form class="auth-form"  method="POST">
 
         <input type="hidden" name="_token" value="{{csrf_token()}}">
        <div class="form-group" id="userName">
         <label>نام کاربری:</label>
-        <input name="name" type="text" required class="form-control">
+        <input name="name" type="text" required value="{{old('name')}}" class="form-control">
       </div>
       <div class="form-group">
         <label>ایمیل:</label>
-        <input name="email" type="email" required class="form-control">
+        <input name="email" type="email" required  value="{{old('email')}}" class="form-control">
       </div>
       <div class="form-group">
         <label>رمز:</label>
@@ -189,9 +192,9 @@
         <label>تکرار رمز:</label>
         <input name="confirm_password" type="password"  class="form-control">
       </div>
-        <div class="form-group" id="passwordRepeat">
+        <div class="form-group">
             <label>کد امنیتی:</label>
-            <a onclick="refreshCaptcha(event)" style="cursor: pointer;">{{Captcha::img()}}</a>
+            <a onclick="refreshCaptcha(event)" id="captchaMaster" style="cursor: pointer;">{{Captcha::img()}}</a>
             <br>
             <input name="captcha" type="text" class="form-control">
         </div>
@@ -204,8 +207,8 @@
     </form>
     <!-- <br/> -->
     <div class="text-center">
-      <a href="" id="signUpGoogle"><img src="assets/img/googleicon.png" /></a>
-      <a href="" id="loginGoogle"><img src="assets/img/googleicon.png" /></a>
+      <a href="{{route('redirectToProvider')}}" id="signUpGoogle"><img width="40" height="40" src="{{URL::asset('assets/img/googleicon.svg')}}" /></a>
+      <a href="{{route('redirectToProvider')}}" id="loginGoogle"><img width="40" height="40" src="{{URL::asset('assets/img/googleicon.svg')}}" /></a>
     </div>
     <br/>
   </div>

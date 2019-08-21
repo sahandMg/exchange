@@ -1,6 +1,6 @@
 @extends('master.layout')
 @section('title')
-    <title> اسم سایت - درباره ما</title>
+    <title> اسم سایت | درباره ما</title>
 @endsection
 @section('content')
 
