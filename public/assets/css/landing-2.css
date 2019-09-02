@@ -25,9 +25,9 @@ body {
   .pb_slant-white:after {
     content: "";
     position: absolute;
-    bottom: -40px;
+    bottom: -50px;
     left: -50px;
-    height: 110px;
+    height: 130px;
     width: 130%;
     background-color: #f2f4f9;
     -webkit-transform: rotate(-4deg);
@@ -57,7 +57,21 @@ body {
 
 .pb_cover_v3 .btn, .pb_xl_py_cover .btn {
   color: white; }
-
+    @media only screen and (max-width: 1440px) { 
+      .pb_slant-light:after,
+     .pb_slant-white:after {
+       content: "";
+       position: absolute;
+       bottom: -40px;
+      left: -50px;
+      height: 110px;
+      width: 130%;
+      background-color: #f2f4f9;
+      -webkit-transform: rotate(-4deg);
+      -ms-transform: rotate(-4deg);
+      transform: rotate(-4deg);
+      z-index: 10; 
+    }
 
   @media only screen and (max-width: 1025px) { 
       .pb_slant-light:after,

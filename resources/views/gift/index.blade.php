@@ -7,7 +7,8 @@
 <div class="container">
    <div class="text-center giftcard-page">
     <h1 class="text-center">خرید کارت هدیه بیت کوین</h1>
-    <span class="text-center">بیت کوین را به خانواده و دوستان خود هدیه بدهید.</span>
+    <p class="text-center">با جیک جیک، به دوستان خود بیت کوین هدیه دهید.</p>
+ <!--    <p class="text-center">جیک جیک، سامانه ی صدور کارت هدیه ی بیت کوینی برای افرادی که مایلند بیت کوین به دوستان و آشنایان خود هدیه بدهند.</p> -->
    </div>
    <div>
          <ul class="d-flex justify-content-around" style="padding-left: 0;">
@@ -90,21 +91,36 @@
   <div style="text-align: right;direction: rtl;">
    <h3 class="text-center">کارت هدیه بیت کوین، بهترین را برای هدیه دادن</h3>
    <br/>
-   <p>کارت هدیه بیت کوین، باعث می شود به راحتی به دیگران بیت کوین هدیه بدهید. انتخاب خوبی برای هدیه تولد، عید نوروز و به عنوان کادو هستش. </p>
+   <p>جیک جیک، سامانه ی صدور کارت هدیه ی بیت کوینی برای افرادی که مایلند بیت کوین به دوستان و آشنایان خود هدیه بدهند. </p>
    <br/>
    <img  class="img-fluid rounded mx-auto d-block" src="assets/img/bitcoinGiftCard.png" alt="کارت هدیه بیت کوین">
   </div>
   <br/><hr/><br/>
   <!-- Bitcoin gift card discription -->
   <div style="text-align: right;direction: rtl;">
-   <h3 class="text-center">چگونه سفارش بدیم؟</h3>
-   <p>به آسانی ، چنتا کلیک می کنی و یه سری اطلاعات وارد می کنی همین.</p>
+   <h3 class="text-center">چرا کارت هدیه ی بیت کوینی ؟</h3>
+   <p>جذابیت این نوع هدیه هم در تازه بودن و هم در ارزش آینده آن است. </p>
+   <p>با توجه به اینکه بیت کوین هنوز از دیدگاه بسیاری از افراد ناشناخته است، پس شما می توانید اولین فردی باشید که دوست خود را با دادن این نوع هدیه از وجود ارز دیجیتال ارزشمندی چون بیت کوین مطلع می کنید. </p>
+   <p>پیش¬بینی های متعددی از سوی صاحب نظران بازار ارزهای دیجیتال در مورد رشد قیمت بیت کوین در آینده ی نه چندان دور شده است. بنابراین شما با دادن این نوع هدیه در واقع، برای دوست خود یک نوع سرمایه گذاری بلند مدت کرده اید. </p>
   </div>
   <br/><hr/><br/>
   <!-- Bitcoin gift card discription -->
   <div style="text-align: right;direction: rtl;">
-   <h3 class="text-center">برای سازمان هه و شرکت ها</h3>
-   <p>برای شرکت ها و سازمان ها اگر زیاد بخرند یه تخفیفی هم بهشون بدیم.</p>
+   <h3 class="text-center">همکاری سازمانی</h3>
+   <p>به کارمندان و مشتریان وفادار خود به جای هدیه های مرسوم بیت کوین هدیه دهید.</p>
+   <p>مدیران محترم، در صورت تمایل برای ایجاد تغییری بزرگ در تشویق اعضای شرکتتان و یا ایجاد وفاداری بیشتر در اعضای باشگاه مشتریانتان، می توانید اقدام به سفارش صدور کارت هدیه ی بیت کوینی با نرخ کارمزد پایین در تعداد مورد نظر نمایید.</p>
+  </div>
+  <br/><hr/><br/>
+  <!-- How to Bitcoin gift card  -->
+  <div style="text-align: right;direction: rtl;">
+   <h3 class="text-center">نحوه ی دریافت کارت</h3>
+   <p>پس از ثبت سفارش، کارت هدیه به آدرس مورد نظر شما ارسال می گردد. در صورت تمایل میتوانید درخواست قرار گرفتن کارت در جعبه ی مخصوص هدیه را نیز داشته باشید.</p>
+  </div>
+  <br/><hr/><br/>
+  <!-- How to Bitcoin gift card  -->
+  <div style="text-align: right;direction: rtl;">
+   <h3 class="text-center">نحوه ی استفاده از کارت</h3>
+   <p>برای استفاده از کارت هم میتوانید بیت کوین موجود در آن را به کیف پول شخصی خود واریز نمایید، هم میتوانید اقدام به تبدیل آن به ریال نمایید. چگونگی هر یک از این موارد بر روی کارت هدیه توضیح داده شده است.</p>
   </div>
 </div>
 </section>
@@ -125,6 +141,8 @@
 	.square span {font-weight: bold;font-size: 1.4rem;}
 	.cart-row span {  margin-right: 4%;margin-left: 4%;font-weight: 400; font-size: 1.4rem; }
   .square {margin-top: 1%;margin-bottom: 1%;}
+  p {font-size: 1.4rem;}
+
   @media only screen and (max-width: 1025px) {
         .square {
           padding: 2% 3%;
@@ -134,11 +152,13 @@
         .square {
           padding: 1% 1%;
         }
+        p {font-size: 1.1rem;}
   }
    @media only screen and (max-width: 420px) {
        .square span {font-weight: bold;font-size: 1rem;}
        .square p {font-weight: bold;font-size: 0.9rem;}
        .exchange-card h3 {font-size: 1rem;}
+       p {font-size: 1rem;}
   }
 </style>
 

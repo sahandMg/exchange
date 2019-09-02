@@ -30,7 +30,8 @@
             font-family: BYekanFont;
         }
         th, a, p, input, button, legend, label, blockquote {font-family: BYekanFont;}
-        .btn {font-family: BYekanFont;}
+        /*.btn {font-family: BYekanFont;}*/
+        .englishFont {font-family: sans-serif;}
     </style>
 </head>
 <body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
@@ -174,31 +175,36 @@
         <input type="hidden" name="_token" value="{{csrf_token()}}">
        <div class="form-group" id="userName">
         <label>نام کاربری:</label>
-        <input name="name" type="text"  class="form-control">
+        <input name="name" type="text"  class="form-control englishFont">
       </div>
       <div class="form-group">
         <label>ایمیل:</label>
-        <input name="email" type="email" required class="form-control">
+        <input name="email" type="email" required class="form-control englishFont">
       </div>
       <div class="form-group">
         <label>رمز:</label>
-        <input name="password" type="password" required class="form-control">
+        <input name="password" type="password" required class="form-control englishFont">
       </div>
       <div class="form-group" id="passwordRepeat">
         <label>تکرار رمز:</label>
-        <input name="confirm_password" type="password"  class="form-control">
+        <input name="confirm_password" type="password"  class="form-control englishFont">
       </div>
         <div class="form-group" id="passwordRepeat">
             <label>کد امنیتی:</label>
             <a onclick="refreshCaptcha(event)" style="cursor: pointer;">{{Captcha::img()}}</a>
             <br>
-            <input name="captcha" type="text" class="form-control">
+            <input name="captcha" type="text" class="form-control englishFont">
         </div>
       <input type="text" name="from" class="form-control" id="inputCoinKindHidden" style="display: none;">
       <input type="text" name="to" class="form-control" id="outputCoinKindHidden" style="display: none;">
       <input type="text" name="amount" class="form-control" id="inputCoinvalueHidden" style="display: none;">
-      <div class="text-center">
-        <button class="btn btn-success mx-auto" type="submit">ثبت</button>
+      <div class="row">
+        <div style="text-align: right;">
+         <button class="btn" id="toggleBtn">ورود</button>
+        </div>
+        <div class="text-center mx-auto" style="padding-left: 50px;">
+          <button class="btn btn-success mx-auto" type="submit" id="authBtn">ثبت</button>
+        </div>
       </div>
     </form>
     <!-- <br/> -->
@@ -213,11 +219,15 @@
 
 <script type="text/javascript">
     // Get the modal
+    var flag = 0;
+    var register = 1; var login = 2 ;
+    flag = login;
 var modal = document.getElementById("authForm");
 
 // Get the button that opens the modal
 var btn = document.getElementById("signupBtn");
 var loginBtn = document.getElementById("loginBtn");
+var toggleBtn = document.getElementById("toggleBtn");
 // var frm = document.getElementById('authForm');
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("custom-close")[0];
@@ -228,13 +238,45 @@ btn.onclick = function(event) {
   console.log("sign up clicked;");
   event.preventDefault();
   $('#authForm h3').text("ثبت نام");
-  $('#authForm button').text("ثبت نام");
+  $('#authBtn').text("ثبت نام");
+  $('#toggleBtn').text("ورود");
   $('#authForm form').attr('action', `{!! route('signup') !!}`);
   $('#userName').show();
   $('#passwordRepeat').show();
   $('#signUpGoogle').show();
   $('#loginGoogle').hide();
-  modal.style.display = "block";
+  modal.style.display = "block"; flag = login;
+}
+
+toggleBtn.onclick = function(event) {
+  if(flag === login) {
+    localStorage.setItem("formKind", "login");
+    console.log("loginBtn clicked;");
+    event.preventDefault();
+    $('#authForm h3').text("ورود");
+    $('#authBtn').text("ورود");
+    var actionLink = `{!! route('login') !!}`;
+    $('#authForm form').attr('action', actionLink);
+    console.log(actionLink)
+    $('#userName').hide();
+    $('#passwordRepeat').hide();
+    $('#signUpGoogle').hide();
+    $('#loginGoogle').show();
+    flag = register;
+  } else {
+    localStorage.setItem("formKind", "signup");
+    console.log("sign up clicked;");
+    event.preventDefault();
+    $('#authForm h3').text("ثبت نام");
+    $('#authBtn').text("ثبت نام");
+    $('#toggleBtn').text("ورود");
+    $('#authForm form').attr('action', `{!! route('signup') !!}`);
+    $('#userName').show();
+    $('#passwordRepeat').show();
+    $('#signUpGoogle').show();
+    $('#loginGoogle').hide();
+    flag = login;
+  }
 }
 
 loginBtn.onclick = function(event) {
@@ -242,7 +284,7 @@ loginBtn.onclick = function(event) {
   console.log("loginBtn clicked;");
   event.preventDefault();
   $('#authForm h3').text("ورود");
-  $('#authForm button').text("ورود");
+  $('#authBtn').text("ورود");
   var actionLink = `{!! route('login') !!}`;
    $('#authForm form').attr('action', actionLink);
    console.log(actionLink)
@@ -251,7 +293,7 @@ loginBtn.onclick = function(event) {
   $('#passwordRepeat').hide();
   $('#signUpGoogle').hide();
   $('#loginGoogle').show();
-  modal.style.display = "block";
+  modal.style.display = "block"; flag = register;
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -280,16 +322,18 @@ function refreshCaptcha(e) {
   var temp = localStorage.getItem("formKind");
   if(temp === "signup") {
    $('#authForm h3').text("ثبت نام");
-   $('#authForm button').text("ثبت نام");
+   $('#authBtn').text("ثبت نام");
+   $('#toggleBtn').text("ورود");
    $('#authForm form').attr('action', `{!! route('signup') !!}`);
    $('#userName').show();
    $('#passwordRepeat').show();
    $('#signUpGoogle').show();
    $('#loginGoogle').hide();
-   modal.style.display = "block";
+   modal.style.display = "block"; flag = register;
   } else {
    $('#authForm h3').text("ورود");
-   $('#authForm button').text("ورود");
+   $('#authBtn').text("ورود");
+   $('#toggleBtn').text("ثبت نام");
    var actionLink = `{!! route('login') !!}`;
     $('#authForm form').attr('action', actionLink);
    // console.log(actionLink)
@@ -298,7 +342,7 @@ function refreshCaptcha(e) {
   $('#passwordRepeat').hide();
   $('#signUpGoogle').hide();
   $('#loginGoogle').show();
-  modal.style.display = "block";
+  modal.style.display = "block";  flag = login;
   }
 </script>
 @endif

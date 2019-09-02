@@ -579,14 +579,17 @@
       if(auth === "true") {
         hideAllExchangeParts();showExchangePart2();
       } else {
-        $('#authForm h3').text("ثبت نام");
-       $('#authForm button').text("ثبت نام");
-      $('#authForm form').attr('action', `{!! route('signup') !!}`);
+       localStorage.setItem("formKind", "signup");
+       event.preventDefault();
+       $('#authForm h3').text("ثبت نام");
+       $('#authBtn').text("ثبت نام");
+       $('#toggleBtn').text("ورود");
+       $('#authForm form').attr('action', `{!! route('signup') !!}`);
        $('#userName').show();
-      $('#passwordRepeat').show();
-     $('#signUpGoogle').show();
-      $('#loginGoogle').hide();
-        modal.style.display = "block";
+       $('#passwordRepeat').show();
+       $('#signUpGoogle').show();
+       $('#loginGoogle').hide();
+       modal.style.display = "block";
       }
     });
 

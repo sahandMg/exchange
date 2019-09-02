@@ -6,22 +6,21 @@
     <section class="pb_section pb_slant-light pb_pb-220">
         <div class="container">
         <h2 class="text-center">تایید ایمیل</h2>
-        <p>برای تایید ایمیل خود، روی لینک ارسال ش
-        ده به ایمیل خود کلیک کنید.</p>
+        <p>برای تایید ایمیل خود، روی لینک ارسال شده به ایمیل خود کلیک کنید.</p>
        @foreach($errors->all() as $error)
-         <div class="alert alert-danger">
+         <div class="alert alert-danger text-right" style="direction: rtl;">
            {{$error}}.
          </div>               
          @endforeach
         <form method="post" action="{{route('ResendVerification',['locale'=>session('locale')])}}"  style="direction: rtl;">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
            <input type="hidden" name="userToken" value="{{$token}}">
-            <p>اگر ایمیلی به ارسال نشده است، با کلیک کردن بر روی مستطیل آبی زیر، ایمیل به شما دوباره ارسال می شود. </p>
+            <p>اگر ایمیلی به شما ارسال نشده است، با کلیک کردن بر روی مستطیل آبی زیر، دوباره به شما ایمیل ارسال می شود. </p>
             <div class="form-group">
                <div class="wrap-input100 validate-input pass m-b-10" data-validate = "Please enter password">
                     <a onclick="refreshCaptcha(event)" style="cursor: pointer;">{{Captcha::img()}}</a>
                </div>
-               <input class="form-control" style="width: 120px;margin-top: 5px;" type="text" pattern="[a-zA-Z0-9]+" required name="captcha" placeholder="کد امنیتی">
+               <input class="form-control englishFont" style="width: 120px;margin-top: 5px;" type="text" pattern="[a-zA-Z0-9]+" required name="captcha" placeholder="کد امنیتی">
              </div>
              <br/>
             <button type="submit" class="btn btn-primary">ارسال دوباره</button>
