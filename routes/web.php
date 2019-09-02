@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Mews\Captcha\Facades\Captcha;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,8 +21,14 @@ Route::get('captcha-refresh',function (){
     $captcha = \Mews\Captcha\Facades\Captcha::create();
     return Captcha::src();
 
-});
+})->name('refreshCaptcha');
 
+Route::get('test',function (){
+
+
+    echo Captcha::img();
+
+});
 Route::get('/','LandingController@index')->name('index');
 
 Route::get('coins-list','LandingController@coinsList')->name('coins');
@@ -30,26 +37,31 @@ Route::get('about','LandingController@aboutUs')->name('aboutUs');
 
 Route::get('contact','LandingController@contact')->name('contact');
 
+Route::post('contact','LandingController@post_contact')->name('contact');
+
 Route::get('faq','LandingController@faq')->name('faq');
 
 // ============== Authentication Routes =============================
-Route::get('login','AuthController@login')->name('login')->middleware('guest');
+Route::group(['middleware'=>'guest'],function (){
 
-Route::post('login','AuthController@post_login')->name('login');
+    Route::get('login','AuthController@login')->name('login');
 
-Route::get('user/verify/{token}','AuthController@VerifyUser');
+    Route::post('login','AuthController@post_login')->name('login');
 
-Route::get('user/email-verify','AuthController@VerifyUserPage')->name('VerifyUserPage');
+    Route::get('user/verify/{token}','AuthController@VerifyUser');
 
-Route::post('resend-verification','AuthController@ResendVerification')->name('ResendVerification');
+    Route::get('user/email-verify','AuthController@VerifyUserPage')->name('VerifyUserPage');
 
-Route::get('google/login','AuthController@redirectToProvider')->name('redirectToProvider');
+    Route::post('resend-verification','AuthController@ResendVerification')->name('ResendVerification');
 
-Route::get('google/login/callback','AuthController@handleProviderCallback')->name('handleProviderCallback');
+    Route::get('google/login','AuthController@redirectToProvider')->name('redirectToProvider');
 
-Route::get('signup','AuthController@signup')->name('signup')->middleware('guest');
+    Route::get('google/login/callback','AuthController@handleProviderCallback')->name('handleProviderCallback');
 
-Route::post('signup','AuthController@post_signup')->name('signup');
+    Route::get('signup','AuthController@signup')->name('signup');
+
+    Route::post('signup','AuthController@post_signup')->name('signup');
+});
 
 Route::get('password-reset','AuthController@passwordReset')->name('passwordReset');
 
@@ -82,7 +94,7 @@ Route::post('get-min-amount','TradeController@getMinAmount')->name('getMinAmount
 
 Route::post('get-exchange-amount','TradeController@getExchangeAmount')->name('getExchangeAmount');
 
-Route::post('create-transaction','TradeController@createTransaction')->name('createTransaction')->middleware('guest');
+Route::post('create-transaction','TradeController@createTransaction')->name('createTransaction');
 
 Route::post('create-fix-transaction','TradeController@createFixRateTransaction')->name('createFixRateTransaction');
 

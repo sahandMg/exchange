@@ -1,12 +1,12 @@
 @extends('master.layout')
 @section('title')
-    <title> اسم سایت - تایید ایمیل</title>
+    <title> اسم سایت | تایید ایمیل</title>
 @endsection
 @section('content')
     <section class="pb_section pb_slant-light pb_pb-220">
         <div class="container">
         <h2 class="text-center">تایید ایمیل</h2>
-        <p>برای تایید ایمیل خود، روی لینک ارسال شده به ایمیل خود کلیک کنید.</p>
+   <!--      <p>برای تایید ایمیل خود، روی لینک ارسال شده به ایمیل خود کلیک کنید.</p>
        @foreach($errors->all() as $error)
          <div class="alert alert-danger text-right" style="direction: rtl;">
            {{$error}}.
@@ -15,15 +15,21 @@
         <form method="post" action="{{route('ResendVerification',['locale'=>session('locale')])}}"  style="direction: rtl;">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
            <input type="hidden" name="userToken" value="{{$token}}">
-            <p>اگر ایمیلی به شما ارسال نشده است، با کلیک کردن بر روی مستطیل آبی زیر، دوباره به شما ایمیل ارسال می شود. </p>
+            <p>اگر ایمیلی به شما ارسال نشده است، با کلیک کردن بر روی مستطیل آبی زیر، دوباره به شما ایمیل ارسال می شود. </p> -->
+            @include('errors.formError')
+        <p>جهت تایید آدرس ایمیل خود، روی لینک ارسال شده به ایمیل، کلیک کنید</p>
+        <form method="post" action="{{route('ResendVerification',['locale'=>session('locale')])}}"  style="direction: rtl;">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+           <input type="hidden" name="userToken" value="{{$token}}">
+            <p>درصورتی که به آدرس شما ایمیلی ارسال نشده است، روی ارسال مجدد کلیک کنید </p>
             <div class="form-group">
                <div class="wrap-input100 validate-input pass m-b-10" data-validate = "Please enter password">
-                    <a onclick="refreshCaptcha(event)" style="cursor: pointer;">{{Captcha::img()}}</a>
+                   <a id="captchaTag" onclick="refreshCaptcha(event)" style="cursor: pointer;"></a>
                </div>
                <input class="form-control englishFont" style="width: 120px;margin-top: 5px;" type="text" pattern="[a-zA-Z0-9]+" required name="captcha" placeholder="کد امنیتی">
              </div>
              <br/>
-            <button type="submit" class="btn btn-primary">ارسال دوباره</button>
+            <button type="submit" class="btn btn-primary">ارسال مجدد لینک فعالسازی</button>
         </form>
     </div>
     </section>
@@ -84,6 +90,21 @@
 @include('master.footer')
 @include('master.scripts')
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        var captcha = document.getElementById('captchaMaster').innerHTML;
+        $('#captchaTag').html(captcha);
+    });
+
+    function refreshCaptcha(e) {
+        var element = e;
+
+        axios.get('{!! (route('refreshCaptcha')) !!}').then(function (response) {
+            element.target.src = response.data
+
+        });
+    }
+
     $('#pb-navbar').addClass("scrolled awake"); 
 </script>
 @endsection

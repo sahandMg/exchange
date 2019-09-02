@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 class TradeController extends Controller
@@ -254,7 +255,7 @@ class TradeController extends Controller
 
     public function walletPaying($transId){
 
-        $trans = $trans = DB::connection('mysql')->table('transactions')->where('trans_id',$transId)->first();
+        $trans = $trans = DB::connection('mysql')->table('exchange_transactions')->where('trans_id',$transId)->first();
        if(is_null($trans)){
 
            return ['error'=>500,'body'=>'invalid trans id'];
@@ -284,6 +285,19 @@ class TradeController extends Controller
         $response = $this->changellyHelper->getChangellyData('getStatus',[
             'id'=> $id,
         ]);
+        if($response['result'] == 'finished'){
+
+            $trans = ExchangeTransaction::where('trans_id',$id)->first();
+            $user = $trans->user;
+            $data = ['trans_query'=> $trans];
+            // todo gift invoice mail page
+//            Mail::send('emails.giftInvoice',$data,function($message)use($data,$user){
+//
+//                $message->to($user->email);
+//                $message->from($data['gift@exchange.com']);
+//                $message->subject($data['رسید سفارش']);
+//            });
+        }
         return $response;
     }
 
