@@ -22,7 +22,7 @@
 	  <div class="d-flex flex-wrap justify-content-around">
           @for($i=0;$i<count($cardsType);$i++)
 	  	<div class="square text-center" id="giftCart{{$i}}">
-	  		<span id="cardType{{$i}}"></span>
+	  		<span id="cardType{{$i}}" class="englishFont"></span>
 	  		<p id="cardPrice{{$i}}" style="direction: rtl;"></p>
 	  	</div>
           @endfor

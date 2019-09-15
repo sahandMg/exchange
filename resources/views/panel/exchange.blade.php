@@ -106,7 +106,7 @@
            </div>
            <div class="form-group">
                <label>آدرس کیف پول</label>
-               <input type="text" class="form-control" id="walletAddressInput">
+               <input type="text" class="form-control englishFont" id="walletAddressInput">
            </div>
            <button id="enter_address_btn" class="btn btn-success" style="margin: auto;display: block;">مرحله بعدی</button>
        </div>
