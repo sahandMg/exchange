@@ -5,6 +5,7 @@
 @section('content')
 
   @include('landing/header') 
+  @include('landing/coinsPrice') 
   @include('landing/features')
   @include('landing/comments')
 
@@ -52,10 +53,7 @@
       border: 0px;
     }
 
-    .selected-exchange span {
-        float: right;
-        margin-top: -5px;
-    }
+    
 
     .select-dropdown-exchange {
         overflow: hidden;
@@ -74,6 +72,25 @@
         background: #f0f0f0;
         cursor: pointer;
 
+    }
+
+    .selected-exchange span {
+        float: right;
+        margin-top: 12px;
+        margin-right: 12px;
+    }
+
+    .selected-exchange b {
+     border-color: #252525 transparent transparent transparent;
+     border-style: solid;
+     border-width: 8px 6px 0 6px;
+     /*height: 0;*/
+     /*left: 90%;*/
+     /*margin-left: -10px;*/
+     /*margin-top: 10px;*/
+     position: absolute;
+     /*top: 50%;*/
+     /*width: 0;*/
     }
 
     select {

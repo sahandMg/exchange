@@ -1,5 +1,42 @@
-<footer class="bg-light" role="contentinfo">
+<footer class="bg-light py-4" role="contentinfo">
       <div class="container">
+         <div class="row pt-2">
+          <div class="col-lg-5 col-md-5 col-sm-12 my-3">
+             <h5 class="text-center my-1">درباره ما</h5> 
+             <p style="direction: rtl;text-align: justify;">نانا پلت فرمی برای تبدیل ارزهای دیجیتال به یکدیگر است. این سایت به عنوان یک سایت پیشرو در ایران در حوزه اکسچنج ها فعالیت خود را با پشتیبانی از 10 رمز ارز آغاز کرد. هم اکنون این سایت از 140 ارز دیجیتال مختلف پشتیبانی می کند.</p>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12 my-3" style="text-align: right;color: white;">
+            <h5 class="text-center my-1">لینک های مهم</h5> 
+            <div class="important-links row mx-auto">
+                <div class="col-md-5 col-sm-6 text-center" style="display: flex;flex-direction: column;">
+                    <a href="{{route('contact')}}">تماس با ما</a>
+                    <!-- border-top: 1px solid #ff9100; -->
+                    <hr style="margin-bottom: 0.5rem;margin-top: 0.5rem;"/>
+                    <a href="{{route('aboutUs')}}">درباره ما</a>
+                    <hr style="margin-bottom: 0.5rem;margin-top: 0.5rem;"/>
+                    <a href="{{route('faq')}}">سوالات متداول</a>
+                </div>
+                <div class="col-md-5 col-sm-6 text-center" style="display: flex;flex-direction: column;">
+                    <a href="{{route('index')}}">خانه</a>
+                    <hr style="margin-bottom: 0.5rem;margin-top: 0.5rem;"/>
+                    <a href="{{route('giftIndex')}}">کارت هدیه</a>
+                </div>
+            </div>
+          </div>
+          <div class="contact-us col-lg-3 col-md-3 col-sm-12 my-3" style="text-align: right;">
+              <h5 class="text-center my-1">تماس با ما</h5> 
+              <div class="tell">
+                   <a href="tel:+989371869568" style="cursor:pointer">
+                         0937 186 9568 &nbsp;<i class="fa fa-phone" aria-hidden="true"></i> 
+                   </a>
+              </div>
+              <div class="" style="direction:rtl">
+                   <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                تهران، ولنجک، دانشگاه شهید بهشتی، پارک علم و فناوری ، شرکت هش بازار
+               </div>
+          </div>
+      </div>
+      </div>
        <!--  <div class="row text-center">
           <div class="col">
             <ul class="list-inline">
@@ -9,7 +46,7 @@
             </ul>
           </div>
         </div> -->
-        <div class="row">
+     <!--    <div class="row">
           <div class="col text-center">
             <div class="row">
               <div class="col-md-6 text-center">
@@ -23,17 +60,20 @@
             <p class="pb_font-14">تمام حقوق این سایت متعلق به صرافی فلان می باشد</p>
           </div>
         </div>
+      </div> -->
+      <div class="text-center pb_font-14"  style="direction: rtl;">
+         <p>تمام حقوق این سایت متعلق به صرافی فلان می باشد.</p>
       </div>
 </footer>
 
 <style type="text/css">
-footer {padding-top: 10%;}
+/*footer {padding-top: 10%;}
   @media only screen and (max-width: 1025px) { 
        footer {padding-top: 14%;}  
   }  
   @media only screen and (max-width: 420px) {
        footer {padding-top: 20%;}  
-  }
+  }*/
 </style>
 
 <!-- loader -->

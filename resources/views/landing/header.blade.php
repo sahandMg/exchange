@@ -1,7 +1,7 @@
 <!-- pb_cover_v3  -->
 <section class="overflow-hidden cover-bg-indigo cover-bg-opacity text-left exchange-header-section pb_gradient_v1 pb_slant-light pb-4 pt-4" id="section-home">
-      <div class="container">
-       <div class="row exchange-header">
+      <div class="container pb-4 pt-4">
+       <div class="row exchange-header pb-4">
         <div class="col-md-5 col-sm-12">
          <h1 class="text-center" style="color: white;">راه آسان و امن برای تبدیل بیش از 140 ارز دیجیتال</h1>
         </div>
@@ -13,7 +13,7 @@
                 <select name="item"><option value=""></option></select>
                 <div>
                   <div class="selected-exchange">
-                    <span>&#8597;</span>
+                    <span><b role="presentation"></b></span>
                     <div id="inputCoinKind">Click and select </div>
                   </div>
                   <div class="select-dropdown-exchange">
@@ -37,7 +37,7 @@
                 <select name="item"><option value=""></option></select>
                 <div>
                   <div class="selected-exchange">
-                    <span>&#8597;</span>
+                    <span><b role="presentation"></b></span>
                     <div id="outputCoinKind">Click and select </div>
                   </div>
                   <div class="select-dropdown-exchange">

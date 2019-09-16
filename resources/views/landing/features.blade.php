@@ -6,7 +6,7 @@
             <h2>ویژگی های ما</h2>
           </div>
         </div>
-        <div class="row">
+        <div class="row" style="direction: rtl;">
           <div class="col-lg-4 col-md- col-sm-6">
             <div class="media d-block pb_feature-v1 text-right">
               <div class="pb_icon"><i class="ion-ios-bookmarks-outline pb_icon-gradient"></i></div>
