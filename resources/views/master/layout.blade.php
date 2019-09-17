@@ -50,8 +50,8 @@
                 <li class="nav-item"><a class="nav-link" href="{{route('aboutUs')}}">درباره ما</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('faq')}}">سوالات متداول</a></li>
                 {{--<!--<li class="nav-item"><a class="nav-link" href="#section-pricing">Pricing</a></li>-->--}}
-                <li class="nav-item"><a class="nav-link" href="{{route('coins')}}">coins</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{route('exchangePage')}}">Exchage</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="{{route('coins')}}">coins</a></li> -->
+                <!-- <li class="nav-item"><a class="nav-link" href="{{route('exchangePage')}}">Exchage</a></li> -->
                 <li class="nav-item"><a class="nav-link" href="{{route('giftIndex')}}">کارت هدیه</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('index')}}">خانه</a></li>
                 @if(!Auth::guard('user')->check())
